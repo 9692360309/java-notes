@@ -1,0 +1,402 @@
+4.Data Types & Literals
+ 						-----------------------
+
+02/10/2023
+-----------
+
+1. Data type & Types of the data types
+2. Data types, range, size, default value
+3. Integral data types
+4. floating data types
+5. Non-numerical data types
+6. Referenced Data types
+7. Literals
+
+--------------------------------------
+1.Data type & Types of the data types:
+--------------------------------------
+
+Data type:
+---------
+-> It is used provide memory allocation to variables in the jvm
+
+-> By using Data types, we can inform to compiler & jvm, which type of data, we want to stre in variables.
+
+->We have 2 types of data types
+
+->We have 2 types of data types
+  1)primitive data types
+  2) referenced data types
+
+1)primitive data types:
+   1)numeric data types
+	integer data types
+	    byte
+	    short
+            int
+            long
+
+        floting data types
+            float
+	    double
+   2)non-numeric data types
+	boolean
+        char
+
+2)referenced data types
+    class
+    interface
+    array
+    enum
+
+2.Data types, range, size, default value
+-----------------------------------------
+=> Datatypes, Data type size, range, Default values
+----------------------------------------------------
+1 byte = 1 bits
+
+2 to the power of 8 = 2*2*2*2*2*2*2* = 128
+
+----------------------------------------------------------------------------------------------------------------
+| Datatypes		size		range 							Default values   
+----------------------------------------------------------------------------------------------------------------
+    byte		 1 byte		-128 to 127						    0
+    
+    short 		 2 bytes	-32,768 to 32,767       			            0
+
+    int			 4 bytes        -2,147,483,648
+					     to 
+					 2,147,483,647					            0
+
+    long      	         8 bytes    -9,223,372,036,854,775,808 
+						to 
+				    9,223,372,036,854,775,807			                    0
+
+
+   float		4 bytes     1.40129846432481707e-45 
+						to 
+				    3.40282346638528860e+38					  0.0
+
+
+   double		8 bytes	    4.94065645841246544e-324d 
+					        to 
+							
+                                    1.79769313486231570e+308d			                  0.0
+
+
+   char 		2 bytes		0 to 65,535						white space
+
+
+   boolean		1 bytes		false or true						false
+
+
+   Referenced          depends on PDT	    ----					        null
+
+
+03/10/2023
+----------
+--------------------
+Integral data types
+-------------------
+----
+byte
+----
+->size 1byte(8 bits)
+
+->range -128 to +127
+
+->this used for Writing & reading the data from file.
+
+->to send the data in the network.
+
+ex:
+---
+byte b1 = 10;
+System.out.println(b1);
+
+byte b2 = 127;
+System.out.println(b2);
+
+//byte b3 = 128; //CE:incompatible types: possible lossy conversion from int to byte
+
+byte b4 = 'a';
+System.out.println(b4);
+
+System.out.println("a"+"b");//ab
+System.out.println('a'+'b');//195
+
+//byte b5 = false; CE:incompatible types: boolean cannot be converted to byte
+
+//byte b6 = "Core Java";//CE:incompatible types: String cannot be converted to byte
+
+//byte b7 = 10.5;//CE:incompatible types: possible lossy conversion from double to byte
+
+-----
+short
+-----
+->rarely used data type
+
+->size is 2 bytes
+
+->range is -32,768 to 32,767
+
+Ex:
+---
+short s1 = 10;
+System.out.println(s1);
+
+//-32768 to 32767
+short s2 = 32767;
+System.out.println(s2);
+
+//short s3 = 50000; //CE:incompatible types: possible lossy conversion from int to short
+
+short s4 = 'Z';
+System.out.println(s4);
+
+
+short s5 = false; //CE:incompatible types: boolean cannot be converted to short
+
+short s6 = "Core Java";//CE:incompatible types: String cannot be converted to short
+
+short s7 = 10.5;//CE:incompatible types: possible lossy conversion from double to short
+
+----
+int 
+----
+->It is mostly used data type.
+
+->Its size 4 bytes
+
+->range is -2,147,483,648 to 2,147,483,647
+
+ex:
+---
+
+----
+long
+----
+->some times int data type range is not sufficent to store big values
+
+->Fox If we want to calcualte the distance, The light foox travelled in 500 days
+   sec = 12500 mitres per sec
+
+  long distance = 500*24*60*60*12500
+
+->size is 8 bytes
+
+->to indicate any int value as long, we can use suffix l or L
+
+long l1 =10l or 10L
+
+
+->by default all integral will be cosdered, as a int data type value by compiler and jvm
+
+-> covert int values byte,short long
+
+   1) directly assigning the value
+
+       byte b1 = 10;
+       short s1 = 10;
+       long l = 10;
+
+   2) by using cast operator
+      int i1 = 120;
+
+      byte b1 =(byte) i1;
+
+      short s1 =(sort)i1
+
+   3)by using suffix, we can't convert by using suffixes for byte,short, only for long we can use suffix
+      long l1 = 10L;
+
+-----------------------
+4.floating data types
+------------------------
+->In java every float value will be considered as a double value by default.
+   float f1 = 10.0;//CE: incompatible types: possible lossy conversion from double to float
+
+   float f1 = 10.0f;
+
+------
+float:
+-----
+-> size 4 bytes
+
+->5 to 6 decimal places, other wise double
+
+------
+double:
+-----
+-> size 8 bytes
+
+->more than 5 to 6 decimal places then use
+
+
+04/10/2023
+
+---------------------------
+5. Non-numerical data types
+---------------------------
+-----
+char
+----
+-> If we place any character in single quote is called character.
+
+-> by using char data type, we represent the character literals
+
+->In every programming language, all characters represnts in the ASCII values.
+
+->ASCII -> AMERICAN STANDARD FOR INTERNATIONAL INTERCHAGE
+
+-> size 2 bytes(16 bits)
+
+->range 0 to 65,535
+
+->c,c++ languages only contains ASSCII characters, but java language contains all languages characcters, to store all languaguages
+  cahracters 1 byte size and 0 to 255 range is not sufficient, that's why size is 2 bytes anf range is 0 to 65,535
+
+->Java language char data type is implemented in the form of Unicode system.
+
+  unicode system = ASCII code system + other languages characters
+
+ex:
+---
+    char c1 = 'a';
+
+    char c2 = ' ';
+
+    //char c3 = '  ';//CE : unclosed character literal
+
+   //char c4 = '';//CE: empty character literal
+
+   //char c5 = 'ab';//unclosed character literal
+
+   char c6 = 96;
+
+   System.out.println(c6);
+
+   char c7 = 65535;
+
+   System.out.println(c7);
+
+   //char c8 = 70000;// CE:  possible lossy conversion from int to char
+
+--------
+boolean:
+--------
+-> boolean data type is used represents either true or false
+
+->size 1 byte
+
+Ex: boolean b1 = true;
+    boolean b2 = false;
+    boolean b3 = 0;
+    //boolean b4 = 0;//incompatible types: int cannot be converted to boolean
+
+---------------------
+referenced data types:
+---------------------
+->by using class, inteterface, emum and array, if we create any variable is callede referenced data type
+
+->We have pre defined referenced data types and also can be customized referenced data types
+
+-> ex for pre definded refeced data types are Sting, Date, StingBuffer and StringBuilder ..etc
+
+->consructor is non-return type method, and constructror name and class name should be the same.
+
+->Eithe constructor, we create or not created compiler will create the constructor.
+
+->to create an object we need a constructor
+
+->to inialize the default values of non-static varibles
+
+
+-> creting customized refereced data type
+   class Employ 
+{
+	int empId;
+	String empName;
+	float empSal;
+	String empCompanyName;
+	boolean isEmpManager;
+    	char gender;
+
+	public static void main(String[] args) 
+	{
+		//creting object employ 1st object
+		Employ empObj1 = new Employ();
+
+		//before setting values, displaying empOb1 object values
+		System.out.println("Emp ID : "+empObj1.empId);//0
+		System.out.println("Emp Name :"+empObj1.empName);//null
+		System.out.println("Emp Sal :"+empObj1.empSal);//0.0
+		System.out.println("Emp Company Name :"+empObj1.empCompanyName);//null
+		System.out.println("Emp is Manager :"+empObj1.isEmpManager);//false
+		System.out.println("Emp Gender :"+empObj1.gender);//space
+
+		//setting the values for empObj1 object
+		empObj1.empId=101;
+		empObj1.empName = "Maurice";
+		empObj1.empSal = 20000;
+		empObj1.empCompanyName = "Infosys";
+		empObj1.isEmpManager = false;
+		empObj1.gender = 'M';
+
+		//for printing space
+		System.out.println();
+
+		//after setting values, displaying empOb1 object values
+		System.out.println("Emp ID : "+empObj1.empId);//101
+		System.out.println("Emp Name :"+empObj1.empName);//Maurice
+		System.out.println("Emp Sal :"+empObj1.empSal);//20000
+		System.out.println("Emp Company Name :"+empObj1.empCompanyName);//Infosys
+		System.out.println("Emp is Manager :"+empObj1.isEmpManager);//false
+		System.out.println("Emp Gender :"+empObj1.gender);//'M'
+
+		//creting employ 2nd object
+		Employ empObj2 = new Employ();
+
+		//setting the values for empObj2 object
+		empObj2.empId=102;
+		empObj2.empName = "Sunny";
+		empObj2.empSal = 15000;
+		empObj2.empCompanyName = "Wipro";
+		empObj2.isEmpManager = false;
+		empObj2.gender = 'M';
+
+         	//for printing space
+         	System.out.println();
+
+		//displaying empOb2 object values
+		System.out.println("Emp ID : "+empObj2.empId);//102
+		System.out.println("Emp Name :"+empObj2.empName);//Sunny
+		System.out.println("Emp Sal :"+empObj2.empSal);//15000
+		System.out.println("Emp Company Name :"+empObj2.empCompanyName);//Wipro
+		System.out.println("Emp is Manager :"+empObj2.isEmpManager);//false
+		System.out.println("Emp Gender :"+empObj2.gender);//'M'
+
+	}
+}
+
+
+      
+
+
+       
+      
+
+
+
+		
+
+	
+
+
+
+
+
+
+
+
+

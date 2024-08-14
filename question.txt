@@ -1,0 +1,15 @@
+palendrom series 
+fibonasis series 
+find out two maximum number in arrey
+routing 
+course policy
+access modifiers
+abstract class
+through thoughs 
+garabge collection
+design pattern
+multi threding 
+multi tasking 
+private and public constructor
+singlton
+

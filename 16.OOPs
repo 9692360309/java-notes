@@ -1,0 +1,1871 @@
+					16.Object Oriented Princples(OOPs)
+					----------------------------------
+				
+-> If we want to create a real time object with effectively, securely,code Reusabily, flexibily  then we need to follow Object Oriented Princples.
+
+->OOPs stands Object Oriented Principles or Object Oriented System
+
+->Main Object Oriented Principles are
+    A PIE
+
+    A -> Abstraction
+    P -> Polymorphism
+    I -> Inheritance
+    E -> Encapsulation
+
+-> The below are Object Oriented Princples
+
+1)class & Types of the classes
+   -class
+   -Types of the classes
+   -syntax to create a class with/without inheritance
+   -inteface
+
+2)object
+
+3)Constructor & Types of Constructorts
+
+4)Constructor Oveloading & Constructor Chaining
+
+5)this key word & this()
+
+6)Data Binding
+
+7)Abstraction
+
+8)Encapsulation
+
+9)Inheritance(IS-A Relationship) & Types of the Inheritances
+
+10)Composition - HAS-A Relationship
+
+11)Aggregation - USES-A Relationship
+
+12)Method Overloading
+
+13)Method Overriding
+
+14)Method Hiding
+
+15)Polymophism
+    ->static Polymophism
+    ->Dynamic polymorhism/Dynamic method dispatching/Losely coupling
+	
+	
+1)class:
+=========
+-> A class is a plan to create an Object and also we can call class is a blueprint of an object.
+
+-> A class is main block that will group the variables and methods for writing the logic
+
+->Every class contains the properties(variables) and behavior(methods) of an object.
+
+->for example, If we want to construct an hosue , the building plan will be class
+
+->If we want to create an Student Object then 
+  the properties are sNo, sName, sCourse, sFee
+  the behaviors are read, write, listen, play, sleep, eat..
+
+
+  
+        class Student{ -> plan of the student object
+
+        //properties(variables) of the student
+
+	int sNo;               
+	String sName;   
+	String sCourse; 
+	double sFee 
+
+  	//behavior(methods) of the student
+	public void read(){
+		System.out.println("currently in reading Mode");
+	}
+	
+	public void write(){
+		System.out.println("currently in writing Mode");
+	}
+	
+	public void listen(){
+		System.out.println("currently in listening Mode");
+	}
+	
+	public void play(){
+		System.out.println("currently in playing Mode");
+	}
+     
+  }
+
+
+=>Types of the classes
+----------------------
+-> In regular programming we uses 6 types of the classes
+
+ 1)interface 
+
+ 2)Abstact class
+
+ 3)Concrete class
+
+ 4)final class
+
+ 5)enum
+
+ 6)Annotation
+
+
+->syntax to create a class with out inheritance
+------------------------------------------------
+<ACCESS-MODIFIERS> <NON-ACCESS-MODIFIERS> <interface/class/enum> classname{
+  
+   //static members
+    1.static variables
+    2.static methods
+    3.static block
+    4.main method
+
+  //non-static members
+    1.non-static variable
+    2.non-static method
+    3.non-static block
+    4.constructor
+
+  //inner class
+}
+
+
+->syntax to create a class with inheritance
+--------------------------------------------
+<ACCESS-MODIFIERS> <NON-ACCESS-MODIFIERS> <interface/class/enum> classname extends/implements superclassname/superinteface{
+  
+   //static members
+    1.static variables
+    2.static methods
+    3.static block
+    4.main method
+
+  //non-static members
+    1.non-static variable
+    2.non-static method
+    3.non-static block
+    4.constructor
+
+  //inner class
+}
+	
+1)interface :
+=============
+->It is fully un implemented class 
+
+->Befoere Java8,It contains only public abstract methods and public static final variables.
+
+->From Java8 onwars, It can contains additionally default methods and static methods 
+
+->intefaces will be created by using inteface keyword
+
+->inteface will be root class in object creation process 
+
+->By deafalut interface methods will be public, even If we are not adding public compler will be added.
+
+->interface allowed modifiers are public, default ,abstract and strictfp
+
+->For example, If want to create Person,Vehicle objects, our programming should start with inteface
+  
+  Ex: interace Person{
+         p v walk();
+         p v eat();
+         p v sleep();
+
+         p v work();
+         
+      }
+
+
+Abstact class:
+==============
+->It is Partially implemented class
+
+->It contains some of the concrete methods and some of the abstract methods
+
+->concrete methods- the methods which are having the body.
+  p v add{
+    //addition logic
+  }
+
+->abstarct methods - the methods with out body.
+  p v add();
+
+->creating a method with out body in the class
+  class AbstractPerson 
+  {
+   void add();
+  }
+  
+  CE: missing method body, or declare abstract
+
+->after adding abstract keyword to the method,
+
+->If a normal class, If it contains at least one abstract method then we need to declare that class as abstract other wise We will get
+  class AbstractPerson 
+  {
+   abstract void add();
+  }
+  CE: AbstractPerson is not abstract and does not override abstract method add()
+
+->by using abstract key word, we create abstract class.
+
+->After declaring class as abstaract then CE
+  abstract class AbstractPerson 
+  {
+   abstract void add();
+  }
+
+
+->A a class it contains at least one abstact method then class should be abstract class.
+
+Q)If a class contains no abstract methods then ca't we declare that class as abstract ?
+---------------------------------------------------------------------------------------
+YES, we can declare our class absract, even one abtract method existed also, but the main advantage is we can't create objects
+for the class. so, when we want to avoid creating objects of our class then declare our class as abstract.
+
+abstract class AbstractPerson 
+{
+ public void add(){
+	 int a=10;
+	 int b=20;
+	System.out.println("Addition of 2 nums :"+(a+b));
+ }
+
+ public static void main(String[] args) 
+	{
+		AbstractPerson obj1 = new AbstractPerson();
+	}
+} 
+
+CE:  AbstractPerson is abstract; cannot be instantiated
+            AbstractPerson obj1 = new AbstractPerson();
+
+
+Q)Why we can't create object for the abstarct classees ?
+---------------------------------------------------------
+->Because Abstract clases may be they will have abstact methods.So, without body we can't call abstract methods right that's why disbled creating objects for the abstract classes.
+
+->Compiler only checks objects creating for abstract class then it throws CE, It never checks the the abstract class contains only
+  abstract methods or concrete methods.
+
+ ->We need to create abstract class, when some of the operations(methods) logic is common for next level classes
+
+
+->When ever, we are implenting the class from an inteface, It has provide the logics to interafce methods other wise our class will be abstract class.
+
+class PartialPerson implements Person
+{
+ 
+}
+
+CE: PartialPerson is not abstract and does not override abstract method coding() in Person
+
+->A method created without body is called abstract method.
+
+->abstact class means, we can say 50% constructed house
+
+
+EX:
+---
+class PartialPerson implements Person
+{
+
+	void walk(){
+		System.out.println("Walking Mode");
+	}
+
+	void eat(){
+		System.out.println("Eating Mode");
+	}
+
+        void sleep(){
+		System.out.println("Sleeping Mode");
+        }
+
+      //not proving logic for
+      //void work()
+}
+
+By default in interface all methods will be public, while overriding methods need to give public otherwise CE:
+sleep() in PartialPerson cannot implement sleep() in Person
+     void sleep(){
+          ^
+  attempting to assign weaker access privileges; was public
+
+->We are not providing logic for work method, thats why our class became abstract class
+
+abstract class PartialPerson implements Person
+{
+
+public	void walk(){
+		System.out.println("Walking Mode");
+	}
+
+public void eat(){
+		System.out.println("Eating Mode");
+	}
+
+ public void sleep(){
+		System.out.println("Sleeping Mode");
+     }
+
+   //not proving logic for
+  public abstract void work();
+}
+
+->The allowed modifiers for abstract class are public, default, abstract and strictfp
+
+Q)What are members we can create in Abstract class?
+-----------------------------------------------------
+->All Static members(SVs, SMs, MM,SBs) & Non-Static members(NSV,NSB,NSM,Constructor)
+
+->We can create abstract methods also
+
+
+3)Concrete class:
+-----------------
+->Fully implemented class with logic and it won't contains abstaract methods
+
+->These class only concremethods only and other class members also but except abstract methods
+
+->We need to create conrete classes for the below scenarios
+
+  => When ever creating subtype object with all methods implementation
+  
+  =>When directly creating main type object with all methods logic with out inheritance concept
+
+->The allowed modifiers to create concre class are public, default, strict fp, final and abstract
+
+Ex-1: 100% fully constucted house	
+
+Ex-2:
+----
+class  Student extends PartialPerson
+{
+
+       @Override
+	public void work(){
+		System.out.println("Studying");
+	}
+	
+}
+
+
+
+4)final class:
+---------------
+->If we create class with final keyword is called final class.
+
+->When we don't want any sub classes for our class and also not use & not override our class methods then we need create our class as   final
+
+
+Ex: class Test1{
+     public void add(){
+         System.out.println("Addition");
+     }
+    }
+
+   class Test2 extends Test1{
+	public static void main(String[] args) 
+	{
+		Test2 test2Obj = new Test2();
+		test2Obj.add();
+	}
+    }
+
+
+->making Test1 class as final
+  final class Test1{
+     public void add(){
+         System.out.println("Addition");
+     }
+  }
+
+  class Test2 extends Test1{
+	public static void main(String[] args) 
+	{
+		Test2 test2Obj = new Test2();
+		test2Obj.add();
+	}
+  }
+
+  CE: cannot inherit from final Test1
+
+->We can create final classes, methods and variables also
+
+->If we create final, for our class no sub class and can't use our class methods and can't override our class methods.
+
+->If we create a final method can't override but we can use final methods.
+  class Test1{
+     public final void add(){
+         System.out.println("Addition");
+     }
+  }
+
+  class Test2 extends Test1{
+   @Override
+   public void add(){
+	
+   }
+
+   public static void main(String[] args) 
+   {
+	Test2 test2Obj = new Test2();
+	test2Obj.add();
+   }
+  }
+
+CE: add() in Test2 cannot override add() in Test1
+    public void add(){
+             ^
+    overridden method is final
+
+->If we create final variables, We can't change the variable values once we assigned
+    class Test2{
+	final int i1 = 5;
+
+	public static void main(String[] args) 
+	{
+		Test2 test2Obj = new Test2();
+		System.out.println(test2Obj.i1);
+		test2Obj.i1 = 30;
+	}
+    }
+
+    CE: cannot assign a value to final variable i1
+
+->For class level non-static final variables, If we not assign any values the via consructor we can assign the values
+  class Test2{
+	final int i1;
+
+       Test2(){
+	  i1 = 20;
+       }
+
+	public static void main(String[] args) 
+	{
+		Test2 test2Obj = new Test2();
+		System.out.println(test2Obj.i1);
+	}
+   }
+
+->For class level static final variables, If we not assign any values the via static block we can assign the values
+  class Test2{
+	static final int i1;
+    static{
+		i1=20;
+    }
+	public static void main(String[] args) 
+	{
+		System.out.println(i1);
+	}
+  }
+
+->We can create final variables in all the blocks(SBS,NSBS,METHODS,CONSTRUCTORS),
+  class Test2{
+	public static void main(String[] args) 
+	{
+		final int i1 = 10;
+		System.out.println(i1);
+		i1=20;
+	}
+ }
+
+=>The allowed modifiers for final class are default, public, final and strictfp
+
+=> Enum:
+--------
+-> enum is a special type of class It holds the fixed set of named constantants
+
+-> We create enum by using "enum" key word
+
+->enum class is by default final.
+
+->It introduced in 1.5 version
+
+->In enum, we can create not only constansts, we  can also we can define all kinds of static & non-static members
+
+syntax:
+        enum enumname{
+		//enum constants with , separator
+
+                //all 8 static & non-static members
+        }
+
+ex:
+   enum Colors{
+	RED, BLUE, YELLOW, GREEN;
+
+	public static void main(String[] args){
+		System.out.println(Colors.RED);
+
+		//to print all the colors at a time
+	    Colors[] colors	=Colors.values();
+		for(Colors color:colors){
+			System.out.println(color);
+		}
+	}
+   }
+
+2)Object:
+---------
+->Object is an Instance of a class
+
+->Here we can create many Instances of object a class
+
+->We can crete instacne/object by using new key word and constructor
+
+->Creating an instance/object means providing the memory to that object in the JVM, By using new key word
+
+->For Stuent object, we can create the many insatances
+  Venkat object, Suresh Object, Vinay object...
+
+-> sample code for creating many instances of Student object
+   Student venkaObject = new Studnet();
+   Student sureshObject = new Studnet();
+   Student vinayObject = new Studnet();
+
+3)Constructor & Types of Constructorts
+=======================================
+
+->Constructor is a special method with out return type
+
+->Construcor is used initialize the non-static variables with default values
+
+->ans also used constructor,If we want to set the values at the time of object creation
+
+->We have 3 types of Constructors
+	- default constructor
+        - no-parametrized constructor
+        - parameterized constructor 
+
+->default constructor:
+-----------------------
+->Compiler creating constructor is called default constructor
+
+->If we not create any constructor in our class then compiler will crete no-paramerized constructor
+
+->Constructor will initialize the default values at the time of object creation, by taking help of "this" key word
+
+  class Student1
+  {
+	int studentId;
+        String studentName;
+        String studentClass;
+        
+        //comiler created constructor
+        Student1(){
+           this.studentId = 0;
+           this.studentName = null;
+           this.studentClass = null; 
+        }
+
+
+	public static void main(String[] args) 
+	{
+		Student1 student1Obj = new Student1();
+		System.out.println(student1Obj.studentId);
+		System.out.println(student1Obj.studentName);
+		System.out.println(student1Obj.studentClass);
+	}
+}
+
+output
+-------
+0
+null
+null
+
+->no-parametrized constructor:
+-----------------------------
+->If developer/programmer created a constructor with out paramaters is called no-parameterized constructor.
+
+->If programmer creates the no-parametrized constructor then compiler will not create default constructor
+
+class Student1
+  {
+	int studentId;
+        String studentName;
+        String studentClass;
+        
+        //develpoer/programmer created constructor
+        Student1(){
+           //compiler initialize the default values
+           this.studentId = 0;
+           this.studentName = null;
+           this.studentClass = null; 
+        }
+
+
+	public static void main(String[] args) 
+	{
+		Student1 student1Obj = new Student1();
+		System.out.println(student1Obj.studentId);
+		System.out.println(student1Obj.studentName);
+		System.out.println(student1Obj.studentClass);
+	}
+}
+
+output
+-------
+0
+null
+null
+
+->parameterized constructor :
+----------------------------
+->If programmer/developer created constructor with parameters is called paramerized constructor.
+
+->Compiler never creates parameterized constructor.
+
+->We create parameterized, If we want set the customized values to the non-static variables, at the time of object creation
+
+class Student2
+{
+	int studentId;
+    String studentName;
+    String studentClass;
+
+    Student2(int studentId, String studentName, String studentClass){
+		studentId = studentId;
+		studentName = studentName;
+		studentClass = studentClass;
+
+    }
+
+	public static void main(String[] args) 
+	{
+		Student2 student1Obj = new Student2(101, "James", "B.Tech");
+		System.out.println(student1Obj.studentId);
+		System.out.println(student1Obj.studentName);
+		System.out.println(student1Obj.studentClass);
+	}
+}
+
+output:
+0
+null
+null
+
+but expected output
+101
+James
+B.Tech
+
+Note:
+----
+when ever class level variables and method/constructor parameterized variable are same then we need differentiate those with "this"
+key word
+
+
+class Student2
+{
+	int studentId;
+    String studentName;
+    String studentClass;
+
+    Student2(int studentId, String studentName, String studentClass){
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentClass = studentClass;
+
+    }
+
+	public static void main(String[] args) 
+	{
+		Student2 student1Obj = new Student2(101, "James", "B.Tech");
+		System.out.println(student1Obj.studentId);
+		System.out.println(student1Obj.studentName);
+		System.out.println(student1Obj.studentClass);
+	}
+}
+
+output:
+101
+James
+B.Tech
+
+
+Q)When class constains only paramerized constructor then can we create object with no-parameterized Constructor ?
+-----------------------------------------------------------------------------------------------------------------
+->No, Its not possible, If we create parametezed constructor then compiler will create default constructor. So with out no-parameterized constructor, we can't create object with no-parameterized constructor.
+
+Ex:
+---
+class Student2
+{
+	int studentId;
+    String studentName;
+    String studentClass;
+
+    Student2(int studentId, String studentName, String studentClass){
+		studentId = studentId;
+		studentName = studentName;
+		studentClass = studentClass;
+
+    }
+
+	public static void main(String[] args) 
+	{
+		Student2 student1Obj = new Student2();
+		
+	}
+}
+
+CE:
+
+Student2.java:16: error: constructor Student2 in class Student2 cannot be applied to given types;
+                Student2 student1Obj = new Student2();
+                                       ^
+  required: int,String,String
+  found:    no arguments
+  reason: actual and formal argument lists differ in length
+
+
+->We can create many parameterized constructors with different order of the parameterized variables
+
+
+Q)If class contains 3 non-static variables? then how many cominationation of parameterzed constructors can we create ?
+----------------------------------------------------------------------------------------------------------------------
+
+->We can how many non-static variables are there, those many factorial number of constructors we can create
+   public class Student {
+	int studentId;
+        String studentName;
+        String studentClass;
+   }
+
+-> This class having 3 non-static variables,so 3! no of constructors, we can create
+   3! = 3*2*1 = 6
+
+   studentid 
+   studentName 
+   studentClass
+   studentid studentName studentClass
+   studentName studentid  studentClass
+   studentName studentClass studentid  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+3)Data Binding:
+--------------
+-> The process of creating variables as a private in the class is Data Binding
+
+->Data Binding provides the security because private variables we can't
+access outside of the class.
+
+class Student{
+	private int sNo;
+	private String sName;
+	private String sCourse;
+	private double sFee;   
+}
+
+4)Abstraction:
+--------------
+->The process providing the necessary information and hiding the unnecessary
+information is called Abstraction.
+
+->For example, If we are using TV remote just we know how to use that and
+we don't how internally it works.here how to use TV remote is necessary 
+information and how it internally works unnecessary inforamtion
+
+
+->In java by using abstract classes and interfaces, we can achive Abstraction
+
+interface Person{
+ public void walk();
+ public void smell();
+ public void eat();
+}
+->to call walk, smell, eat methods, just if we know how to call those
+methods its enough, but no need know how the methods implented internally
+
+5)Encapsulation:
+-----------------
+-> The Encapsulation is the combination implentation of DataBinding and Abstraction
+
+->Encapsulation = DataBing + Abstraction
+
+->If we want apply Encapsulation to Java class, we need follow below steps
+1) create all the variables with private key word
+
+2)create setter methods to set the values to the variables
+
+3)create getter methods to read the values of the variables
+
+Ex: 
+
+class Student{
+	private int sNo;
+	private String sName;
+	private String sCourse;
+	private double sFee;
+	
+	//setter methods
+	publid void setSNo(int sNo){
+	 this.sNo = sNo;
+	}
+	
+	publid void setSName(String sName){
+	 this.sName = sName;
+	}
+	
+	publid void setSCourse(String sCourse){
+	 this.sCourse = sCourse;
+	}
+	
+	publid void setSFee(double sFee){
+	 this.sFee = sFee;
+	}
+	
+	//getter methods
+	
+	publid int getSNo(){
+	 return sNo;
+	}
+	
+	publid String getSName(){
+	 return sName;
+	}
+	
+	publid String getSCourse(){
+	 return sCourse;
+	}
+	
+	publid double getSFee(){
+	 return sFee;
+	}
+     
+  }
+  
+		Student venkatObject = new Student();
+		
+		venkatObject.setsNo(101);
+		venkatObject.setsName("Venkat");
+		venkatObject.setsCourse("Core Java");
+		venkatObject.setsFee(4000);
+		
+		System.out.println(venkatObject.getsNo());
+		System.out.println(venkatObject.getsName());
+		System.out.println(venkatObject.getsCourse());
+		System.out.println(venkatObject.getsFee());
+		
+		
+Advantages:
+----------
+-> We can achive Security
+
+->Data Hiding
+
+->Increased Code Flexibility
+
+->Code Reusabily
+		
+Assignment:
+-----------
+Create Eployee class and object by following enacapsulation rules, the employee properties
+are eNo, eName, eSal, eDepartment.
+
+
+6)Inheritance(IS-A Relationship):
+---------------------------------
+->The process of extending one class from another class is called Inheritance
+
+->By using Inheritance, parent classe properties(variables) and methods ,we can use in the
+child and also If we are not comfortable with parent class method logic then we can
+override that method in child class.
+
+->By using extend/implements we can implement the Inheritance
+
+->If we want to make Inheritance relation between 2 classes or 2 interfaces, we need use
+extends key word
+
+->If we want to make Inheritance relation between class and interface, we need to use 
+implements key word
+
+->Types of Inheritance
+-----------------------
+1)Single Inheritance
+
+2)Multilevel Inheritance
+
+3)Multiple Inheritance
+
+4)Hierarchical Inheritance
+
+5)Hybrid Inheritance
+
+
+7)Composition -HAS-A Relationship:
+-----------------------------------
+-> If an object does't exist with out another object then those 2 objecta relation is
+HAS-A Relationship.
+
+Ex: Student and Adress relationship is HAS-A A relationship
+	Car and Engine relationship is HAS-A A relationship
+
+package javaLangPackage;
+
+public class Address{
+	private String houseNo ;
+	private String city ;
+	private String street ;
+	private long pin;
+	
+	public String getHouseNo() {
+		return houseNo;
+	}
+	public void setHouseNo(String houseNo) {
+		this.houseNo = houseNo;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public long getPin() {
+		return pin;
+	}
+	public void setPin(long pin) {
+		this.pin = pin;
+	}
+	@Override
+	public String toString() {
+		return "Address [houseNo=" + houseNo + ", city=" + city + ", street=" + street + ", pin=" + pin + "]";
+	}
+	
+	
+	
+}
+
+
+package javaLangPackage;
+
+public class Student{
+	private int sNo;
+	private String sName;
+	private String sCourse;
+	private double sFee;
+	
+	//HAS-A Relation ship
+	private Address address;
+	
+	public int getsNo() {
+		return sNo;
+	}
+	public void setsNo(int sNo) {
+		this.sNo = sNo;
+	}
+	public String getsName() {
+		return sName;
+	}
+	public void setsName(String sName) {
+		this.sName = sName;
+	}
+	public String getsCourse() {
+		return sCourse;
+	}
+	public void setsCourse(String sCourse) {
+		this.sCourse = sCourse;
+	}
+	public double getsFee() {
+		return sFee;
+	}
+	public void setsFee(double sFee) {
+		this.sFee = sFee;
+	}
+	
+	
+	
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Student [sNo=" + sNo + ", sName=" + sName + ", sCourse=" + sCourse + ", sFee=" + sFee + ", address="
+				+ address + "]";
+	}
+	public static void main(String[] args) {
+		Student studentObj = new Student();
+		studentObj.setsNo(101);
+		studentObj.setsName("Venkat");
+		studentObj.setsFee(4000);
+		studentObj.setsCourse("Core Java");
+		
+		Address address = new Address();
+		address.setHouseNo("2-1/2-2");
+		address.setStreet("7/G Colony");
+		address.setCity("SEcunderaBad");
+		address.setPin(522123);
+		
+		studentObj.setAddress(address);
+		
+		System.out.println(studentObj);
+	}
+	
+}
+
+
+8)Aggregation -USES-A Relationship:
+-----------------------------------
+-> If an object can be existed with out another object then those 2 objecta relation is
+USEA-A Relationship.
+
+Ex: Student and Bike relationship is USES-A A relationship
+	Car and SounSystem relationship is HAS-A A relationship
+	
+	
+	
+9)Ploylymorphism:
+-----------------
+->Polymophism means having many forms, we can define polymorhism as the ability of a message
+to be displayed more than one form.
+
+->In Java, Polymophism based on the object passing it behave in different forms.
+
+->In Java We have 2 types of Ploylymorphism
+
+1)Static/Compile time/Early Binding polymorhism
+
+2)Dynamic /Runtime /Dynamic method/Late Binding dispatching 
+ 
+
+1)Static/Compile time/Early Binding polymorhism(Method Overloading):
+--------------------------------------------------------------------
+->S/C/E polymorhism is also called Method Overloading and occured at compile time
+
+->Method Overloading is a process of writing the multiple methods with same name and 
+with different paramters in same class.
+
+->Method over loading is possible in the same class only.
+
+->S/C/E polymorhism always take care care compiler at compilation time meana which output
+shoul come decides at compile time time only
+
+->about var arg feature
+	-var arg feature released in java 5 version
+	-it will take any number arguments as input
+	-syntax datatype... variable name
+			int... values
+			double... values
+			String.. values
+			Student.. students
+	-it will acts internally as an array
+
+
+case-1
+
+ public class AdditiionSPCase1 {
+	//a,b values hard coded
+    public void add(){
+	 int a=10;
+	 int b=20;
+	 int c=a+b;
+	 System.out.println("Addition Of Two Numbers :"+c);
+	}
+	
+	//a,b values can be passed dynamically
+	public void add(int a, int b){
+	
+	 int c=a+b;
+	 System.out.println("Addition Of Two Numbers :"+c);
+	}
+	
+	public void add(int a, int b, int c){
+	
+	 int d = a+b+c;
+	 System.out.println("Addition Of Three Numbers :"+d);
+	}
+	//var arg feature released in java 5
+	//it will take any number arguments as input
+	//syntax datatype... variable name
+	//it will acts internally as an array
+	
+	public void add(int... values) {
+		
+		int sum = 0;
+		for(int number:values) {
+			sum = sum+number;
+		}
+		
+		System.out.println("Sum of "+values.length+" Numbers :"+sum);
+	}
+	
+	
+	public static void main(String[] args) {
+		AdditiionSPCase1 additiionSPObject = new AdditiionSPCase1();
+		additiionSPObject.add();
+		additiionSPObject.add(10, 20);
+		additiionSPObject.add(10, 20, 30);
+		additiionSPObject.add(10, 20, 30,40);
+	}
+}
+
+   
+->add(), add(int a, int b), add(int a, int b, int c) are the overloaded methods
+  Addition additionObject = new Addition();
+  additionObject.add(1,2,3);
+  additionObject.add();
+  additionObject.add(30,40);
+
+case-2:
+------
+public class StaticPolymorphismCase2 {
+	public void m1() {
+		System.out.println("No arg m1 method");
+	}
+	
+	public void m1(int i) {
+		System.out.println("int arg m1 method");
+	}
+	
+	public void m1(double d) {
+		System.out.println("double arg m1 method");
+	}
+	
+	public static void main(String[] args) {
+		StaticPolymorphismCase2  staticPolymorphismCase2Object = new StaticPolymorphismCase2();
+		staticPolymorphismCase2Object.m1();
+		staticPolymorphismCase2Object.m1(10);
+		staticPolymorphismCase2Object.m1('a');
+		staticPolymorphismCase2Object.m1(10.3);
+		staticPolymorphismCase2Object.m1(10.3f);
+		
+	}
+}
+
+ouput:
+------
+No arg m1 method
+int arg m1 method
+int arg m1 method
+double arg m1 method
+double arg m1 method
+
+case-3:
+-------
+->Automatic pramotion of data tpyes will be happened in the Method Over loading
+
+->If passed argument exact datatype method not available, It will search for next level
+data type method, then next level data type also not available then it search for again
+next level data type still not found, it will throw method not found Exception at 
+compilation time only.
+
+->Copiler search the data types in the below way
+
+	byte --> short --> int --> long -->float --> double
+						|
+						|
+						char
+
+public class StaticPolymorphismCase3 {
+	public void m1() {
+		System.out.println("No arg m1 method");
+	}
+	
+	public void m1(long i) {
+		System.out.println("long arg m1 method");
+	}
+	
+	public void m1(float d) {
+		System.out.println("float arg m1 method");
+	}
+	
+	
+
+//	byte --> short --> int --> long -->float --> double
+//						|
+//						|
+//					   char	
+	
+	public static void main(String[] args) {
+		StaticPolymorphismCase3  staticPolymorphismCase3Object = new StaticPolymorphismCase3();
+		staticPolymorphismCase2Object.m1();
+		staticPolymorphismCase2Object.m1(10);
+		staticPolymorphismCase2Object.m1('a');
+		//staticPolymorphismCase2Object.m1(10.3); Here we will get CE, because no method is found with double paramter and also there is no next level
+		staticPolymorphismCase2Object.m1(10.3f);
+		
+	}
+}
+
+output:
+------
+
+No arg m1 method
+long arg m1 method
+long arg m1 method
+float arg m1 method
+
+
+case-4:
+------
+For the referenced Data types firt priority will be taken by child type 
+
+NtRamarao <--extends-- HariKrishna <---extends-- Jr NTR
+
+class NtRamaRao {
+}
+
+class HariKrishna extends NtRamaRao {
+}
+
+class JrNtr extends HariKrishna {
+}
+
+public class StaticPolymorphismCase4 {
+	public void m1() {
+		System.out.println("No arg m1 method");
+	}
+
+	public void m1(NtRamaRao ntRamaRao) {
+		System.out.println("NtRamaRao arg m1 method");
+	}
+
+	public void m1(HariKrishna hariKrishna) {
+		System.out.println("HariKrishna arg m1 method");
+	}
+
+	public void m1(JrNtr jrNtr) {
+		System.out.println("JrNtr arg m1 method");
+	}
+
+	// eaxact object type ---> its parent object Type ---> its parent object type
+
+	public static void main(String[] args) {
+		StaticPolymorphismCase4 staticPolymorphismCase4Object = new StaticPolymorphismCase4();
+		staticPolymorphismCase4Object.m1();
+		staticPolymorphismCase4Object.m1(new NtRamaRao());
+		
+		// remove m1(NtRamaRao ntRamaRao) -- > It will search NtRamaRao parent class
+		// type method, If its available thows method not found CE
+		staticPolymorphismCase4Object.m1(new HariKrishna());
+		
+		// If we remove m1(HariKrishna hariKrishna) method, then it will search for
+		// HariKrishna parent Method,
+		// then m1(NtRamaRao ntRamaRao) is available then it will be excecuted
+		
+		staticPolymorphismCase4Object.m1(new JrNtr());
+		// case-1 remomve m1(JrNtr jrNtr) then it search for super type of JR ntr is
+		// HariKrishna
+		// case-2 remove m1(HariKrishna hariKrishna) then it search for m1(NtRamaRao
+		// ntRamaRao)
+
+	}
+}
+
+
+case - 5
+--------
+-> when we pass argument to call over loaded methods, if the passed argument value matches
+to more than one method then we will get Ambiguity exception
+
+public class StaticPolymorphismCase5 {
+	public void m1(Object object) {
+		System.out.println("Object arg m1 method");
+	}
+
+	public void m1(String string) {
+		System.out.println("String arg m1 method");
+	}
+	
+	public void m1(StringBuffer string) {
+		System.out.println("StringBuffer arg m1 method");
+	}
+
+
+	public void m1(Student student) {
+		System.out.println("Student arg m1 method");
+	}
+
+
+	// eaxact object type ---> its parent object Type ---> its parent object type
+
+	public static void main(String[] args) {
+		StaticPolymorphismCase5 staticPolymorphismCase5Object = new StaticPolymorphismCase5();
+		staticPolymorphismCase5Object.m1("java");
+		staticPolymorphismCase5Object.m1(new StringBuffer("java"));
+		staticPolymorphismCase5Object.m1(new Student());
+		
+		//here the argument null value matches to 
+		//String parameter m1 method
+		// StringBuffer parameter m1 method
+		//Student parameter m1 method then compiler confuses to which method to call
+		//So, here we will get Ambiguity Exception
+		//staticPolymorphismCase5Object.m1(null);
+		
+
+	}
+}
+
+case-6:
+-------
+
+public class StaticPolymorphismCase5 {
+
+	public void m1(int value1,int value2) {
+		System.out.println("int-int arg m1 method");
+	}
+	
+	public void m1(int val1, float val2) {
+		System.out.println("int-float arg m1 method");
+	}
+
+
+	public void m1(float val1, int val2) {
+		System.out.println("float-int arg m1 method");
+	}
+
+
+	// eaxact object type ---> its parent object Type ---> its parent object type
+
+	public static void main(String[] args) {
+		StaticPolymorphismCase5 staticPolymorphismCase5Object = new StaticPolymorphismCase5();
+		staticPolymorphismCase5Object.m1('a','b');
+		staticPolymorphismCase5Object.m1(10, 'a');
+		
+		//here not applicable for int-10, double - 10.5 value, because there is no int,double parameters m1 method
+		//staticPolymorphismCase5Object.m1(10, 10.5);
+		
+		//CE: Not applicable for the arguments float,float
+		//staticPolymorphismCase5Object.m1(10.5f, 10.5f);
+
+	}
+}
+
+case-7:
+------
+The overloaded methods execution decision takes care by always by the compiler based on 
+the reference type, In overloaded methods run time time object never plays any role but 
+based on the reference type overloaded methods will be executed. 
+
+Note****: In overlaoding reference type plays role, based on the reference type overloaded 
+methods will be excecuted. 
+
+Ex: Student studentObject = new Student();
+Student studentObject ---> reference type
+new Student ---> object creation
+
+Person <-----extends---- Student
+
+Person personObject1 = new Person();
+Person personObject2 = new Student();
+
+Student studentObject1 = new Student();
+
+class Person{
+	
+	
+}
+
+class Student extends Person{}
+
+public class StaticPolymorphismCase7 {
+	public void m1(Person personObject) {
+		System.out.println("Person arg m1 method");
+	}
+
+	public void m1(Student studentObject) {
+		System.out.println("Student arg m1 method");
+	}
+	
+
+
+	// eaxact object type ---> its parent object Type ---> its parent object type
+
+	public static void main(String[] args) {
+		StaticPolymorphismCase7 staticPolymorphismCase7Object = new StaticPolymorphismCase7();
+		Person personObject1 = new Person();
+		staticPolymorphismCase7Object.m1(personObject1);
+		
+		Student studentObject = new Student();
+		staticPolymorphismCase7Object.m1(studentObject);
+		
+		Person personObject2 = new Student();
+		staticPolymorphismCase7Object.m1(personObject1);
+		staticPolymorphismCase7Object.m1(studentObject);
+		
+		//In the case overloading we should pass argument reference type and object type 
+		// should be same
+		staticPolymorphismCase7Object.m1(personObject2);
+
+	}
+}
+
+
+2)Dynamic Ploylymorphism/Runtime Ploylymorphism/Dynamic method Dispatching/Late Binding dispatching :
+-----------------------------------------------------------------------------------------------------
+->We can't achieve dynamic polymorphism with out inheritance
+
+->in the Dynamic polymorhism execution decision takes care by decision takes care by 
+JVM  based on the passing the run  time object.
+
+->In overriding always play the role run time object.
+
+->The process of writing exact method proto type with logic in the child class then its 
+called method overriding.
+
+->We can override the methods, when ever the classes are in Inheritance relationship only
+
+->We can over ride only non-static methods.
+
+->If parent class method logic not comfortable then we have to that method in the 
+child class and we can write our own logic.
+
+=>Down casting:
+---------------
+The procees of taking out child object from parent reference is calles Down casting,
+by using Cast opertor, we can do Down casting
+Parent parentObject  = new Child();
+Child chilObject = (Child)parentObject;
+
+
+class Parent {
+
+	public void study() {
+		System.out.println("Paraent need to study Enginnering");
+	}
+
+	public void work() {
+		System.out.println("Paraent needs to Work");
+	}
+
+}
+
+class Child extends Parent {
+	@Override
+	public void study() {
+		System.out.println("Child need to become Singer");
+	}
+
+	public void play() {
+		System.out.println("Child wants to play");
+	}
+
+	public void dance() {
+		System.out.println("Child wants to dance");
+	}
+
+}
+
+public class OerridingCase1 {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Parent Object creation
+		Parent parentObject = new Parent();
+		parentObject.study();
+		
+		//We can't call child method from parent object
+		//parentObject.work();
+		//parentObject.play();
+		
+		
+
+		// child object creation
+		Child childObject = new Child();
+		// The study method overriden in the child class, so it will be executed from
+		// child class
+		// If we not over ride then it will be executed from parent class
+		childObject.study();
+
+		childObject.work();
+		childObject.play();
+		childObject.dance();
+		
+		// With parent reference type child object creation
+		Parent parentObject2 = new Child();
+		parentObject2.study();
+		parentObject2.work();
+		
+		//here we can call only parent class methods, because compiler checks only reference type 
+		// but it won't check inside reference what object is available
+		//parentObject2.play();
+		//parentObject2.danace();
+		
+		//by using parentObject2 how can we call play and dance methods
+		//By using dowcasting method()
+		Child childObject2 = (Child)parentObject2;
+		childObject2.play();
+		childObject2.dance();
+		
+		
+	}
+
+}
+
+=>Rules to follow while overriding:
+----------------------------------
+1)Method signatute(combination of name & parameters of the method) must be same
+  class A{
+    public void m1(){
+	   System.out.println("A m1()");
+	}
+  }
+  
+  class B extends A{
+	@Override
+    public void m1(){
+	   System.out.println("B m1()");
+	}
+  }
+  
+2)While overriding before java 1.4 version, the reutn type should same in the child class
+Also, but from java 1.5 onwrds covarient types(sub class types) supported.
+
+Ex: class Person{}
+
+    class Student extends Person{}
+	
+	
+	class A{
+	   public Person m1(){
+	    System.out.println("A Person m1()");
+		return new Person();
+	   }
+	}
+	
+	class B extedns A{
+	@Override
+	public Student	m1(){ //--> here taking return type as a Student is called Covarient return
+		System.out.println("B Person m1()");	
+	}
+	
+	}
+	
+3)private methods we can't over ride
+
+class A{
+   private void m1() {
+	   System.out.println("A m1()");
+   }
+}
+
+class B extends A{
+private void m1() {
+	System.out.println("B m1()");
+}
+-> In B class m1() method is not overriding, in B class m1 method is its own private
+method but over riding method from a class
+
+4)final methods we can't override
+	class A{
+		public final void m1(){
+			System.out.println("A Person m1()");
+		}
+	}
+
+	class B extends A{
+
+	@Override
+	public final void m1() { 
+		System.out.println("B m1()");
+	}
+
+  }
+  
+-> here we will get Compile time error, saying theat final methods can't be overridded
+  
+5)We should override parent class abstract methods.
+abstract class Test{
+	abstract void m1();
+}
+
+class Test1 extends Test{
+
+	@Override
+	void m1() {
+		System.out.println("m1()");
+		
+	}
+	
+}
+
+6)While overirding the methods, week access modifiers not allowed but we can increase in the below order
+
+pubilc <--- protected <----default<---private
+
+
+public(yes)
+  |
+  |
+public
+
+protected 
+   |
+   |
+protected/public
+
+default
+   |
+   |
+default/protected/public
+
+
+private
+ |
+ |
+ here overiding is not possible
+ 
+ 
+ =>The below modifiers no restrictions in the case of overriding
+ ---------------------------------------------------------------
+-> sysnchonized
+->native
+->strictfp
+
+final method(impossible)
+    |
+    |
+non-final method
+
+
+non-final method
+    |
+	|
+final method 
+
+
+abstract method
+    | |
+	| |
+non-abstaract method
+
+sysnchonized method
+    |  |
+	|  |
+non-synchronized method
+
+native method
+   | |
+   | |
+non native method
+
+strictfp method
+   | |
+   | |
+non-strictfp method
+
+
+7)While overiding the levlel the exceptions can be decreased(parent --> child exceptions) but can't be increased, It is applicable for the 
+only Checked Exception but UnChecked Checked Exceptions
+
+->Always we should think about Checked Exceptions, In the Parent class method throws Cheked Exception then 
+  Child class should throw its Child Exception 
+Parent: public void m1() throws Exception (valid)
+Chlid : public void m1() throws IOException
+
+Parent : public void m1() throws IOException(in valid)
+Chlid : public void m1() throws Exception
+
+->In the case of Unchecked Exceptions no restrictions
+Parent : public void m1()thows NullPinterException(Valid)
+Child :  public void m1()throws ArithematicExceptions
+
+Parent : public void m1()thows NullPinterException(Valid)
+Child :  public void m1()
+
+->If parent class method not thowing any exception, In the child class can throw UnChecked Exception
+Parent : public void m1()(valid)
+Child :  public void m1()thows NullPinterException
+
+->If parent class method not thowing any exception, In the child class can throw Checked Exception
+Parent : public void m1()
+Child :  public void m1()thows IOException
+
+=>Method Hiding:
+----------------
+-> We can't override static methods, even override also those methods will become own methods of the 
+partiular class.
+
+->We can't override non-static methods as a static methods
+
+->here methods execution take care compiler based on the reference type.
+class A{
+	
+	public static void m1() {
+		System.out.println("A m1() ");
+	}
+}
+
+class B extends A{
+	
+	public static void m1() {
+		System.out.println("B m1() ");
+	}
+}
+
+class C extends B{
+	public static void m1() {
+		System.out.println("C m1() ");
+	}
+}
+
+public class OverridingCase1{
+	public static void main(String[] args) {
+		 A aObect = new A();
+		 aObect.m1();
+		 
+		 B bObect = new B();
+		 bObect.m1();
+	 
+		 A aObect2 = new B();
+		 aObect2.m1();
+	 
+		 B bObject = new C();
+		 bObject.m1();
+	 
+		 A aObect3 = new C();
+		 aObect3.m1();
+	}
+}
+
+Upcasting & Down Casting:
+------------------------
+Upcasting:
+----------
+The process of putting child class object in the Paraent class reference is called Upcasting
+Parent parentObject = new Child() ===> Upcasting
+Advantage: We can Achieve Losely coupling/Runtime polymorhsm
+
+Parent parentObject = new Child1()/new Child2()/new Child3();
+Sim simObject = new Airtel()/new Jio()/new Idea()
+
+Down Casting:
+------------
+The process of taking out the child object from parent reference is called Down casting. If we want to do
+Down casting, comulsarly need to be done UpCastsisting, before DowCasting.
+
+By using cast operator we do the DownCasting
+
+Parent parentObject = new Child();==> Upcasting
+Child childObject = (Child)parentObject; ==> Down casting
+
+
+=>Overriding With respect variables:
+------------------------------------
+->Overriding concept not applicable for the variables
+
+->Variables execution done by the compiler based reference type.
+class Paraent{
+	int a =100;
+}
+
+class Child extends Paraent{
+   int a = 200;
+}
+
+Parent parentObject = new Parent();
+parentObject.a; ===> 100
+
+Child childObject = new Child();
+childObject.a; ===> 200
+
+Parent parentObject = new Child();
+parentObject.a; ===> 100
+
+
+=> The differences between overloading and overiding
+
+
+								overloading						   						overiding
+==============================================================================================================	
+Method Signature				With same name and with different  					With same name and with same  					Method 
+								parameters 											parameters
+								
+								
+How many classes				In one oveloading possible							More than one classes needed
+needed
+
+
+Return types					No Restrictions									   Covarient return types supports
+
+
+Access Modifiers				No Restrictions									   Week access modifiers not allowed in the child class
+																				   Public <--- protected <---default <---private
+																				   
+throws clause					No Restrictions										The level Checked Exceptions can be decreased(Parent to Child)
+																					and no restrictions about UnChecked Exceptions
+																					
+																					
+private, static,final methods 	can be overloaded									can't be overridden
+
+
+Method Execution				Always take care by the compiler					Always take care by the JVM
+								based in reference type								based on the run time object we pass
+								
+								
+also called 					Compile Time Polymophism/							Runtime polymorhism/Dynamic method dispatching/
+								Static PolyMorphism/								Dynamic Ploylymorphism..
+								early Binding
+								
+																																									
+			
+
+Assignment: Create a HumanBeing project, by taking interface as HumanBeing and methods hear, speek,walk,behavior,work and 
+also take abstaract class as Person by implemting Methods for behavoir and work and take Concrete classes Venkat, Revathi,
+Srinu by implementing logics for behavior and work and take test class with main method and insertHuman method.	
+

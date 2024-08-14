@@ -1,0 +1,295 @@
+
+						6.Arrays
+						---------
+14/10/2023
+----------
+
+1) variable & variable dis Advantages
+
+2)Introduction Array & Advantages & DisAdvantages
+
+3)Array Declaration
+
+4)Array object assignment
+
+5)Array declaration, object assignment and setting/getting values in single line
+
+6)diff b/w length & length()
+
+7)Array values/elements assignment
+
+8)Array variable assignments
+
+9)Number of ways to read values from the Array
+
+
+1)variable & variable dis Advantages:
+-------------------------------------
+->variable is used to only signle value.
+  int a = 10;
+  here a is a variable.
+
+->We can't store more than one value.
+
+2)Introduction Array & Advantages & DisAdvantages:
+--------------------------------------------------
+->Array is indexed, fixed size of homogenious elements.
+
+->Array is collection of elements, in sigle array variable, we can store many homogenous values based on the   array size.
+
+->Advantages:
+  ----------
+   - we can store many values in sinle variable
+   - Array recommeded to use, If we know the size before only.
+   
+->Dis Advantages:
+  --------------
+  - it is fixed in the size 
+  - It can store only homo genious elements by default, but by using object[] we can store heterogenious      elements
+  - no prefined library support
+
+
+3)Array Declaration:
+--------------------
+-> Array declaration is nothing but just creating an array variable.
+
+syntax-1: primitive/referenced data type[] varaible name;
+syntax-2: primitive/referenced data type []varaible name;
+syntax-3: primitive/referenced data type varaible name[];
+
+ex-1: int[] values/ int []values / int values[];
+      
+
+ex-2: 
+      class Student{}
+      Student[] students / Student []students /Student students[]
+
+->Note: At the time array declaration, we should not give the size of the array, If we give We will get CE:
+   int[6] values;
+
+
+4)Array object:
+---------------
+->creating array object by using new key word is called array object
+
+->If we want create any array object, we need to use new key word and also need to give array size
+
+syntax: new datatype[size of the array]
+
+ex: new int[10];
+
+
+5)Arra Creation & intentnal diagram of array
+---------------------------------------------
+Array = Array Delclaration + Array object assignment
+
+->create int array, to store 5 int values
+	int[] values = new int[5];
+
+->create student array, to store 10 student objects
+        Student[] students = new Student[10];
+
+
+6)Array creation & setiing & getting values from Array
+-------------------------------------------------------
+int values[] = new int[5];
+//setting the values to the array
+  values[0] = 10;
+  values[1] = 20;
+  values[2] = 30;
+  values[3] = 40;
+  values[4] = 50;
+
+//getting & displaying values from array
+  System.out.println(values[0]);
+  System.out.println(values[1]);
+  System.out.println(values[2]);
+  System.out.println(values[3]);
+  System.out.println(values[4]);
+
+5)Array declaration, object assignment and setting values in single line:
+--------------------------------------------------------------------------
+->If we know the array at the time of creating array only, the we can set those values to the array at the same   time.
+
+-> arrary delclaration, array object assignment and setting the values 
+    syntax-1: primitve/ref data type[] variablename = new primitive/ref datatype[]{val1,val2,val3...};
+
+    ex: int[] values = new int[]{10,20,30,40,50};
+	String[] fruits= new String[]{"banana","apples"};
+
+   syntax-2: primitve/ref data type[] variablename = {val1,val2,val3.....};
+    ex: int[] values = {10,20,30,40,50};
+
+Note: at the time creating array with the values, no need to mention the array size other wise, we will           CE:error: array creation with both dimension expression and initialization is illegal, so here how           may values we are at the time of creating array, that will be the size of the array.
+
+6)diff b/2 length & length():
+-----------------------------
+length:
+------
+-> length is final variable in array, It used to get the size of the array
+   syntax: arrayVariableName.length;
+
+   ex; int[] values = {10,20,30,40,50};
+       System.out.println(values.length);//5
+
+length():
+--------
+->this method belongs to String class, It used find numbers of chracters present in the string.
+ex: String coure = "Core Java";
+    System.out.println(course.length());//9
+
+
+7)Array values/elements assignment:
+-----------------------------------
+->If we create a primitve type array, we can store the values to that array only lower data type range values.
+
+  byte -> short ->int -> long -> float -> double
+                  |
+                 char
+
+          int[] numbers = new int[10];
+	  numbers[0] = 10;
+
+	  numbers[1] = 'a';
+
+	  byte b1 = 20;
+          numbers[2] = b1;
+
+	//numbers[3] = 10L; //CE:  incompatible types: possible lossy conversion from long to int
+	numbers[3] = (int)10L; 
+
+	//numbers[4] = 10.3; // CE: incompatible types: possible lossy conversion from double to int
+	numbers[4] = (int)10.3;
+
+	//numbers[5] = "Core Java";// CE: String cannot be converted to int
+	//numbers[5] = (int)"Core Java"; //String cannot be converted to int
+	
+
+	System.out.println(numbers[0]);//10
+	System.out.println(numbers[1]);//97
+	System.out.println(numbers[2]);//20
+	System.out.println(numbers[3]);//10
+	System.out.println(numbers[4]);//10
+
+9)Number of ways to read values from the Array
+----------------------------------------------
+->We have 4 ways to read the values from the array
+	1)based on the index
+	2)by using for loop
+	3)by using enhanced for loop
+	4)by using Arrays.toString(-) method
+
+int[] numbers1 = {100,200,300,400,500,600,700,800};
+
+//1)based on the index
+        System.out.println(numbers1[0]);
+	System.out.println(numbers1[1]);
+	System.out.println(numbers1[2]);
+	System.out.println(numbers1[3]);
+	System.out.println(numbers1[4]);
+	System.out.println(numbers1[5]);
+	System.out.println(numbers1[6]);
+	System.out.println(numbers1[7]);
+//dis-advantage : need to write many sysouts
+
+
+
+//2. by using for loop
+for(int i=0 ; i<numbers1.length ; i++){ 
+  System.out.println(numbers1[i]);
+}
+
+
+
+//3. by using enhanced for loop
+for(int maurice : numbers1){
+   System.out.println(maurice);
+}
+
+//4.by using Arrays.toString(-)
+System.out.println(Arrays.toString(numbers1));
+
+
+
+  
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6.Arrays_new.txt
+Displaying 6.Arrays_new.txt.

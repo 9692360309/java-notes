@@ -1,0 +1,1200 @@
+								21.MultiThreading
+								-----------------
+
+01. Multi Tasking & Types of Multi Tasking
+02. Process based Mutlt Tasking
+03. Thread based Multi Tasking
+04. Thread & Number of ways to create a Thead
+05. Thread class constructor
+06. Thread class methods
+07. Life cycle of the Thread
+08. Getting & Setting name of thread
+09. Methods to Restrict Thread execution:
+	1)yield
+	2)join
+	3)sleep
+10. Daemon/Non Daemong Threads
+11. Executor Service
+11. Synchronization
+12. Inter Thread Communication
+
+
+								
+=>Multi Tasking:
+----------------
+->Executing multiple threads simentaniusly is called MultiThreading.
+->Thre are 2 types of Multi Tasking
+		1)Process based Multi Tasking
+		2)Thread based Multi Tasking
+		
+1)Process based Multi Tasking:
+--------------------------------
+->Executing multiple tasks simentaniusly, where each task is Independent task, Then such 
+type of tasking is Multi Tasking.
+
+->Process based Multi Tasking occurs at OS levle.
+
+EX: While typeing java program, simentaniusly listening the music and downloading the
+software.
+
+->So, here 3 taks involed programing, listening, downloading
+
+2)Thread based Multi Tasking:
+-----------------------------
+->Executing multiple threads simentaniusly, where each thread is Independent task, then
+such type of multi tasking is called Thread based Multi Tasking.
+
+EX: Print 1 to 100 numbers by using 2 threads
+    Moving the files from one location by involving Multiple Threads
+	
+	
+=>Thread:
+---------
+->Thread is an independent task, It has its own execution.
+
+=>Number of ways to create a Thead:
+-----------------------------------
+1)By extending Thead class
+2)By implementing Runnable interfce
+
+1)By extending Thead class:
+---------------------------
+->Thead class implemented Runnable interface already
+
+Runnable(I) ---> public void run();
+    |
+    |
+ implements
+    |
+    |
+class Thread {
+ @Overiride
+ public void run(){ --> to write the thread logic 
+  -----(written empty logic)
+ }
+  
+  public void start(){ --> to start the Thread
+  
+  }
+}
+
+   |
+   |
+ extends
+   |
+   |
+ MyThread extends Thread{
+   main(){
+     MyThread mythreadObject = new MyThread();
+     mythreadObject.start();
+
+   }
+ }
+ 
+ Ex:
+ 
+ public class MyThread extends Thread{
+	
+	@Override
+	public void run() {
+		//My thread logic 
+		for(int i=1;i<=10;i++) {
+		System.out.println("Hello :: "+i);         
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		//My Thread object created
+		MyThread myThreadObject = new MyThread();
+		//starting the Thread
+		myThreadObject.start();
+		//
+		
+		//main thead logic
+				for(int i=1;i<=10;i++) {
+					System.out.println("Hii :: "+i);
+				}
+		//Main Thead logic end
+	}
+
+}
+
+possibilty outputs
+output1:
+------
+Hii :: 1
+Hii :: 2
+Hii :: 3
+ |
+ |
+Hi :: 10
+Hello::1
+Hello ::2
+ |
+ |
+Hello :: 10
+
+output2:
+------
+Hello::1
+Hello ::2
+ |
+ |
+Hello :: 10
+Hii :: 1
+Hii :: 2
+Hii :: 3
+ |
+ |
+Hi :: 10
+
+output2:
+------
+Hello::1
+Hello ::2
+Hii :: 1
+Hii :: 2
+Hello :: 3
+Hello :: 4
+Hello :: 5
+Hello :: 6
+Hello :: 7
+Hello :: 8
+Hello :: 9
+Hello :: 10
+Hii :: 3
+Hii :: 4
+Hii :: 5
+Hii :: 6
+Hii :: 7
+Hii :: 8
+Hii :: 9 
+Hi :: 10
+
+ 
+
+=>about start()
+-------------
+->used start the Thread, It is not a normal method, It will start a new Thread flow of 
+execution.
+
+=>Thead Scheduler:
+---------------
+->Thread scheduler decides the execution of the Threads, We can't expect in which order threads will be executed.
+
+->Thead Scheduler is the part of JVM, So, we can't expect the behavior of the JVM.
+
+=>Difference between run and start method:
+------------------------------------------
+->in run method we write the new thread logic 
+->start method is used start or invoke the new thread
+
+->mandatory to override the run method and to provide the logic for new Thred logic implementation
+->start method no need to override, we can over ride also but no use, It behaves like a normal
+method.
+
+=>If we overload run method, what will be happened
+--------------------------------------------------
+->If we overload run method there is no use, It will behave as a normal method.
+->When ever we call start method, start method search for the Runnable override method, then 
+it will from particular class overiden method.
+
+=>If we not override run method in our class, what will be happened?
+--------------------------------------------------------------------
+->If we not override run method in our class then Thread class run method will be executed, So
+In Thead class run method, no logic implemented, we won't get any output.
+
+=>If We override start method, what will be happened
+-----------------------------------------------------
+->If we overide start method, It behaves like normal method, and new thread won't be created and If new Thread not created , run method won't be called.
+
+2)By implementing Runnable interfce:
+------------------------------------
+class  TestRunnable implements Runnable
+{
+	@Override
+	public void run() {
+		//My thread logic 
+		for(int i=1;i<=10;i++) {
+		System.out.println("Hello ::  "+i);         
+		}
+	}
+
+
+	public static void main(String[] args) 
+	{
+		    //creating object of Test Runnable
+			TestRunnable testRunnable = new TestRunnable();
+
+			//Creating an Object of Thread
+			Thread threadObject = new Thread(testRunnable);
+			//starting the Thread
+			threadObject.start();
+		 
+		//main thead logic
+				for(int i=11;i<=20;i++) {
+					System.out.println("Hii :: "+i);
+			 }
+		//Main Thead logic end
+	}
+}
+
+possibilty outputs:
+-------------------
+Hello ::  1
+Hello ::  2
+Hii :: 11
+Hii :: 12
+Hello ::  3
+Hii :: 13
+Hello ::  4
+Hii :: 14
+Hii :: 15
+Hello ::  5
+
+Hii :: 11
+Hii :: 12
+Hello ::  1
+Hii :: 13
+Hii :: 14
+Hello ::  2
+Hello ::  3
+Hii :: 15
+Hello ::  4
+Hii :: 16
+Hello ::  5
+Hii :: 17
+Hello ::  6
+
+
+=>Which is the recommended way to define a Thread:
+-------------------------------------------------
+->Among those 2 ways, implementing Runnable inteface is Recommmended
+
+->Java does't support multiple inheritance, So, If already our claas extends Thread class then we can't 
+extend other class.
+
+->By implementing Runnable interface, we can extend other class class also
+
+
+=>Thread class Constructors:
+---------------------------
+1)Thred threadObject = new Thread();
+2)Thred threadObject = new Thread(Runnable runnable);
+3)Thred threadObject = new Thread(String threadName);
+4)Thred threadObject = new Thread(Runnable runnable,String threadName);
+5)Thred threadObject = new Thread(ThreadGroup threadGroup,String threadName);
+6)Thred threadObject = new Thread(ThreadGroup threadGroup,Runnable runnable);
+7)Thred threadObject = new Thread(ThreadGroup threadGroup,Runnable runnable,String threadName);
+
+
+=>Thead class Methods:
+----------------------
+1)public void run()
+2)public void start()
+3)public void sleep(long ms)
+4)public void sleep(long ms, long ns)
+5)public State getState()
+6)public final String getName()
+7)public final void setName(String name)
+8)public final int getPriority()
+9)public final void setPriority()
+
+10)public static native void yield();
+
+11)
+public final void join() throws InterruptedException
+public final void join(long milliseconds) throws InterruptedException
+public final void join(long milliseconds, long nanoseconds) throws InterruptedException
+
+12)public final void setDaemon(boolean on)
+
+
+
+=>Life cycle of the Thread:
+---------------------------
+-> Thread Life cycle contains several phases of Thread execution
+
+1) New
+
+2) Runnable
+
+3) Running
+
+4) Blocked
+
+5) Terminated
+
+
+New: A thread begins its life cycle in the new state. Thread remains in the new state until we will call start ( ) method.
+
+Runnable : After calling start ( ) method, thread comes from new state to runnable state.
+
+Running : A thread comes to running state when Thread Schedular will pick up that thread for execution.
+
+Blocked  : A thread is in waiting state if it waits for another thread to complete its task.
+
+Terminated : A thread enters into terminated state once it completes its task.
+
+
+
+=>How to know the stage of the Thead:
+--------------------------------------
+by using getState() method, we can know the current stage of the Thread
+TestRunnable testRunnable = new TestRunnable();
+//Creating an Object of Thread
+Thread threadObject = new Thread(testRunnable);
+System.out.println(threadObject.getState()); ==> NEW
+//starting the Thread
+threadObject.start();
+System.out.println(threadObject.getState()); ==> RUNNABLE
+
+
+=>Can we start the same Thread again where already start method called?
+-----------------------------------------------------------------------
+->After starting the thread, If we restart the thead again, We will get Run Time Exception : IllegalThreadStateException
+
+
+=>Getting and Setting name of a Thread:
+--------------------------------------
+->In Java every thread will have some name, it can be explicitely provided by the programmer or 
+JVM provided name
+
+->We can set and get the name of the threads by filloing methods
+public final String getName()
+public final void setName(String name)
+
+-> to set & get name of the current thread
+Thread.currentThread.setName(name of the Thread);
+Thread.currentThread.getName();
+
+class  TestSetAndGetNameThread implements Runnable
+{
+	@Override
+	public void run() {
+		System.out.println(Thread.currentThread().getName()); // Suresh
+		//My thread logic 
+		for(int i=1;i<=10;i++) {
+		System.out.println("Hello ::  "+i);         
+		}
+	}
+
+
+	public static void main(String[] args) 
+	{
+			Thread.currentThread().setName("Venkat");
+			System.out.println(Thread.currentThread().getName());//Venkat
+
+			//int a = 10/0; Exception in thread "Venkat" java.lang.ArithmeticException: / by zero
+                                       //  at TestSetAndGetNameThread.main(TestSetAndGetNameThread.java:16)
+
+		    //creating object of Test Runnable
+			TestSetAndGetNameThread testRunnable = new TestSetAndGetNameThread();
+
+			//Creating an Object of Thread
+			Thread threadObject = new Thread(testRunnable);
+			threadObject.setName("Suresh");
+			System.out.println(threadObject.getName()); // Suresh
+			
+			//starting the Thread
+			threadObject.start();
+		 
+		//main thead logic
+				for(int i=11;i<=20;i++) {
+					System.out.println("Hii :: "+i);
+			 }
+		//Main Thead logic end
+	}
+}
+
+Ex-2
+----
+class TestThread1 extends Thread 
+{
+	public static void m1(){
+		System.out.println(Thread.currentThread().getName()); // Venki
+		Thread.currentThread().setName("Suresh");
+	}
+
+     @Override
+	 public void run(){
+		System.out.println(Thread.currentThread().getName());
+	 }
+
+	public static void main(String[] args) 
+	{
+		Thread.currentThread().setName("Venki");
+		System.out.println(Thread.currentThread().getName());//Venki
+		m1();
+		System.out.println(Thread.currentThread().getName());//Suresh
+		TestThread1 testThreadObject = new TestThread1();
+
+		//here we are calling from main method, so the thread will be main Thread, so here we are
+		//setting the name to main Thread
+		Thread.currentThread().setName("John");
+
+		//here directly setting the name for our Thread
+		testThreadObject.setName("Kumar");
+		testThreadObject.start();
+		
+	}
+}
+
+
+
+=>Thead Priorities:
+-------------------
+-> Every Thread will have some priority, it can be explicitely provided by the Programmer or default 
+priority that provided by the JVM.
+
+-> The valid range of every thread from 1 to 10, here 1 is the least and 10 is the highest
+
+->In Thred class defined the following constants to represent the thread priorities.
+		Thread.MIN_PRIORITY = 1 ---->The minimum priority that a thread can have
+		Thread.NORM_PRIORITY = 5 --->The default priority of the Thead
+		Thread.MAX_PRIORITY = 10 --->The maximum priority that a thread can have
+		
+->TheadScheduler will check the priorities of thread, to allocate the processor.
+
+->The Thread which is having highest priority will get first chance to execute
+
+->If Two threads having same Priority, then we can't tell that which thread will be executed first, the
+execution depends on TheadScheduler.
+
+->For Ex
+Thread.LOW_PRIORITY(INVALID)
+Thead.HIGH_PRIORITY(INVALID)
+0(INVALID)
+8(VALID)
+Thread.MIN_PRIORITY(VALID)
+Thread.NORM_PRIORITY(VALID)
+Thread.MAX_PRIORITY(VALID)
+
+->to set the priorities, in the Thread class 2 methods are defined
+  public final int getPriority()
+  public final void setPriority()
+  
+  
+->If we set thread priorities,other than 1 to 10 numbers, then we will get IllegalArgumentException
+MyThread myThreadObject = new MyThread();
+myThread.setPriority(5);(valid)
+myThread.setPriority(1000);(invalid)-->IllegalArgumentException
+myThread.setPriority(-8);(invalid)-->IllegalArgumentException
+myThread.setPriority(Runnable.MAX_PRIORITY);(invalid)
+myThread.setPriority(Thread.MAX_PRIORITY);
+
+Ex:
+---
+class ThreadPriority2 extends Thread 
+{
+	@Override
+	public void run(){
+		for(int i=1;i<=10;i++){
+			Thread.sleep(2000);
+			System.out.println("Hii.. :: "+i);
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		//ThreadPriority Thead 
+		ThreadPriority2 threadPriorityObject = new ThreadPriority2();
+		threadPriorityObject.setPriority(10);
+		threadPriorityObject.start();
+
+		//main Thread logic
+		for(int i=20;i>=11;i--){
+			Thread.sleep(1000);
+			System.out.println("Bye.. :: "+i);
+		}
+		//main Thread logic end
+
+	}
+}
+
+Note: some of the OSs, won't support Thread priorities, just we should know the theritical 
+knowledge.
+
+expected out put:
+-----------------
+Hii.. :: 1
+Hii.. :: 2
+Hii.. :: 3
+Hii.. :: 4
+Hii.. :: 5
+Hii.. :: 6
+Hii.. :: 7
+Hii.. :: 8
+Hii.. :: 9
+Hii.. :: 10
+Bye.. ::20
+Bye.. ::19
+Bye.. ::18
+Bye.. ::17
+Bye.. ::16
+Bye.. ::15
+Bye.. ::14
+Bye.. ::13
+Bye.. ::12
+Bye.. ::11
+
+=>Methods to Restrict Thread execution:
+--------------------------------------
+->We have 3methods to restrict the thread execution
+1)yield
+2)join
+3)sleep
+
+1)yield:
+--------
+ ->By using yield method we can pause current Thread excecution and we can give chance to other theards to execute,
+ which are having same priority.
+ 
+ ->If other Threads having less priority than current thred then other threads won't get chance to execute, so 
+ currentThread execution continued.
+ 
+ ->When ever we call yield method on particular thead then it will go to waiting state, afterwards we can't give
+ guarante that when this thread get chance again to execute.
+ 
+ -> yiled method from Thread class, proto type of yield method is
+	public static native void yield();
+	
+class YieldTest extends Thread 
+{
+	@Override
+	public void run(){
+		for(int i=1;i<=10;i++){
+			Thread.yield();
+			System.out.println("Hii.. :: "+i);
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		//ThreadPriority Thead 
+		YieldTest yieldTestObject = new YieldTest();
+		yieldTestObject.start();
+
+		//main Thread logic
+		for(int i=20;i>=11;i--){
+			System.out.println("Bye.. :: "+i);
+		}
+		//main Thread logic end
+
+	}
+}
+
+->In the above program, The chance executing main thead is high priority because YieldTest Thread is calling yield
+method.
+
+Note : so os's wont support the yield method functionality.
+
+
+2)join:
+------
+->If thread wants to wait, until other thread execution finished then we should use join method
+
+->If Thread t1 wants until thead t2 execution finished, then we need to call t2.join()
+
+->The join method defiened from Thread class, There are 3 overloaded join methods available
+
+public final void join() throws InterruptedException
+public final void join(long milliseconds) throws InterruptedException
+public final void join(long milliseconds, long nanoseconds) throws InterruptedException
+
+Ex-1: Main Thead(Rama) is waiting child Thread(Seetha Thread)
+-------------------------------------------------------------
+class JoinTest extends Thread 
+{
+	@Override
+		public void run(){
+			for(int i=1;i<=10;i++){
+				System.out.println("Seetha Thread");
+				try{
+				Thread.sleep(2000);
+				}catch(InterruptedException ie){}
+			}
+		}
+	public static void main(String[] args) throws InterruptedException
+	{
+		JoinTest joinTestObject = new JoinTest();
+		joinTestObject.setName("Seetha");
+		joinTestObject.start();
+
+		//Rama Thead is waiting until Seetha Thead excution finished
+		joinTestObject.join();
+		
+		Thread.currentThread().setName("Rama");
+		for(int i=1;i<=10;i++){
+			System.out.println("Rama Thread");
+			}
+		
+	}
+}
+
+output:
+-------
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+
+
+Ex-2: Child Thread(Seetha Thread) is waiting Main Thead(Rama) 
+-------------------------------------------------------------
+ class JoinTest extends Thread 
+{
+	private static Thread ramaThead;
+	@Override
+		public void run(){
+			try{
+			//Seetha Thread is waiting for Rama
+			ramaThead.join();
+			}catch(InterruptedException ie){}
+
+			for(int i=1;i<=10;i++){
+				System.out.println("Seetha Thread");
+			}
+		}
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		Thread.currentThread().setName("Rama");
+		//assigng main Thead reference
+		JoinTest.ramaThead = Thread.currentThread();
+
+		JoinTest joinTestObject = new JoinTest();
+		joinTestObject.setName("Seetha");
+		joinTestObject.start();
+		
+		for(int i=1;i<=10;i++){
+			Thread.sleep(2000);
+			System.out.println("Rama Thread");
+			}
+		
+	}
+}
+
+output:
+------
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Rama Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+Seetha Thread
+
+Ex-3: Child Thread(Seetha Thread) is waiting Main Thead(Rama) and Main Thead(Rama) is waiting Child Thread(Seetha Thread)
+------------------------------------------------------------------------------------------------------------------------
+->When thread one is waiting for thread2 and thread2 is waiting for thred2 the dedlock situation occurs
+ class JoinTest extends Thread 
+{
+	private static Thread ramaThead;
+
+	@Override
+		public void run(){
+			try{
+			//Seetha Thread is waiting for Rama
+			ramaThead.join();
+
+			}catch(InterruptedException ie){}
+
+			for(int i=1;i<=10;i++){
+				System.out.println("Seetha Thread");
+			}
+		}
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		Thread.currentThread().setName("Rama");
+		//assigng main Thead reference
+		JoinTest.ramaThead = Thread.currentThread();
+		
+		JoinTest joinTestObject = new JoinTest();
+		joinTestObject.setName("Seetha");
+		joinTestObject.start();
+
+		//Rama is waiting for Seetha Thread
+		joinTestObject.join();
+		
+		for(int i=1;i<=10;i++){
+			System.out.println("Rama Thread");
+			}
+		
+	}
+}
+
+Ex-4: If any Thread calls join method on the same thread then it will be occured Dedlock situation
+
+class JoinTest extends Thread 
+{
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		Thread.currentThread().setName("Rama");
+		//Rama is waiting for him self
+		Thread.currentThread().join();
+		
+		for(int i=1;i<=10;i++){
+			System.out.println("Rama Thread");
+			}
+		
+	}
+}
+
+3)sleep
+-------
+->If Thread don't want to perform any operation and it wants pause a particular time then we should call sleep method.
+
+->The sleep method from Thread class
+
+->sleep over loaded methods are
+  public static native sleep(long ms)throws InterruptedException
+  public static native sleep(long ms, long ns)throws InterruptedException
+  
+Ex:
+class SleepTest extends Thread 
+{
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		for(int i=1;i<=20;i++){
+			Thread.sleep(2000);
+			System.out.print(i+"\t");
+			}
+		
+	}
+}
+
+							
+	
+=>Daemon/Non Daemong Threads:
+-----------------------------
+->A Thread that executes background to help other threads execution then that thread is 
+called Daemon Thread.
+
+->A Thread that executes to run the business logic then that thread is called non-daemon Thread.
+
+For Ex: Stundent and Teacher
+
+Student ---> Non-Daemon Thread
+Teacher ---> Daemon Thread
+
+->Main Thread ---> Non-Daemon Thread
+
+->Garbage Collector --> Daemon Thead
+
+-> JVM will wait until non-daemon threads execution is finished but JVM will not wait until
+   daemon threads execution is finished. So, simply JVM will shutdown even though daemon 
+   threads execution is not finished.
+   
+->Based on parent thread, we can tell that whether thread is daemon or non-daemon thread.
+
+->If Parent Thread is daemon then child threads also daemon threads.
+
+->If Parent Thread is non-daemon then child threads also non-daemon threads.
+
+->By daefault main thread is non-daemon thread, so all custom threads also non-daemon threads
+because main thread is Daemon thread
+
+
+->By using Thead class non-static variable daemon, JVM will understand that whether thead is daemon or
+non-daemon.
+
+->If daemon variable value is true then thread is daemon oterwise thread is non-daemon
+
+-> By default main thread daemon variable value is false because main thread is non-daemon
+
+->By using setDaemon(-), we can change custom threads also as daemon
+  public void setDaemon(boolean condtion) --> from Thread class
+
+
+->By using isDaemon(), we can know whether thread is daemon or non-daemon
+  public boolean isDaemon()--> from Thread class
+  
+  
+Ex: MyThread mt1 = new MyThread();
+	mt1.start(); --> thread is started as non-daemon Thead
+	
+	MyThread mt2 = new MyThread();
+	mt2.setDaemon(false);
+	mt2.start(); --> thread is started as daemon Thead
+	
+
+Ex:
+class DaemonOrNonDaemonTest extends Thread 
+{
+	@Override
+		public void run(){
+			System.out.println("run starts");
+			for (int i=1;i<50 ;i++ )
+			{
+				System.out.println(i+ "   ");
+			}
+			System.out.println("run ends");
+		}
+
+
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		DaemonOrNonDaemonTest  dndThread = new DaemonOrNonDaemonTest();
+		System.out.println("Thead is "+(dndThread.isDaemon()?"Daemon Thread":"Non-Daemon Thread"));
+		dndThread.setDaemon(true);
+		System.out.println("Thead is "+(dndThread.isDaemon()?"Daemon Thread":"Non-Daemon Thread"));
+		dndThread.start();
+		
+	}
+}
+
+Note: We have to use setDaemon(-) method, before starting the thread, once thread started 
+If we use setDaemon(-) method then we will get java.lang.IllegalThreadStateException
+
+
+=>How to interrupt one thread to another thread:
+------------------------------------------------
+->by using interrput(), we can interrupt to another Thread
+
+
+->interrupt method is from Thread class 
+
+public void interrupt()
+
+
+Ex:
+
+class InterruptTest extends Thread 
+{
+	@Override
+		public void run(){
+			System.out.println("run starts");
+			try{
+			for (int i=1;i<50 ;i++ )
+			{
+				Thread.sleep(2000);
+				System.out.println(i+ "   ");
+			}
+			}catch(InterruptedException ie){
+				System.out.println("run got Interrupted");
+			}
+			System.out.println("run ends");
+		}
+
+
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		InterruptTest  interruptThread = new InterruptTest();
+		interruptThread.start();
+		interruptThread.interrupt();
+	}
+}
+
+=>Synchronization:
+------------------
+-> The process of allowing multiple threads one after another to modify same object is
+called Synchronization.
+
+->we can apply synchronization ob object by using synchronized key word.
+
+->By using Synchronization we can solve the Data Inconsistancy issue.
+
+->But disadvantage is synchronized key word increases waiting of the Thread.
+
+->We can appy synchrinization in 2 ways
+  1)Syncronized block level
+  2)Syncronized method level
+  
+->In Java every object will have the unique lock system.so, internall Synchronization concept
+implemented by using locking concept
+
+->In the below example without Synchronization, If we execute, the output will be
+Rajesh booked with Seat Number :30
+Venkat booked with Seat Number :30
+Venkat booked with Seat Number :30
+Rajesh booked with Seat Number :30
+
+so, here same seat booked for all
+
+
+Ex: Syncronization at method level
+package multiThreading;
+
+class Bus {
+	private int seatNumber;
+	public synchronized void  book(String name,int seatNumber) {
+		System.out.println("Please wait booking starting...");
+		this.seatNumber = seatNumber;
+		
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {}
+		
+				System.out.println(name+ " booked with Seat Number :"+this.seatNumber);
+		
+	}
+	
+
+}
+
+public class CustomerThread extends Thread{
+	private Bus bus;
+	private String name;
+	private int seatNumber;
+	
+	public CustomerThread(Bus bus, String name, int seatNumber) {
+		this.bus = bus;
+		this.name = name;
+		this.seatNumber = seatNumber;
+	}
+	
+	@Override
+	public void run() {
+		this.bus.book(name, seatNumber);
+	}
+	
+	public static void main(String[] args ) {
+		Bus busObject = new Bus();
+		CustomerThread customerThread1 = new CustomerThread(busObject, "Rajesh", 30);
+		CustomerThread customerThread2 = new CustomerThread(busObject, "Venkat", 40);
+		CustomerThread customerThread3 = new CustomerThread(busObject, "Rajesh", 21);
+		CustomerThread customerThread4 = new CustomerThread(busObject, "Venkat", 26);
+		customerThread1.start();
+		customerThread2.start();
+		customerThread3.start();
+		customerThread4.start();
+	}
+	
+	
+	
+}
+
+
+out put:
+--------
+Please wait booking starting...
+Rajesh booked with Seat Number :30
+Please wait booking starting...
+Venkat booked with Seat Number :26
+Please wait booking starting...
+Rajesh booked with Seat Number :21
+Please wait booking starting...
+Venkat booked with Seat Number :40
+
+syncronized block:
+----------------
+->If very less lines of the code needs to be apply Synchronization then no need to apply
+Synchronization for all the lines then recommended to use Syncronized block
+
+->The main advatntage of Syncronized block is the waiting time of the threads will be
+decreased.
+
+->syntax:
+---------
+synchronized(this){--> here this current object reference
+
+----
+----
+
+}
+
+Ex:
+public  void  book(String name,int seatNumber) {
+		System.out.println("Please wait booking starting...");
+		synchronized (this) {
+			
+		
+		this.seatNumber = seatNumber;
+		
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {}
+		
+				System.out.println(name+ " booked with Seat Number :"+this.seatNumber);
+		}
+}
+
+->Note : We can apply Synchronization at variable level also by using transient key word
+
+=>Inter Thread Communication:
+-----------------------------
+->If one thread wants to communicate with another thread then we can communicate by using
+wait, notify, notifyAll methods 
+
+->wait, notify, notifyAll methods from Object class
+
+->The thread is required other thread updation then it has to call wait method then immediately
+it will go to waiting state.
+
+->The thread which provides updation about its execition then its responsible to notify other
+threads by using notify method.
+
+->by using notify method which provides the updation to one thread and by using notifyAll
+it can update more then one threads
+
+->we need to call wait, notfy, notifyall methods at synchrinization are only, otherwise we will
+get IllegalMonitorStateException.
+
+Ex-1: notify and wait
+---------------------
+class SumThread extends Thread {
+	private int total = 0;
+	
+	public int getTotal() {
+		return total;
+	}
+
+	@Override
+	public void run() {
+		synchronized (this) {
+			System.out.println("Sum Thread execution started");
+			for (int i = 1; i <= 100; i++) {
+				total = total + i;
+			}
+			System.out.println("Sum Thread giving notification call");
+			this.notifyAll();
+			System.out.println("Sum Thread execution finished");
+		}
+	}
+}
+
+
+public class InterThreadCommunication {
+
+	public static void main(String[] args) throws InterruptedException {
+		SumThread sumThreadObject = new SumThread();
+		sumThreadObject.start();
+		
+		//main thread
+		synchronized (sumThreadObject) {
+			System.out.println("Main method started");
+			sumThreadObject.wait();
+			System.out.println("Main method got notification call");
+			System.out.println("Total ::"+sumThreadObject.getTotal());
+			System.out.println("Main method Ended");
+			
+		}
+
+	}
+
+}
+
+Ex-2 : notifyAll and wait
+-------------------------
+class SumThread extends Thread {
+	private int total = 0;
+	
+	public int getTotal() {
+		return total;
+	}
+
+	@Override
+	public void run() {
+		synchronized (this) {
+			System.out.println("Sum Thread execution started");
+			for (int i = 1; i <= 100; i++) {
+				total = total + i;
+			}
+			System.out.println("Sum Thread giving notification call");
+			this.notifyAll();
+			System.out.println("Sum Thread execution finished");
+		}
+	}
+}
+
+
+class Thread1 extends Thread{
+	
+	@Override
+	public void run() {
+		SumThread sumThreadObject = new SumThread();
+		sumThreadObject.start();
+		//main thread
+				synchronized (sumThreadObject) {
+					System.out.println("Thread1 method started");
+					try {
+						sumThreadObject.wait();
+					} catch (InterruptedException e) {}
+					System.out.println("Thread1 got notification call");
+					System.out.println("Total ::"+sumThreadObject.getTotal());
+					System.out.println("Thread1 method Ended");
+					
+				}
+	}
+
+}
+
+
+class Thread2 extends Thread{
+	
+	@Override
+	public void run() {
+		SumThread sumThreadObject = new SumThread();
+		sumThreadObject.start();
+		//main thread
+				synchronized (sumThreadObject) {
+					System.out.println("Thread2 method started");
+					try {
+						sumThreadObject.wait();
+					} catch (InterruptedException e) {}
+					System.out.println("Thread2 got notification call");
+					System.out.println("Total ::"+sumThreadObject.getTotal());
+					System.out.println("Thread2 method Ended");
+					
+				}
+	}
+
+}
+
+
+public class InterThreadCommunication {
+
+	public static void main(String[] args) throws InterruptedException {
+		SumThread sumThreadObject = new SumThread();
+		sumThreadObject.start();
+		
+		Thread1 thread1Object = new Thread1();
+		thread1Object.start();
+	
+		Thread2 thread2Object = new Thread2();
+		thread2Object.start();
+	}
+
+}
+
+
+
+ 
+
+

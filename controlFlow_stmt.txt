@@ -1,0 +1,918 @@
+					5.OPERATORS & FLOW CONTROL STATEMENTS
+					-------------------------------------
+
+06/10/2023
+----------
+
+1)Operator & Types Operators
+
+2)Arithematic Operators(+, -, * , /, %)
+
+3)Relational Operators(>, >=, <,=<)
+
+4)Equality Operators(==, !=)
+
+5)Logical Operators(&&, ||)
+
+6)Increment(post->a++,pre->++a)/Decrement(post-> a--,pre--> --a) Operators
+
+7)concatenation operator(+)
+
+8)instanceof operator(instanceOf)
+
+9)conditional/Ternary operators(codition? stmt1 : stmt2 )
+
+10)Object creation operator(new)
+
+11)Assignment operator(=)
+
+12)Lambda operator(->)
+
+13)Flow Conntrol Statements
+	1) Condition Statement
+		1) if
+		2) if-else
+		3) if-else ladder
+		4) switch
+
+	2) Iterable/loop statements
+		1)while
+		2)do-while
+		3)for
+		4)for each(java 5v)
+
+	3)Transfer statements
+		1)break
+		2)continue
+		3)retrn
+
+1)Operator & Types Operators:
+------------------------------
+->operator is a symbol, which is used between operands(values) for the any calcualation/decision making.
+
+2)Arithematic Operators(+, -, * , /, %)
+---------------------------------------
+->between 2 numerical variables
+
+byte -> short -> int ->long ->float ->double
+
+byte+byte = int
+byte+int = int
+int+int = int
+byte+long = long
+byte+short = short
+float+long = float
+char+char = int
+
+Ex:
+--
+
+int a = 10;
+
+int b = 20;
+		
+int r1 = a+b;//int+int = int
+System.out.println(r1);
+
+//boolean r2 = a+b;//int+int=int CE: incompatible types: int cannot be converted to boolean
+
+double r3 = 10.3+10; //double+int = double
+
+char ch1 = 'a';//97
+char ch2 = 'b';//98
+//char r4 = ch1+ch2;//CE: incompatible types: possible lossy conversion from int to char
+
+char r5 = (char)(ch1+ch2);//97+98=195
+
+//char r6 = (char)ch1+(char)ch2;//'a'+'b'=int//CE: error: incompatible types: possible lossy conversion from int to char	
+byte r7 = ch1+ch2;//CE: incompatible types: possible lossy conversion from int to byte
+System.out.println(r6);
+
+07/10/2023
+----------
+=>Expression calcualation:
+ --------------------------
+ ->while calcuating expression in java, we need to follow 2 rules
+
+ ->every expression will have +, -, *, / and %, 
+	1) firtst preference for multiplicative operators - (* , /, %)
+ 	2) next preference for additive operators(+, -)
+
+ ->while dividing,small number with big number then always quotient will be zero
+	
+		System.out.println(3/4);//0
+		System.out.println(12/15);//0
+		
+
+ ->while moduling, small number with big number the reminder will be the smaller number
+ 		System.out.println(1%5);//1
+		System.out.println(51%60);//51
+		System.out.println(91%100);//91
+
+ -> always we need calcaulate from left to right direction
+
+     int r = 2/3+1%5+3*4+6/1-3/1
+             0 + 1 + 12+ 6 - 3 = 16
+
+=>Division special points:
+--------------------------
+ -> area of the circle fomula = pi r square
+     pi = 22/7
+      r = 10
+-> area of the circle int r = 22/7*10*10;
+                               3*10*10=300
+                               
+   int/int = int
+
+double r4 = 22/7*10*10;
+		System.out.println(r4);//300.0
+
+		double res5 = 22.0/7*10*10;
+		          //= 3.1428*10*10
+			 //=  31.4*10
+                         //=  314.28
+							
+		//double/int=double
+		System.out.println(res5);//314.2857142857143
+         	System.out.println("---------------------------------------");
+		System.out.println(0/2);//0
+
+		System.out.println(2/1);//2
+
+		System.out.println(1/2);//0
+
+		System.out.println(0.0/2);//0.0
+
+		System.out.println(2.0/1);//2.0
+
+		//System.out.println(2/0);//RE: java.lang.ArithmeticException: / by zero
+
+		System.out.println(2.0/0);//INFINITY
+
+		System.out.println(-2.0/0);//-INFINITY
+
+		//System.out.println(0/0);//RE: java.lang.ArithmeticException: / by zero
+
+		System.out.println(0.0/0);//NAN
+
+		System.out.println(-0.0/0);//NAN
+
+
+3)Relational Operators(>, >=, <,=<)
+------------------------------------
+-> These operators will be used to compare 2 values
+
+-> the result type will be boolean
+
+   System.out.prinln(2>0);//T
+   System.out.prinln(2>=0);//T
+   System.out.prinln(2>=2);//T
+   System.out.prinln(2=<1);//F
+   System.out.prinln(2<1);//F
+
+
+4)Equality Operators(==, !=)
+-------------------------------
+-> These operators will be used to compare 2 values are same or not
+
+-> the result type will be boolean
+    
+    System.out.prinln(2==0);//F
+    System.out.prinln(2!=0);//T
+   System.out.prinln(2==1);//F
+   System.out.prinln(2!=1);//T
+
+
+5)Logical Operators(&&, ||)
+----------------------------
+-> && operator will be used to compare both expressions/conditions at a time, in the case of && operator both the expressions/conditions true means only, it will be true other wise false.
+    T && T = T
+    T && F = F
+    F && T = F
+    F && F = F
+
+-> || operator will be used to compare both expressions/conditions at a time, in the case of || operator any one the expressions/conditions true then it will be true otherwise false.
+    T || T = T
+    T || F = T
+    F || T = T
+    F || F = F
+
+07/10/2023 8PM
+-------------
+
+6)Increment(post->a++,pre->++a)/Decement(post-> a--,pre--> --a) Operators
+-------------------------------------------------------------------------
+-> These operators used to increment/decrement by 1, but increment/decrement situatiions will be different
+
+-> we have 2 types of increment operators & 2 decrement operators
+	1)pre increment operator(++a)
+	2)post increment operator(a++)
+
+	1)pre decrement operator(--a)
+	2)post decrement operator(a--)
+
+->a++ or ++a ==> a = a+1
+
+->a-- or --b ==> a = a-1
+
+1)pre increment operator(++a):
+------------------------------
+->value incremented immediately and update the actual variable value
+->expression will be executed with incremented value
+
+2)post increment operator(a++):
+------------------------------
+->value will not incremented immediately
+->expression will be executed with out incremented value
+->after excecuting expression,value incremeted and update the actual variable value
+
+1)pre decrement operator(--a):
+------------------------------
+->value decremented immediately and update the actual variable value
+->expression will be executed with decremented value
+
+2)post decrement operator(a--):
+------------------------------
+->value will not decremented immediately
+->expression will be executed with out decremented value
+->after excecuting expression,value decremeted and update the actual variable value
+
+Ex-1
+----
+	int a=1;//2
+	int b=2;//3
+	System.out.println(a++);//1
+	System.out.println(++b);//3
+
+	System.out.println(a);//2
+	System.out.println(b);//3
+
+	int x = 1;//2
+	int y = x++;//1
+	System.out.println(x);//2
+	System.out.println(y);//1
+
+	int c = 10;//11
+	int d = 2;//3
+	int e = 3;//4
+
+	int f = c++;//10
+	int g = ++d;  //3
+	int h = e++;//3
+	System.out.println(f);//10
+	System.out.println(g);//3
+	System.out.println(h);//3
+	System.out.println(c);//11
+	System.out.println(d);//3
+	System.out.println(e);//4
+
+	int a1 = 10;//11 12
+	int b1 = ++a1 + a1++;//22
+
+	System.out.println(a1);
+	System.out.println(b1);
+
+	int x1 = 1;
+	int y1 = 2;
+	int z1 = 3;
+
+	int r1 = x1++ + ++y1 + z1++ - --x1 + y1-- - z1++ + ++x1; 
+	System.out.println(x1);
+	System.out.println(y1);
+	System.out.println(z1);
+	System.out.println(r1);
+
+
+7)cocatenation operator(+)
+--------------------------
+->In Java + is a over loaded operation, It has 2 behaviors
+		1)addition behavior
+		2)concatenation
+
+=>"Core" + "Java" = "Core Java"
+
+=> "1"+"2"+"3" = 123
+
+=> 1+2+3 = 6
+
+=>1+2+"Hi"+1+2+3 = 3Hi123
+    3+"Hi"+1+2+3
+    "3Hi"+1+2+3
+    "3Hi1"+2+3
+    "3Hi12"+3
+    "3Hi123"
+
+8)instanceof operator(instanceOf):
+----------------------------------
+-> this operator is used to check, the current is belongs to whic class
+
+class Customer {}
+
+class Student {}
+
+class Employ {}
+
+class  TestInstanceof{
+	public static void main(String[] args) 
+	{
+		Customer custObj1 = new Customer();
+
+		Student studentObj1 = new Student();
+
+		Employ empObj1 = new Employ();
+
+		System.out.println(custObj1 instanceof Customer);
+
+		System.out.println(studentObj1 instanceof Student);
+
+		System.out.println(empObj1 instanceof Employ);
+
+
+	}
+}
+
+9)conditional/Ternary operators(codition? stmt1 : stmt2 )
+---------------------------------------------------------
+-> conditional/ternary operator gives the results based on the codition.
+
+->If it is true, gives the stm1 result otherwise it gives stm2 results
+
+  syntax: condition ? stm1 : stmt2
+
+ Ex: // condition ? stmt1 : stm2 
+	String result = 2<=3 ? "Hello" : "Bye";
+	System.out.println(result);
+
+
+08/10/2023
+----------
+=>inner conditional/ternary operator
+------------------------------------
+->By using ternary operator we can ceck more than one condition also, even at the statement parts also we can write the codition.
+
+
+syntax: condition ? (condition ? stm1 : stmt2) : (condition ? stm1 : stmt2)
+
+-> example to check posstive or nagitive or ZERO
+    int input = 0; 
+    String result = input>0 ? input+" is possitive": input == 0 ? "ZERO" : input+" is nagitive";
+    System.out.println(result);
+
+->DisAdvanatages of innener condtional/ternary operator:
+----------------------------------------------------- 
+->It kills the readability.
+
+->Either conditional/ternary or inner conditional/ternary operator We can only can write one line statement.
+
+10)Object creation operator(new)
+-------------------------------
+-> by using it we can object for a class.
+ex: class Student{}
+    Student studentObj = new Student();
+
+
+11)Assignment operator(=)
+-------------------------
+-> By using we can assign the values to the variables.
+   int a = 10;
+   Student studentObj = new Student(); 
+
+12)Lambda operator(->)
+-----------------------
+=> It will discussed in the java8 features concept
+
+==========================
+=>Flow Conntrol Statements
+===========================
+
+13)Flow Conntrol Statements
+	1) Condition Statement
+		1) if
+		2) if-else
+		3) if-else ladder
+		4) switch
+
+	2) Iterable/loop statements
+		1)while
+		2)do-while
+		3)for
+		4)for each(java 5v)
+
+	3)Transfer statements
+		1)break
+		2)continue
+		3)retrn
+
+
+-> By using FCS, We can control the program execution.
+
+-> By using FCS, We can also inform to JVM in which order pragram statements should be executed.
+
+-> Flow control statements(FCS), divided into 3 categoreis
+	Flow Conntrol Statements
+		1) Condition Statement
+			1) if
+			2) if-else
+			3) if-else ladder
+			4) switch
+
+		2) Iterable/loop statements
+			1)while
+			2)do-while
+			3)for
+			4)for each(java 5v)
+
+		3)Transfer statements
+			1)break
+			2)continue
+			3)retrn
+
+->Condition Statements
+-----------------------
+-> Based on the condition we want to execute a particular logic then Conditional Statements
+
+1)if
+----
+ ->If we want to check & execute logic based only one codition either true or false then we should used if    condition
+
+ ->to if condition always needs to give boolean value, either true or false, otherwiase We will get CE
+  
+ ->syntax: if(boolean condition){
+             ------
+             -----
+           } 
+ ->boolean conditions, we can provide in 6 formats
+	1) directly boolean values
+        2) via variables
+	3) relational operators(>,>=,<,=<)
+        4) logical operators(&&,||)
+        5) equality operators(==, !=)
+        6) expression
+
+1) directly boolean values
+-------------------------
+Ex-1
+----
+
+if(true){
+  System.out.prinln("Hello");
+}
+
+System.out.prinln("Hi");
+System.out.prinln("Hey");
+
+
+Ex-2
+----
+if(false){
+  System.out.println("Hello");
+}
+System.out.println("Hi");
+System.out.println("Hey");
+
+ex-3
+----
+if(1){ //CE: incompatible types: int cannot be converted to boolean
+ System.out.println("Hello");
+}
+System.out.println("Hi");
+System.out.println("Hey");
+
+2) via variables:
+-----------------
+int a = 0;
+
+		if(a){ 
+			System.out.println("Hello");
+		}
+
+		System.out.println("Hi");
+		System.out.println("Hey");
+
+
+int a = 10;
+
+		if(a=20){ //CE: incompatible types: int cannot be converted to boolean
+			System.out.println("Hello");
+		}
+
+
+int a = 10;
+
+		if(a==30){ 
+			System.out.println("Hello");
+		}
+
+		int b1 = 10;
+        if(b1==10){ 
+			System.out.println("Hello");
+		}
+
+		int b2 = 10;
+        if(b2==20/2){ 
+			System.out.println("Hello");
+		}
+
+		boolean bool1 = true;
+		if(bool1){ 
+			System.out.println("Hello");
+		}
+
+		boolean bool2 = true;
+		if(bool2=false){ 
+			System.out.println("Hello");
+		}
+
+int a=2;
+		int b=1;
+
+		System.out.println(a+b+(a*b)+a/b);
+		
+
+		if(a+b+(a*b)+a/b>0){
+			System.out.println("Hello");
+		}
+
+
+=>2) if-else
+-------------
+-> to check 2 conditions
+
+  syntax:  if(condition){
+		true condition rekated logic
+		
+           }else{
+
+		true condition rekated logic
+           }
+
+
+-> input = 3
+   
+   if(input%2==0){
+	System.out.println(input+" is even");
+		
+   }else{
+
+	System.out.println(input+" is odd");
+    }
+
+
+3) if-else ladder:
+------------------
+->if we want to check more 2 conditions, then use if-else ladder
+
+  syntax:
+	  if(cond1){
+              ----
+          }else if(cond2){
+              -------
+          }else if(cond3){
+              -------
+          }     
+
+              |
+              |
+              |
+          else{
+             ---------
+          }
+
+
+ex:
+---
+input 23
+
+if(input>=1 && input =<10){
+	System.out.println(input + "comes under between 1 to 10");
+}else if(input>=21 && input =<30){
+	System.out.println(input + "comes under between 21 to 30");
+}else if(input>=31 && input =<40){
+	System.out.println(input + "comes under between 31 to 40");
+}if(input>=41 && input =<50){
+	System.out.println(input + "comes under between 41 to 50");
+}if(input>=51 && input =<60){
+	System.out.println(input + "comes under between 51 to 60");
+}if(input>=61 && input =<70){
+	System.out.println(input + "comes under between 61 to 70");
+}if(input>=71 && input =<80){
+	System.out.println(input + "comes under between 71 to 80");
+}if(input>=81 && input =<90){
+	System.out.println(input + "comes under between 81 to 90");
+}else{
+	System.out.println(input + "comes under between 91 to 100");
+}
+
+10/10/2023
+-----------
+==========
+=>4)switch
+==========
+-> When ever we need to check more than 2 conditions based on the exact value then need to be used switch case
+
+-> Switch works based on exact value match
+
+-> what ever we do using Switch cases condition, we can do easily by if-else ladder
+
+-> What ever we do using if-else lader, we can't do that by switch case condition
+
+syntax:
+-------
+	switch(variablename){
+		case value1:
+			logic
+                      break;
+		case value2:
+			logic
+                      break;
+		case value3:
+			logic
+                      break;
+                       |
+                       |
+                 case valuen:
+                       logic
+                       beak;
+		defaut:
+		   logic
+			
+
+
+ }
+
+Ex: 
+   INPUT = 1
+   OUTPUT = ONE
+
+   INPUT=12
+   OUTPUT = INVLID INPUT
+
+   int input = 3;
+
+		switch(input){
+			case 1:
+				System.out.println("ONE");
+			     break;
+			case 2:
+				System.out.println("TWO");
+			     break;
+			case 3:
+				System.out.println("THREE");
+			     break;
+			case 4:
+				System.out.println("FOUR");
+			     break;
+			case 5:
+				System.out.println("FIVE");
+			     break;
+			case 6:
+				System.out.println("SIX");
+			     break;
+			case 7:
+				System.out.println("SEVEN");
+			     break;
+			case 8:
+				System.out.println("EIGHT");
+			     break;
+           case 9:
+				System.out.println("NINE");
+			     break;
+		   case 10:
+				System.out.println("TEN");
+			     break;
+			default:
+				System.out.println("INVALID INPUT");
+
+=>allowed arguments for switch case are byte, short, int, long and char
+
+=> From java5, all wraper class & enum it supports
+
+=> From java7 onwards String also can be taken
+
+=>Advantages of the switch case:
+--------------------------------
+-> increase the code readability
+
+-> when we want to check many, prefer to use switch
+
+->one value condition based checkup
+
+
+=>Diffrence if-else ladder switch
+
+
+		if-else ladder					switch case
+-----------------------------------------------------------------------------------------------------------
+	1) Flow Control Statement			1) Flow Control Statement
+
+	2) used to check more than 2 conditions		2) used to check more than 2 conditions
+
+	3)code readabiliy not good compare to switch	3)It code readability good
+
+	4)all data types support			4)byte, short, int, long and chat and its wrapper 							          classes, String, enum
+
+        5)We can check many condition			5) only matched conditions
+
+	6)can be used all the operators			6) can't be used any operator
+
+
+2) Iterable/loop statements
+-----------------------------
+	1)while
+	2)do-while
+	3)for
+	4)for each(java 5v)
+
+->can be write and execute the to particular limit.
+
+->by using loop statemets, based on the conditions, we can execute the logic repeatedly
+
+->Write less, execution will be more
+
+1)while
+-------
+->If we don't know num of iterations to execute in advance, then we should go with while loop.
+
+  syntax : while(boolean condition){
+		//body statemets
+	   }
+
+  EX: print the numbers from 1 to 10
+	int start = 1;
+	while(start<=10){
+	   System.out.println(start);
+	   start = start+1;
+	}
+
+12/10/2023
+----------
+2)do-while
+----------
+->body executes atleast once then it checks the condition.
+
+syntax:
+------
+     do{
+         //body logic
+     }while(boolean condition);
+
+
+EX: print the numbers from 1 to 100
+	int i1 = 1;
+        
+        do{
+	  System.out.println(i1);
+	   i1 = i1+1;
+        }while(i1<=100);
+
+
+3)for loop
+-----------
+->most commonly used loop
+
+->It is best suitable, If we know number of iterations to execute in advance.
+
+->It gives more readability compare to while & do-while
+
+syntax:
+------
+     for(intialization; condition ; icrement/decrement){
+          // body
+     }
+
+ex: print the numbers from 1 to 100
+
+      for(int i1=1;i1<=100;i1++){
+          System.out.println(i1);
+      }
+
+
+4)for each(java 5v):
+--------------------
+->for-each is an enhanced for loop, introduced in java 5 version
+
+->by using it, we can retrive/iterate array and collection object elements.
+
+->syntax: for(element type<space>variable name : elements variable name){
+             //body
+          }
+
+-> int[] values = {10,20, 30, 40 ,50};
+    for(int value : values){
+	System.out.println(value);
+    }
+
+3)Transfer statements
+======================
+1)break
+2)continue
+3)retrn
+
+1)break:
+========
+-> by using it, we can stop the program execution in middle based on the condition.
+
+-> we can use break statement in switch case and only in loop.
+
+Ex: WAP to print even 1 to 1000, If we get 60 then break the loop.
+    for(int i = 1;i<=1000;i++){
+	   if(i==60){
+	     break;
+	   }
+           if(i%2 == 0){
+		System.out.println(i);
+           }
+    }
+
+2)continue:
+-----------
+-> by using it we can stip the elements based on the condition, except that skipping thing remaining all will be executed.
+
+-> we can use continue statement in only in loops.
+
+Ex: WAP to print even 1 to 1000, dont print 20, 30 ,60
+    for(int i = 1;i<=1000;i++){
+	   if(i==60){
+	     break;
+	   }
+           if(i%2 == 0){
+		System.out.println(i);
+           }
+    }
+
+=>Diffence between break and continue
+-------------------------------------
+
+			break							continue
+ --------------------------------------------------------------------------------------------------------------
+  => stop the at middle of the exution when condition matched       => only skip the matched codition logic
+
+  => can be used in switch and loops				    => can be used only in loops
+
+
+3)retrn:
+--------
+-> by using return statement, we can return the values from method
+
+-> EX: public void add(int num1, int num2){
+         retun num1+num2;
+      }
+
+
+
+
+
+
+
+
+
+
+	
+     
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+  
+
+
+   
+    
+
+
+
+
+
+
+
+
+     
+	    
+            
+
+
+
+
+
+
+
+
+

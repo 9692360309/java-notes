@@ -1,0 +1,1841 @@
+										Java8 Featutes
+										--------------
+1)Why Java8 Featutes:
+---------------------
+->To enable the Functional Programming
+->To concise the code code and to increase the code readability
+->Java8 features simplifies the concurency opeartions
+->Java8 introduced the functional features
+   Lamdas, streams, optionals...etc
+   
+2)Java8 Featutes:
+-----------------
+
+		
+1)To Enable Functional Programming
+		1)Lamda Expression
+		2)Functional Inteface
+		3)Method and Constructor reference(::)
+		
+2)Pre defined Functional interfaces
+		1)Predicate 
+		2)Function
+		3)Consumer
+		4)Supplier
+
+3)Inteface features
+		1)static methods in interface
+		2)default methods in interface
+		
+4)Stream API
+	Stream API devided into 2 categories of methods
+	1)Intemediate Operations
+	2)Terminal Operations
+	
+	1)Intemediate Operations
+	------------------------
+		1)fileter
+		2)map
+		3)distinct
+		4)sorted
+		5)skip
+		6)limit
+		
+	2)Terminal Operations
+	---------------------
+		1)collect
+		2)count
+		3)max
+		4)min
+		5)forEach
+		6)forEachOrdered
+		7)toArray
+		8)reduce
+		9)anyMatch
+		10)allMatch
+		11)noneMatch
+		12)findAny
+		13)findFirst
+		
+5)Optional class(to avoid Null pointerException)
+
+6)New Date and Time API
+
+7)StringJoiner
+
+8)SplitIterator
+
+9)CollectionFrameworkChanges
+
+=>Lamda Expressions:
+--------------------
+->Lamda Expression is a annnymous/nameless function, which is 
+			*Not having any name
+			*Not having any Modfier
+			*Not having any return type
+			
+->We write the Lamda expressions by using arrow(->) sumbol
+			
+->By using Lamda expressions, we can enable the Functional programming
+
+->We can redce the number of lines of the code, so code readability will be increased
+
+->We can resolve the complexity of Annymous Inner class
+
+Ex-1: To print the Welcome Message
+-----
+	normal Method
+	-------------
+				public void message(){
+					System.out.println("Welcome");
+				}
+				
+	Lamda Expression:
+	-----------------
+		 ()->{
+				System.out.println("Welcome");
+			 }
+			 
+Note-1: If lamda expression body contains only one line statement the then curly braces are optional
+-------
+		()->System.out.println("Welcome");
+		
+
+Assignment ->Write the Lamda expression for to print the Hello World
+
+Ex-2: Sum of 2 numbers
+-----
+	normal method
+	-------------
+				public void sum(int number1,int number2){
+					System.out.println(number1+number2);
+				}
+	
+	Lamda Expression:
+	----------------
+			  (int number1,int number2)->System.out.println(number1+number2);
+			  
+Note-2: 
+-------
+In the Lamda expressions providing data types to the parameters also optional,based on the values
+we pass compiler decides the type of the parameters, It is also called Type Infererence
+(int number1,int number2)->System.out.println(number1+number2);
+(number1,number2)->System.out.println(number1+number2);
+
+Assignment-2:Write the Lamda Expression for subtraction, multiplication, division of 2 numbers
+
+
+Ex-3: Find the length of the given String
+------------------------------------------
+normal method:
+-------------
+          public int length(String string){
+		   return string.length();
+		  }
+		  
+lamda expression:
+----------------
+		 (String string)->{
+		   return string.length();
+		  }
+
+		(String string)->return string.length(); ->as per note 1
+		(string)->return string.length(); ->as per note 2
+		  
+Note-3:
+-------
+If Lamda expression contains only one parameter, programming paranthesis-() is optional
+		string->return string.length(); ->as per note 3
+
+Note-4:
+-------
+If Lamda expression returns something, providing return keyword also optional
+      	string->string.length(); ->as per note 4	
+		
+		
+->To write Lamda expressions we need Functional Interface, with out Functional interface we can't write
+Lamda Expressions.
+
+Functional Inteface:
+--------------------
+->An interface which contains only one abstract method and it should be annoted with @FunctionalInteface
+ annotation
+ 
+Lamda Expression Coding:
+------------------------
+->Write a Lamda expressions for
+          -display message
+		  -sum of 2 numbers
+		  -find the length of a given string
+		  
+-display message:
+-----------------
+	@FunctionalInterface
+	public interface DisplayMessage {
+		public void message();
+	}
+	
+	DisplayMessage displayMessage = () -> System.out.println("Hello World");
+    displayMessage.message();
+	
+-sum of 2 numbers:
+-------------------	
+@FunctionalInterface
+interface LenthOfString {
+	public int lengthOfString(String input);
+}
+
+Sum sumObject = ( number1, number2)->System.out.println("Sum Of 2 Numbers :"+(number1+number2));
+sumObject.add(10, 30);
+	
+ -find the length of a given string:
+------------------------------------
+@FunctionalInterface
+interface LenthOfString {
+	public int lengthOfString(String input);
+}
+
+LenthOfString lenthOfStringObj = input-> input.length();
+System.out.println(lenthOfStringObj.lengthOfString("Java")); 
+	
+Lamda expression for Runnable:
+------------------------------
+		Runnable runnableObj = ()->{
+			for (int i = 0; i < 10; i++) {
+				System.out.println("From run method");
+				
+			}
+		};
+		Thread thread = new Thread(runnableObj);
+		thread.start();
+		
+		//main thred
+		for (int i = 0; i < 10; i++) {
+			System.out.println("From Main method");
+			
+		}
+		
+Lamda Expression for Comparator:
+--------------------------------
+Comparator<Integer> comparatorObj = (number1,number2)->{
+			if(number1<number2)
+				return -(-1);
+			else if(number1>number2)
+				return -1;
+			else
+				return 0;
+		};
+		
+		ArrayList<Integer> integersList = new ArrayList<>();
+		integersList.add(10);
+		integersList.add(4);
+		integersList.add(2);
+		integersList.add(1);
+		integersList.add(5);
+		integersList.add(6);
+		System.out.println(integersList);
+		integersList.sort((number1,number2)->-(number1.compareTo(number2)));
+		System.out.println(integersList);
+			
+ 
+-----------------------
+=>Functional Interface:
+-----------------------
+->An inteface if it contains only one abstract method and which should annoted with @FunctionalInteface annotation
+  then its called Find
+  
+->@FunctionalInteface checks that interface contains only one interface or other It throws CompileTimer Error
+
+Rule-1: It contains only one abstract method and it can contans more than one stastic and default methods
+-------
+@FunctionalInterface
+ interface FunctionalInterfaceDemo1 {
+	public void m1();
+	
+	default void m2(){
+	 System.out.println("From Default method");
+	}
+	
+	static void m3(){
+	 System.out.println("From static method");
+	}
+	
+}
+
+Rule-2: If parent @FI contains one abstract method then writing abstract method in child @FI optional 
+------
+->Parent @FI abstract method automatically availabel in chils @FI
+
+Ex-1 (valid)
+------------
+
+@FunctionalInterface
+ interface ParentFI{
+	public void m1();
+}
+
+@FunctionalInterface
+ interface ChildFI extends ParentFI{
+}
+
+Ex-2 (valid)
+------------
+
+@FunctionalInterface
+ interface ParentFI{
+	public void m1();
+}
+
+@FunctionalInterface
+ interface ChildFI extends ParentFI{
+ public void m1();
+}
+
+Ex-2 (valid)
+------------
+
+@FunctionalInterface
+ interface ParentFI{
+	public void m1();
+}
+
+@FunctionalInterface
+ interface ChildFI extends ParentFI{
+ public void m2();
+}
+
+Rule-3: If Parent @FI will have already  abstract methodthen child @FI should have different abstract method:
+-------------------------------------------------------------------------------------------------------------
+Ex-1: invalid
+
+@FunctionalInterface
+ interface ParentFI{
+	public void m1();
+}
+
+@FunctionalInterface
+ interface ChildFI extends ParentFI{
+ public void m2();
+}
+
+Rule-4: child inteface is not a @FI but its parent inteface is @FI then child interface can have many abstract methods.  
+-------
+Ex-1: valid
+
+@FunctionalInterface
+ interface ParentFI{
+	public void m1();
+}
+
+interface ChildFI extends ParentFI{
+ public void m1();
+ public void m2();
+ public void m3();
+ public void m4();
+}
+
+
+Q)Why FunctionalInteface should contain only one abstract method?
+-----------------------------------------------------------------
+->FunctionalInteface interface introcuded to invoke/define the Lamda Expressions.
+
+->If @FI contains more than one than one method then compiler confuses that to which abstract method
+Lamda expression logic should be apply.
+
+Ex:
+   interface FunctionalInterfaceDemo1 {
+	public int add(int a, int b);
+	public int sub(int a, int b);
+		
+  }
+  
+  FunctionalInterfaceDemo1 fi1 =(a,b)->a+b; // CE: The target type of this expression must be a functional interface
+		fi1.add(23, 10);
+
+-----------------------------------------------------------------------
+=>Number of ways to provide the implementation to the abstract methods:
+-----------------------------------------------------------------------
+ ->an interface abstract methods implementation, we can do in 3 ways
+   -by implementing class
+   -by using Annymous Inner class
+   -by using Lamda expression
+   
+-by implementing class:
+-----------------------
+ public class DisplayMessageImpl implements DisplayMessage{
+
+	@Override
+	public void message() {
+		System.out.println("Hello World...");
+		
+	}
+	
+	public static void main(String[] args) {
+		DisplayMessageImpl displayMessageImpl = new DisplayMessageImpl();
+		displayMessageImpl.message();
+	}
+
+}
+In this way, we can use this clas method any where we want in the project. so, code reusability applicable
+in this process.
+
+-by using Annymous Inner class:
+-------------------------------
+public static void main(String[] args) {
+		
+		DisplayMessage displayMessage = new DisplayMessage() {
+			
+			@Override
+			public void message() {
+				System.out.println("Hello World");
+				
+			}
+		};
+displayMessage.message();
+
+In this process, there is no code reusability, there only we are writing the and calling there only.
+
+-by using Lamda expression:
+---------------------------
+DisplayMessage displayMessage = () ->System.out.println("Hello World");
+displayMessage.message();
+
+->By using Lamda expression implementation also no code Reusability
+
+->to work with stream API, Lamda expressions only supports
+
+->Lamda expression is not alternative to Annymous Inner class
+
+-> Difference between Lamda Expression and Annymous Inner class
+---------------------------------------------------------------
+Diff-1
+------
+-We can write Anonymous inner class for the Concrete class
+-We ca't write Lamda Expresssion for Concrete class
+
+Ex:
+--
+	class ConcreteClass{
+		public void m1() {
+		System.out.println("From m1()");
+		}
+	}
+
+	public static void main(String[] args) {
+		
+		ConcreteClass concreteClassObj = new ConcreteClass() {
+			public void m1() {
+				System.out.println("From m1()");
+			}
+		};
+		
+		concreteClassObj.m1();
+	}
+
+Diff-2
+------
+-We can write Anonymous inner class for the Abstract class
+-We ca't write Lamda Expresssion for Abstract class
+
+  Ex:
+    abstract class AbstractClass{
+	public void m1() {
+		System.out.println("From m1()");
+	}
+	
+	public abstract void m2();
+	}
+	
+	public static void main(String[] args) {
+		
+		AbstractClass abstractClassObj = new AbstractClass() {
+			public void m1() {
+				System.out.println("From m1()");
+			}
+			
+			public  void m2() {
+				System.out.println("From m2()");
+			}
+		};
+		
+		abstractClassObj.m1();
+		abstractClassObj.m2();
+       }
+
+
+Diff-3
+------
+-We can write Anonymous inner class for the inteface and Functional inteface
+-We can write Lamda Expresssion for the only for the functional
+
+	@FunctionalInterface
+	interface FI{
+		public void m1();
+	}
+
+	interface I1{
+		public void m1();
+		public  void m3();
+    }
+	
+	
+		FI fiObj = new FI() {
+			public void m1() {
+				System.out.println("From m1()");
+			}
+		};
+		
+		fiObj.m1();
+		
+		I1 i1Obj = new I1() {
+			public void m1() {
+				System.out.println("From m1()");
+			}
+
+			@Override
+			public void m3() {
+				System.out.println("From m3()");
+				
+			}
+		};
+		
+		i1Obj.m1();
+		i1Obj.m3();
+
+Diff-4
+------
+-to Work with Stream API using Anonymous Inner class not possible
+-to Work with Stream API using Lamda Expressions only possible
+
+-------------------------------
+=>Default Methods in interface:
+-------------------------------
+->Before java8, we can only write abstact methods and constants in interface
+
+->From Java8 onwards, we can also write concrete methods in interface by using default keyword 
+
+->interaface static methods given to provide backward compatability
+
+   Ex: inteface I1{
+		public void m1()
+		public void m2();
+       }
+	   
+	    class A implements I1{
+		 @overide
+		 p v m1(){
+			S.o.pln("from A M1()");
+		 }
+		}
+		
+		class B implements I1{
+		 @overide
+		 p v m1(){
+			S.o.pln("from B M1()");
+		 }
+		}
+		
+		class C implements I1{
+		 @overide
+		 p v m1(){
+			S.o.pln("from C M1()");
+		 }
+		}
+		Now If we add, m2() method in the inteface then all the classes will not work.
+		then if we make m2 method as a defaut method then it will work
+
+->The interface default methods, we can call or overiide the default from the implemented class
+
+->We have to write default methods in interface, when ever the common logic is requires for the all the
+ implemeted classes, that common logic we can put in default method of the inteface and we call that
+ method from interface.
+ 
+->We can override default methods logics in the implementedclass, If we are not confortable interface 
+default methods logic then we have to overiide.
+	interface I1{
+		default void m1(){
+			System.out.println("From I1-m1()");
+		}
+    }
+	
+
+	class ImplementedCalss implements I1{
+		@Override
+		public void m1(){
+			System.out.println("From I1-m1()");
+		}
+		
+		public static void main(String[] args) {
+			ImplementedCalss implClassObj = new ImplementedCalss();
+			implClassObj.m1();
+	}
+  }
+
+->When 2 or more intefaces having same default methods then while overriding those default methods in the
+implemented class then we will get CE because compiler confuses from which inteface the metchod need to 
+be overide.
+
+	interface I1{
+		default void m1(){
+			System.out.println("From I1-m1()");
+		}
+    }
+	
+	interface I2{
+		default void m1(){
+			System.out.println("From I2-m1()");
+		}
+    }
+	
+
+	class ImplementedCalss implements I1,I2{ //CE
+		
+		public static void main(String[] args) {
+			
+		}
+  }
+
+
+solution-1: need to overide m1 method
+-------------------------------------
+
+class ImplementedCalss implements I1,I2{
+		
+		@Override
+		public void m1(){
+			System.out.println("From ImplementedCalss-m1()");
+		}
+		
+		public static void main(String[] args) {
+			ImplementedCalss implClassObj = new ImplementedCalss();
+			implClassObj.m1();
+	}
+}
+
+solution-2: overide m1 method and call particular inteface default method
+--------------------------------------------------------------------------
+
+class ImplementedCalss implements I1,I2{
+		
+		@Override
+		public void m1(){
+			//I1.super.m1();
+			I2.super.m1();
+			//we can call both intefaces logics at a time also
+		}
+		
+		public static void main(String[] args) {
+			ImplementedCalss implClassObj = new ImplementedCalss();
+			implClassObj.m1();
+	}
+}
+
+=>Difference between interface and abstract class:
+--------------------------------------------------
+
+  interface							   abstract class
+ -----------------------------------------------------
+ ->By default all variables are		-> In abstact class we can create non final static and
+   public static final variables       non-static variables
+   
+ ->in inteface we ca't create       ->In abstact class class we can create constructors
+   constructors,stastic blocks        ,non-static blocks ans static blocks
+   and non-static blocks
+   
+ ->If Its functional inteface       -> For abstact class we can't write lamda expression
+   we can write lamda expression
+   for it.
+   
+ ->It won't supports state of the   ->It supports state of the object
+   object
+   
+ 
+=>Static methods in inteface:
+-----------------------------
+->Form Java8 onwards, we can also write static methods in the interface, in the interface static methods
+  we write the common utility logic.
+
+->Whether we are implementing inteface or not , From any class we can call the static method by
+  using the interface name.
+  
+  interface I3{
+	static void m1() {
+		System.out.println("I1 M1()");
+	}
+  }
+  
+  public class IntefaceStaticMethodsDemo{
+
+	public static void main(String[] args) {
+		I3.m1();
+	}
+
+ }
+
+->We can't call static methods of the interface by using Implemted class name or Implemented class object
+  We will compile time error can't find symbol 
+  
+  public class IntefaceStaticMethodsDemo implements I3{
+
+	public static void main(String[] args) {
+		IntefaceStaticMethodsDemo implClassObj = new IntefaceStaticMethodsDemo();
+		implClassObj.m1();//CE: Can't find symbol
+	}
+
+ }
+
+
+Method and Constructor reference(::)
++++++++++++++++++++++++++++++++++++
+->Method Refrerence is used to refer the method of the Functional Inteface
+
+->Method Reference is easy form of the Lamda Expression
+
+->We can replace replace the Lamda expression with method reference.
+
+->For My Functional inteface abststract method, which ever method should be refered or executed and insted of writing Lamda expression
+then we should go with Lamda expression.
+
+->We write the method references by using double colon(::) operator
+
+->We have 3 types of Method Refrerences
+   1)static Method reference
+   2)non-static method reference
+   3)costrucor reference
+   
+1)static Method reference:
+--------------------------
+->When ever If we don't want provide logic for FunctionalInteface of the abstract method lamda expression and If we want to be 
+executed any existed static method for that Lamda Expression.
+
+->While referring our funactional inteface abstract method to any other method, then our method and referring method return type and
+  metod parameters should be the same.
+
+->syntax:
+--------
+classname::methodName
+
+Ex-1:
+----
+@FunctionalInterface
+interface I4{
+	void m1();
+}
+
+public class MethodREferenceDemo {
+	
+	static void sayHello() {
+		System.out.println("Hello");
+	}
+
+	public static void main(String[] args) {
+	   //I4 i4Obj = ()->sayHello();--> Lamda Expression
+	    I4 i4Obj = MethodREferenceDemo::sayHello;-->here replaced Lamda Expression with Method Reference
+		i4Obj.m1();
+	}
+
+}
+
+Ex-2:
+-----
+@FunctionalInterface
+interface I4{
+	void m1();
+}
+public class MethodREferenceDemo {
+	
+	static void sayHello() {
+		System.out.println("Hello");
+	}
+
+	public static void main(String[] args) {
+		
+		Thread threadObj = new Thread(MethodREferenceDemo::sayHello);
+		threadObj.start();
+	}
+	
+
+}
+
+->while writing the method references, return types should be same between abstract and refering method.
+
+@FunctionalInterface
+interface Sum{
+	int add(int a,int b);
+}
+public class MethodREferenceDemo {
+	
+	static int sayHello() {
+		return 10;
+	}
+	
+	static int subtraction(int a, int b) {
+		return a-b;
+	}
+
+	public static void main(String[] args) {
+		
+		//Sum sumObj	= (a,b)-> sayHello();
+		//Sum sumObj	= MethodREferenceDemo::sayHello;
+		System.out.println(sumObj.add(20, 40));
+		
+		//Sum sumObj	= (a,b)->subtraction(a,b);
+		//Sum sumObj = MethodREferenceDemo::subtraction;
+		System.out.println(sumObj.add(20, 40));
+	}
+
+}
+
+2)Non-static Method reference:
+-----------------------------
+->Non-static Method reference we can refer by using object name
+
+syntax: objectName/objectReference :: non-static method Name
+-------
+
+@FunctionalInterface
+interface I5{
+	void m1();
+}
+
+public class MethodREferenceDemo {
+	
+	 void sayHello() {
+		System.out.println("Hello");
+	}
+	 
+
+	public static void main(String[] args) {
+		MethodREferenceDemo demoObj = new MethodREferenceDemo();
+		
+		//I5 i5Obj = demoObj::sayHello;
+		
+		I5 i5Obj = new MethodREferenceDemo()::sayHello;
+		
+		i5Obj.m1();
+		
+	}
+
+}
+
+3)costructor reference:
+-----------------------
+->constructor reference we can refer by using new key word
+
+->While writing the constructor reference, our abstract method and costructor parameters should be the same.
+
+->Syntax: class name :: new 
+
+@FunctionalInterface
+interface I5{
+	void m1();
+}
+
+public class MethodREferenceDemo {
+	MethodREferenceDemo(){
+		System.out.println("From MethodREferenceDemo Constructor");
+	}
+
+	public static void main(String[] args) {
+		
+		I5 i5Obj = MethodREferenceDemo::new;
+		i5Obj.m1();
+		
+	}
+
+}
+
+Pre defined Functional interfaces:
+++++++++++++++++++++++++++++++++++
+->from Java8 version ,we have some functional to support the stream api  
+	1)Predicate & BiPredicate -> takes any type of input retruns true/false -> method name: boolean test(input)
+	2)Function  & BiFunction -> can takes any type of input and returns the any type of output -> method: output apply(input)
+	3)Consumer  & BiConsumer -> can takes any of input but won't return -> method: void accept(input)
+	4)Supplier -> can't take any input but returns output -> method: output get()
+	
+1)Predicate :
+------------
+->It is a functional interafce and its from java.util.function package.
+
+->It accepts the single input and always returns boolean value
+
+->It is used for the condition checks
+
+->It has a single abstract method, called "test"
+
+@FunctionalInterface
+public interface Predicate<T> {
+	boolean test(T t);
+}
+
+=>Predicate to check whether given string length is greater than 4 or not
+
+public class PredicateDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Predicate<String> predicateObj = (String input)->{
+			if(input.length()>5)
+			return true;
+			else
+			 return false;	
+		};
+		
+		System.out.println(predicateObj.test("java"));
+		
+		//after simplified the lamda expression
+		Predicate<String> predicateObj = input-> input.length()>5;
+		System.out.println(predicateObj.test("java123"));
+
+	}
+
+}
+
+Assignment: Write the Lamda Expression by using predicate to check that given number is even or not
+
+Assignment: Find the names start with 'S' from the given Array using lamda expression
+            String[] names = {"Sulthan", Balayya, 'Soundary', 'Venkat'}
+			Predicate<String> namePredicate = name->name.charAt(0)=='S';
+			for(String name:names){
+				if(namePredicate.test(name)){
+				  S.o.pln(name);
+				}
+			}
+			
+Assignment: Find the person age >=18 from the person list 
+			class Person{
+				int age;
+				String personName
+				
+			}
+			List<Person> persons = Arrays.asList(new Person(20,'Abhay'),new Person(10,"Bhanu"));
+			Predicate<Person> personPredicate = person->person.getAge()>=18;
+			for(Person person:persons){
+				if(personPredicate.test(person)){
+				  S.o.pln(person);
+				}
+			}
+			
+=>BiPredicate:
+--------------
+	-> BiPredicate to work with 2 arguments
+	Ex: After concating 2 strings length >10
+		BiPredicate<String, String> biPredicate = (s1,s2)->s1.concat(s2).length()>10;
+		System.out.println(biPredicate.test("test", "test111"));
+	
+-----------------
+Predicate joining:
+------------------
+->To combine multiple predicates we will use predicate joining
+->and() and or() methods used
+
+Find the person age >=18 and name start with 'A' from the person list 
+			class Person{
+				int age;
+				String personName
+				
+			}
+			List<Person> persons = Arrays.asList(new Person(20,'Abhay'),new Person(10,"Bhanu"));
+			Predicate<Person> agePredicate = person->person.getAge()>=18;
+			Predicate<Person> namePredicate = person->person.getName.charAt(0)=='A';
+			Predicate<Person> personPredicate = agePredicate.and(namePredicate);
+			//Predicate<Person> personPredicate = agePredicate.or(namePredicate);
+			for(Person person:persons){
+				if(personPredicate.test(person)){
+				  S.o.pln(person);
+				}
+			}
+
+2)Function:
+-----------
+->It is frunctional interaface from java.util.function package
+
+->This is used to perform the logic on the given input.
+
+->It takes 2 arguments, first argument to represent the input, second argument to represent the output
+
+->It has single abstract method called apply
+
+@FunctionalInterface
+public interface Function<T, R> {
+	R apply(T t);
+}
+
+Ex-1: Lamda Expression for Function inteface to find out the length of the given string
+
+Function<String, Integer> functionObj = input->input.length();
+System.out.println(functionObj.apply("Java is Platform Independent Language.."));
+
+
+Ex-2: Lamda for Functional interface to get the output in the below format
+
+		input: java
+		output: java4
+		
+Function<String,String> functionObj = input->input+input.length();
+System.out.println(functionObj.apply("java"));
+
+Assignment: Wtite the lamda expression for Function inteface to check the given age is eligible for vote or not
+
+BiFunction:
+----------
+->to work with 2 arguments
+->Addition of 2 numbers
+
+  BiFunction<Integer, Integer, Integer> biFunction = (num1,num2)->num1+num2;
+   System.out.println(biFunction.apply(100, 200));
+
+
+		
+3)Consumer:
+-----------
+-> Consumer is a functional inteface and it is from java.util.function
+
+->It accepts single input and It reurns nothing.
+
+->It has single abstract method called accept
+
+@FunctionalInterface
+public interface Consumer<T> {
+	void accept(T t);
+	
+}
+
+Ex-1: Lamda expression for Consumer to print the given input
+Consumer<String> cosumerObj = input->System.out.println(input);
+cosumerObj.accept("Java");
+
+Ex-2:
+----
+Write a lamda expression to check the given number is even or not adding the number 5
+
+Consumer<Integer> cosumerObj = input->{
+			input = input+5;
+			if(input%2==0)
+				System.out.println(input+" is even number");
+			else
+				System.out.println(input+" is odd number");
+			
+		};
+		
+		cosumerObj.accept(-12);
+		
+	}
+	
+Assignment:
+----------
+Write a lamda expression for the consumer inteface to check the the given string is Palandrome or not
+
+hint : Palandrome means after reversing string you should get same string
+
+=> BiConsumer:
+-------------
+-to pass arguments 
+  BiConsumer<Integer, Integer> biConsumer = (i1,i2)->System.out.print(i1+i2);
+		biConsumer.accept(10, 20);
+
+4)Supplier:
+----------
+->It is functional interface and its from java.util.function
+
+->It accepts the no argument but retun a value
+
+->It has only one abstract method called "get"
+
+@FunctionalInterface
+public interface Supplier<T> {
+	T get();
+} 
+
+Ex: Lamda Expression for Supplier to reverse the String and ruturns the reversed string
+
+Supplier<String> suplierObj = ()->{
+			String input = "MalayalaM";
+			return new StringBuilder(input).reverse().toString();
+		};
+System.out.println(suplierObj.get());
+
+Assignment: Write a lamda expression for Supplier to generate 5 digits OTP
+	Supplier<String> otpSuplier = ()->{
+		String otp="";
+		for(int i=1;i<=5;i++){
+			otp=otp+(int)(Math.random()*10);
+		
+		}
+		return otp;
+	};
+	S.o.pln(otpSuplier.get());
+
+Assignment: Write a lamda expression for Supplier, to revese a given number number 
+
+
+
+Stream API
++++++++++++
+->Stream is a sequence of elements comes from the source, here can be array or collection objects
+->Stream API introcuded in 1.8V
+->Stream API given to process the data
+
+We can create stream in 2 ways
+	1)Stream.of(ele1, ele2, ele3...)
+		Stream<Strings> strings = Stream.of("A","B","C");
+		
+	2)strem()
+	   AL strngsList = new ArrayList<>();
+	   strngsList.add("A");
+	   strngsList.add("B");
+	   strngsList.add("C");
+	   Stream<String> strem = strngsList.stream();
+	   
+->Spream API given several methods to perform operations on the data 
+
+->Stream API devided into 2 categories of methods
+	1)Intemediate Operations methods
+	   These methods peroform operations based on the given operation on the stream and returns new stream
+			Ex: filter, map
+	2)Terminal Operations methods
+		These methods perform the operations based on the given operation on the stream and returns result
+		   Ex: count
+		   
+	Ex-1: Find even numbers
+	List<Integer> numbers = Arrays.asList(45,13,13,25,34,34,56,92,87,76);
+		
+		for(Integer number:numbers) {
+			if(number%2 == 0)
+				System.out.println(number);
+		}
+		//Stream<Integer> numbersStream = numbers.stream().filter(number->number%2==0);
+		//numbersStream.forEach(number->System.out.println(number));
+		
+		numbers.stream().filter(number->number%2==0).forEach(number->System.out.println(number));
+		   
+	Ex-2: Find the names which is having length > 4
+	----
+		ArrayList<String> namesList = new ArrayList<>();
+		namesList.add("Arun");
+		namesList.add("Balayya");
+		namesList.add("Deva");
+		
+		for(String name:namesList) {
+			if(name.length()>4)
+				System.out.println(name);
+		}
+		
+		//Stream<String> strStreams = namesList.stream().filter(name->name.length()>4);
+		//strStreams.forEach(name->System.out.println(name));
+		namesList.stream().filter(name->name.length()>4).forEach(name->System.out.println(name));
+	
+	1)Intemediate Operations
+	------------------------
+	filter operations
+		1)filter
+	map Operations
+		2)map & FlatMap
+	slicing opeartions
+		3)distinct
+		4)skip
+		5)limit
+	sorting opeartions
+	    6)sorted
+		
+	2)Terminal Operations
+	---------------------
+	   matching opeartions
+	    1)anyMatch
+		2)allMatch
+		3)noneMatch
+		
+	   find operations
+	    4)findAny
+		5)findFirst
+		
+	   collectors operations
+		5)collect
+		
+		
+		3)max
+		4)min
+		2)count   
+		5)forEach
+		6)forEachOrdered
+		7)toArray
+		8)reduce
+		
+		
+		
+1)filter:
+--------
+->The fiter is a intermediate operation of the stream API
+
+->It is used to fileter  the elements of a stream 
+
+->Filter uses the Predicate functional interaface, to filter the stream of elements
+
+----use forEach method instead of Collections
+
+Stream filter(Predicate predicate)
+
+		ArrayList<Employee> empList = new ArrayList<>();
+		
+		Employee employee1 = new Employee(101, "Venkat", 10000);
+		empList.add(employee1);
+		
+		Employee employee2 = new Employee(102, "Arun", 8000);
+		empList.add(employee2);
+		
+		Employee employee3 = new Employee(103, "Bala", 5000);
+		empList.add(employee3);
+		
+		Employee employee4 = new Employee(104, "Chaithu", 15000);
+		empList.add(employee4);
+		
+		Employee employee5 = new Employee(105, "Dhana", 12000);
+		empList.add(employee5);
+		
+		Employee employee6 = new Employee(105, "Dhana", 12000);
+		empList.add(employee6);
+		
+1)filtering the employees salary > 10000
+		List<Employee> employeeList =	empList.stream().filter(employee->employee.getEmpSalary()>10000).collect(Collectors.toList());
+		System.out.println(employeeList);
+		
+2)filtering the employees, whose name starts with A
+		List<Employee> namesEmployeeList = empList.stream().filter(employee->employee.getEmpName().startsWith("D")).collect(Collectors.toList());
+		System.out.println(namesEmployeeList);
+		
+		//filtering the employees, whose employee id is 103
+		List<Employee> empId103EmployeeList = empList.stream().filter(employee->employee.getEmpNo()==103).collect(Collectors.toList());
+		System.out.println(empId103EmployeeList);
+		
+3)Assignment: find the numbers  which are divisible by 5 from 1 to 100, by using java8 filter method
+
+4)Assignment: find the number of users whose ager >30 and name length >6
+               create user(id,name,age) 
+		
+		
+2)map:
+-----
+-> map is intermediate operation 
+
+->Map method is used to data tranformation
+
+->Map will accept the Function Functional inteface lamda expression.
+
+->We have to use map method to update the steaming elements.
+
+->We have to use map to return different type of streaming elements
+
+-> public Stream map(Function function)
+
+//increase the 10% of current salary, whose experience is > 3 years
+		
+Function<Employee, Employee> salIncrementFunction = employee->{									
+                     employee.setEmpSalary(employee.getEmpSalary()+(employee.getEmpSalary()*10/100));
+      			return employee;
+		     };
+		
+List<Employee> incrementSalEmpList = empList.stream().
+					filter(employee->employee.getExperience()>3).
+					map(employee->{
+					 employee.setEmpSalary(employee.getEmpSalary()+(employee.getEmpSalary()*10/100));
+					  return employee;
+					}).collect(Collectors.toList());
+		
+		
+//get employee names list who is having more than 3 years expers
+Function<Employee, String> empNameFunction = (Employee employee)->{return employee.getEmpName();};
+ List<String> empNames = empList.stream().
+                                filter(employee->employee.getExperience()>3).
+			        map(empNameFunction).
+				collect(Collectors.toList());
+	
+//Assignment: update emp names as first name and last name of first letter should be capital
+
+//Assignment: names>4 and print below format
+    Ashok-5
+    Akshay-6
+	
+//Assignment: get only emails from customer list
+   List<String> emails = customerList.stream().map(customer->customer.getEmail()).collect(Collectors.toList());
+	
+3.flatMap:
+----------
+->Flatening is a process of merging list of list elements into single list
+->flatMap is used to data transformation + flattening
+->flatMap = map + flattening
+
+ customer will more than one phone number then to collect the all the all phone not possible with map
+   List<List<String>> = customerList.stream().map(customer->customer.getPhoneNumbers()).collect(Collectors.toList());
+	
+   with flatMap
+   List<String> phoneNumbers = customerList.stream().flatMap(customer->customer.getPhoneNumbers().stream()).collect(Collectors.toList());
+	
+  
+=>Difference between map and FlatMap
+		map							flatMap
+---------------------------------------------------------------------------------------
+->It process the stream of values 			->It process the stream of stream values
+
+->It can do only data transformation     		->It can do data tranformation + flattening
+
+->It works as one-one mapping  				->It works as one to many mapping
+
+->Use map() when we are having                          -> use flatMap, when we have list of list values
+  list of valiues
+	
+
+4.distinct
+----------
+->This method is used get the unique elements from stream, 
+      to work with distinct need to overiride equals and hash Code methods in our class
+
+->distict method works by equals and hashCode method
+
+-> p Stream<T> distinct()
+
+Employee class 
+
+package java8features;
+
+public class Employee {
+	
+
+	private int empNo;
+	private String empName;
+	private double empSalary;
+	private int experience;
+	
+	public Employee(int empNo, String empName, double empSalary, int experience) {
+		super();
+		this.empNo = empNo;
+		this.empName = empName;
+		this.empSalary = empSalary;
+		this.experience = experience;
+	}
+
+	public int getEmpNo() {
+		return empNo;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public double getEmpSalary() {
+		return empSalary;
+	}
+
+	public int getExperience() {
+		return experience;
+	}
+
+	public void setEmpNo(int empNo) {
+		this.empNo = empNo;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public void setEmpSalary(double empSalary) {
+		this.empSalary = empSalary;
+	}
+
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empNo=" + empNo + ", empName=" + empName + ", empSalary=" + empSalary + ", experience="
+				+ experience + "]";
+	}
+	
+	
+  @Override
+  public int hashCode() {
+	// TODO Auto-generated method stub
+	return empNo;
+  }
+	
+  
+  
+  @Override
+  public boolean equals(Object obj) {
+	  Employee employee = (Employee)obj;
+	return this.empNo==employee.getEmpNo()&&
+		   this.empName.equals(employee.getEmpName())&&
+		   this.empSalary == employee.getEmpSalary()&&
+		   this.experience == employee.getExperience();
+  }
+
+}
+
+
+//find the unique employees
+List<Employee> uniqueEmployees = empList.stream().distinct().collect(Collectors.toList());
+System.out.println(uniqueEmployees);
+
+=>limit:
+--------
+->By using limit method we can get number of elements we want from the starting position of the stream
+
+->syntax: public Stream limit(long noOfElementsNeeded)	
+
+->Ex: courseList.sream().limit(3).forEach(course ->System.out.println(course));	 -> It gives first 3 courses
+
+Ex: Find the 3rd highest salary employee
+empList.stream().sorted(Comparator.comparingDouble(Employee::getEmpSalary).reversed()).skip(2).limit(1).forEach(System.out::println);
+
+
+=>skip:
+-------
+->By using skip we can select and get the elements, from where onwards we needed
+
+->syntax: public Stream skip(long noOfElementsNeedToSkip)
+
+->Ex: courseList.sream().limit(3).forEach(course ->System.out.println(course));	
+
+Ex: empList.stream().skip(3).forEach(System.out::println);-> It gives the elements after skipping first 3 elements
+
+->By using skip method find the max salary of the employee
+	empList.stream().sorted().skip(5).forEach(System.out::println);
+
+
+
+sorted:
+-------
+->sorted method is used to sort the elements based o nthe property.
+
+->By using sorted method we can do natural sorting order and customized sorting order
+
+->We can do sorting by using sorted() method and sorted method(Comparator)
+
+->sorted() method we need to use for natural sorting order, If we want to work with natural 
+  sorting then our class must be Comparable otherwise we will get ClassCastException
+
+->sorted(Comparator) method, we need use for customized sorting order
+
+sorted() example:
+---------------
+package java8features;
+
+public class Employee implements Comparable<Employee>{
+	
+
+
+	private int empNo;
+	private String empName;
+	private double empSalary;
+	private int experience;
+	
+	public Employee(int empNo, String empName, double empSalary, int experience) {
+		super();
+		this.empNo = empNo;
+		this.empName = empName;
+		this.empSalary = empSalary;
+		this.experience = experience;
+	}
+
+@Override
+public int compareTo(Employee emp) {
+	// TODO Auto-generated method stub
+	if(this.empSalary>emp.getEmpSalary())
+		return 1;
+	else if(this.empSalary<emp.getEmpSalary())
+		return -1;
+	else
+	return 0;
+}
+ 
+}
+
+
+ArrayList<Employee> empList = new ArrayList<>();
+		
+		Employee employee1 = new Employee(101, "Venkat", 10000,2);
+		empList.add(employee1);
+		
+		Employee employee2 = new Employee(102, "Arun", 8000,6);
+		empList.add(employee2);
+		
+		Employee employee3 = new Employee(103, "Bala", 5000,10);
+		empList.add(employee3);
+		
+		Employee employee4 = new Employee(104, "Chaithu", 15000,4);
+		empList.add(employee4);
+		
+		Employee employee5 = new Employee(105, "Dhana", 12000,3);
+		empList.add(employee5);
+		
+		Employee employee6 = new Employee(105, "Dhana", 12000,3);
+		empList.add(employee6);
+		
+		->sorted by employeeSalary 
+		empList.stream().sorted().forEach(emplyee->System.out.println(emplyee));
+		
+
+		System.out.println();
+		empList.stream().sorted(Comparator.comparingDouble(Employee::getEmpSalary).reversed()).forEach(System.out::println);
+		
+
+		
+2)Terminal Operations
+---------------------
+
+9)anyMatch,allMatch,noneMatch:
+------------------------------
+->p boolean anyMatch(Predicate) is used to check, at least one element is mathched for the given predicate
+Ex:
+boolean isAnyEmpIsGreaterthan15000 = empList.stream().anyMatch(emp->emp.getEmpSalary()>10000);
+		System.out.println(isAnyEmpIsGreaterthan15000);
+		
+->p boolean allMatch(Predicate) is used to all elements are matched with given condition or not
+Ex:
+boolean allEmployeesAreGreaterthan10000 = empList.stream().allMatch(emp->emp.getEmpSalary()>10000);
+		System.out.println(allEmployeesAreGreaterthan10000);
+		
+->p boolean noneMatch(Predicate) is used to check, no element is matched matched for the given Codition,
+here condition matched means return false otherwise return true
+
+Ex:
+boolean noneOfEmployeesAreGreaterthan10000 = empList.stream().noneMatch(emp->emp.getEmpSalary()>10000);
+		System.out.println(noneOfEmployeesAreGreaterthan10000);
+		
+13)findFirst
+-> to get first reorord
+   personsList.stream().fileter(person->person.getCountry().equals("India")).findFirst();
+
+12)findAny
+->to get any record based on the matching.
+personsList.stream().fileter(person->person.getCountry().equals("India")).findAny();
+		
+		
+
+=>collectors with stream:
+-------------------------
+1)collect:
+----------
+collect method is used to collect the elements from particular pipeline intermediate methods and it 
+can convert required type of list, set amd map..
+
+Ex:
+List<Employee> employeesBySalDescOrder =empList.stream().
+                                          sorted(Comparator.comparingDouble(Employee::getEmpSalary).reversed()).
+                                          collect(Collectors.toList());
+										  
+->collect names of persons belongs to India and store it into names collection
+  List<String> names = persons.stream().filter(person->)
+									  
+2)count:
+--------
+count is used count the number of elements present in the Steream
+
+Syntax: public long count()
+
+Ex: Count the number od employees, whose salary > 10000
+
+long numberOfEmployees =empList.stream().filter(employee->employee.getEmpSalary()>10000).count();
+System.out.println(numberOfEmployees);
+
+3)max & Min
+------------
+-> Min is used to find the min value of the stream
+->to find the min value of the stream copulsorly elements should sorted
+Syntax: public Object min(Comparator)
+
+1st way
+-------
+ex: find the min salary employee
+Optional<Employee> minSalaryEmp =empList.stream().min(Comparator.comparingDouble(Employee::getEmpSalary));
+
+2nd way
+-------
+ Optional<Employee> minSalaryEmp = empList.stream().collect(Collectors.maxBy(Comparator.comparing(e->e.getSalary())))
+		System.out.println(minSalaryEmp.get());
+		
+		
+-> Max is used to find the max value of the stream
+->to find the max value of the stream copulsorly elements should sorted
+Syntax: public Object max(Comparator)
+
+1st way
+------
+ex: find the max salary employee
+Optional<Employee> maxSalaryEmp =empList.stream().max(Comparator.comparingDouble(Employee::getEmpSalary));
+
+2nd way
+------									
+Optional<Employee> maxSalaryEmp =empList.stream().collect(Collectors.maxBy(Comparator.comparing(e->e.getSalary())));
+		System.out.println(maxSalaryEmp.get());
+
+average Salary
+double averageSalary =empList.stream().collect(Collectors.averagingDouble(e->e.getSalary()));
+		System.out.println(averageSalary);
+		
+=>grouping By
+--------------
+-> It categorise the data based on the given data
+
+Ex: get the employees based on the department
+Map<String,List<Employee>> emps = empList.stream().collect(Collectors.groupingBy(emp->emp.getDept()));
+
+Ex: get the persons based on the department
+Map<String,List<Person>> persons = personList.stream().collect(Collectors.groupingBy(person->person.getCountry()));
+
+------------------
+=>parallel Stream:
+-----------------
+->
+
+
+5)forEach&forEachOrdered
+-----------------------
+->for Each is used print the elements 
+->for each Method will acccept Consumer Functional Inteface Lamda Expression
+-> void forEach(Consumer consumer)
+Ex:
+	empList.stream().forEach(employee->System.out.println(employee));
+	
+->forEachOrdered respect the encounter order but forEach won't accept encounter order when
+ever we are using with parallel() method
+
+Ex: empList.stream().parallel().forEachOrdered(employee->System.out.println(employee));
+
+6)toArray & toArray(IntFunction<A[]> array)
+------------------------------------------
+->toArray method is used to convert the Object ArrayList
+Ex:
+---
+Object[] objectArray = empList.stream().map(emp->emp.getEmpName()).toArray();
+System.out.println(Arrays.toString(objectArray));
+
+->By toArray(IntFunction<A[]> intFunction), we can get the required type array
+EX:
+String[] names = empList.stream().map(emp->emp.getEmpName()).toArray(String[]::new);
+		System.out.println(Arrays.toString(names));
+		
+		
+7)reduce:
+---------
+->reduce method is used to do aggredation operations like sum, average, ..etc
+
+->reduce method applies binary opearator, to each element in the stream
+
+Ex: calcualate the all the employees salary
+double totalEmpSal = empList.stream().map(emp->emp.getEmpSalary()).reduce(0.0,(sal1,sal2)->sal1+sal2);
+		System.out.println(totalEmpSal);
+		
+ex: find min and max salary employee
+double maxSalary = empList.stream().map(emp->emp.getEmpSalary()).
+								reduce(0.0,(sal1,sal2)->(sal1>sal2?sal1:sal2));						
+		System.out.println(maxSalary);
+
+
+
+-------------
+StringJoiner:
+------------
+-> It introduced in java 1.8 valid
+->We can conncat more than one string with specified delimeter
+->We can conncat more than one string with specified delimeter and with prefix and suffix
+Constructors:
+	StringJoiner stringJoiner = new StringJoiner(CharSequance del)
+	StringJoiner stringJoiner = new StringJoiner(CharSequance del,CharSequance prefix,CharSequance suffix)
+ 
+   
+Ex:
+   StringJoiner stringJoiner = new StringJoiner("-");
+   stringJoiner.add("One");
+   stringJoiner.add("Two");
+   stringJoiner.add("Three");
+   S.o.pln(stringJoiner);//One-Two-Three
+   
+   StringJoiner stringJoiner2 = new StringJoiner("-","(",")");
+   stringJoiner2.add("One");
+   stringJoiner2.add("Two");
+   stringJoiner2.add("Theree");
+   S.o.pln(stringJoiner);//(One-Two-Three)
+   
+---------------
+Optional class:
+---------------
+->java.util.Optional class given in java 1.8V
+->This class given to avoid the null pointer Exception
+->If we do any operations on null value then We will get NPE
+->Actually NPE checking is not do any foce with Programmer, but with optional class NPE checking mandatory
+ 
+----------------------
+local Date & Time API:
+----------------------
+->java 8 LocalDate and time classses
+->Before Java8, we use java.util.Date class
+
+->In java, we have 2 types of classes
+          ->java.util.Date(For normal date related operations)
+	  ->java.sql.Date(For db date related operations)
+		  
+  Date date = new Date(); //
+  S.o.pln(date);//It gives complete date and time
+  
+->If we want, we can particular date format, we have to SimpleDateFormat
+  SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/YYYY");
+  String date1=sdf1.format(date);
+  S.o.pln(sdf1);
+  
+  SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MMM/YYYY");//3 letters month
+  String date1=sdf.format(date);
+  S.o.pln(sdf2);
+  
+  SimpleDateFormat sdf = new SimpleDateFormat("dd/MMMM/YYYY");//complete month name
+  String date1=sdf.format(date);
+  S.o.pln(sdf3);
+  
+  //convert String date to date obj
+  SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+  Date date = sdf.parse("2023-01-10");
+  S.o.pln(date);
+  
+->In java.util.Date class, there are no direct utility methods because in java 1.8V given
+LocalDate and time classes
+
+java.time.LocalDate (Its given for date related operations)
+java.time.LocalTime(Its given for time related operations)
+java.time.LocalDateTime(Its given for date&time related operations)
+
+Date date = new Date(); //
+  S.o.pln(date);//It gives complete date and time
+  
+LocalDate localDate = new LocalDate.now();
+S.o.pln(localDate);//It gives only date
+
+localDate = localDate.plusYears(2);
+S.o.pln(localDate);//It gives years with Plus 2
+
+localDate = localDate.plusMonths(2);
+S.o.pln(localDate);//It gives date with Plus 2 months
+
+localDate = localDate.plusDays(2);
+S.o.pln(localDate);//It gives date with Plus 2 days
+
+//to check is before or after date
+boolean isBefore = LocalDate.parse("2023-1-12").isBefore(LocalDate.parse("2021-12-1"));
+boolean isBefore = LocalDate.parse("2023-1-12").isAfter(LocalDate.parse("2021-12-1"));
+
+//to check leap year or not
+boolean isLeapYear = LocalDate.parse("2023-1-12").isLeapYear();
+
+
+LocalTime localTime= new LocalTime.now();
+S.o.pln(localTime);//It gives only time
+
+localTime = localTime.plusHours(2);
+S.o.pln(localTime);//It gives time with Plus 2 hours
+
+Period peroid = Period.between(LocalDate.parse("2023-12-01"),LocalDate.now());
+peroid.getYears();
+peroid.getMonths();
+peroid.getMinutes();
+
+Duration duration = Duration.between("16:00",LocalDate.now());
+duration.getHours();
+duration.getMinutes();
+duration.getSeconds();
+
+
+Assignments
+-----------
+1.list the 5+ years experience employees 
+2.Increment the 10% salary for 5+ years experience employees 
+3.Get the Max salary employee information  
+
+  video link
+  -----------
+  https://www.youtube.com/watch?v=prHy8-wGQOU&list=PLEobH9rG2FO2xApVYP3OD17JZVEK7STLg
+
+======================================================================================================================================
+4.Sort the employees ascending/descending order
+5.Get the list of employee names in ascending order
+6.Find the 2nd and 3rd  highest employee salary information
+7.Calculate the total salary of the employees in the company
+
+  video link
+  ----------
+   https://www.youtube.com/watch?v=uSiWDE8cXKI&list=PLEobH9rG2FO2xApVYP3OD17JZVEK7STLg&index=2
+
+=====================================================================================================================================
+8 . Calculate the company average salary
+9. Count male and female employees
+10 . male and female average salary
+11 . Get departments list in the company
+12 . Get the employees departments wise
+ 
+  video link
+  ----------
+    https://www.youtube.com/watch?v=VH1mDeJP-ck&list=PLEobH9rG2FO2xApVYP3OD17JZVEK7STLg&index=3
+
+======================================================================================================================================
+13)There are 1000 employees in the company and 4 departments. Find out in each department the highest salary employee info in the form of the department as key and value as Employee object using Java 8
+
+14) Count each character of the String using java8
+        i/p: String s1 = "James Gosling";
+                     o/p:    { =1, a=1, s=2, e=1, g=1, G=1, i=1, J=1, l=1, m=1, n=1, o=1}
+
+15) Find the unique characters of the String using Java8
+                       i/p: String s1 = "James Gosling"; 
+                       o/p: [ , a, e, g, G, i, J, l, m, n, o]
+
+16) Find the duplicate characters of the String using Java8
+                      i/p: String s1 = "James Gosling"; 
+                      o/p: [s]
+
+17) Find the highest number of the array using Java 8
+       i/p: int[] numbers = {23,1,100,110,3,5,9,34,90,82,34,49,59,69,72,88};
+                     o/p: 110
+
+18) Find the second highest number of the array using Java8
+       i/p: int[] numbers = {23,1,100,110,3,5,9,34,90,82,34,49,59,69,72,88};
+                     o/p: 100
+
+19) Find the smallest number of the array using Java8
+       i/p: int[] numbers = {23,1,100,110,3,5,9,34,90,82,34,49,59,69,72,88};
+                     o/p: 1
+
+20) Find the second smallest number of the array using Java8
+       i/p: int[] numbers = {23,1,100,110,3,5,9,34,90,82,34,49,59,69,72,88};
+                     o/p: 3
+
+video link
+----------
+https://www.youtube.com/watch?v=P2ULNzhYfUA&list=PLEobH9rG2FO2xApVYP3OD17JZVEK7STLg&index=4
+
+======================================================================================================================
+21.Longest Sting of given String array
+22.Find the numbers who starts 8 from the given integer array
+23.find out male gender highest salary employ info in company
+24.find out female gender highest salary in company
+25.Find out the words start and ends with same character from given string array
+
+video link
+----------
+     https://www.youtube.com/watch?v=pXB9AIyfPtA&list=PLEobH9rG2FO2xApVYP3OD17JZVEK7STLg&index=5
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+   
+   
+   
+
+  
+
+
+

@@ -1,0 +1,12 @@
+1.what is the difference between jdk and jre?
+2.why java is platform indipendent language?
+3.what is the difference between abstract class and interface?
+4.what is the difference between final ,finally and finalize?
+5.what is the difference between stack and heap memory?
+6.what is the difference between method overloading and method overriding?
+7.what is the difference between private and protected modifiers?
+8.what is constructor overloading in java?
+9.what iss the use of super kw=ey word in java?
+10.what is the difference between staic method static variable and static class in java?
+11.what exactly System.out.println in java?
+12.what part of memory- stack or heap is cleaned in garbage collection process in java?

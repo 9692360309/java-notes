@@ -1,0 +1,700 @@
+9.Methods & Types of Methods
+					----------------------------
+
+1)What is Method & Condition to create Method
+
+2)Parts of Method
+
+3)Find out main method parts
+
+4)Defination, declaration and calling Method
+
+5)Types of Methods
+
+6)What are Modifiers allowed to Method
+
+7)Rules to call static & non-static methods
+
+8)Rules to call Parameterized & non-parameterized methods
+
+9)Rules to call void & non-void methods
+
+1)What is Method & Condition to create Method
+-----------------------------------------------
+->Method is a sub block of a class, that is used impenting the logic of object operation.
+
+->We need to create a method for separating diffent types of logics
+
+Ex: We got a requirement for Find Arithematic operations for given 2 numbers
+---
+	class  AOsTest
+	{
+	 public static void main(String[] args) 
+	 {
+		int num1 = 10;
+		int num2 = 5;
+
+		System.out.println("Addition of 2 numbers :"+(num1+num2));
+		System.out.println("Subtraction of 2 numbers :"+(num1-num2));
+		System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+		System.out.println("Division of 2 numbers :"+(num1/num2));
+		System.out.println("Modulation of 2 numbers :"+(num1%num2));
+	}
+      }
+
+->Dis-Adavatages of all the operations logic, writing in one method:
+--------------------------------------------------------------------
+->When ever we call the method, all operations logic will be executed
+
+->Its kills the code readability
+
+->There is no code reusability, when ever we call this method, all the operations logic will be executed, but We can't call particular operation related logic.
+
+->we can't return all operations result
+
+solution: write every operation in diffenet method
+
+-> syntax to create a method
+         <modifier> <return type> methodname(parameters/no paramenters){
+                //method body
+         }
+
+     ex: public void add(int num1, int num2){
+            //method body
+          }
+
+->in Below example for separating the logic
+   class  AOsTest
+   {
+	public static void main(String[] args) 
+	{
+		int num1 = 10;
+		int num2 = 5;
+                
+                //object creation
+		AOsTest aOsTestObj = new AOsTest();
+
+                //calling Subtraction method
+                aOsTestObj.sub(10,20);
+
+
+	}
+
+	public void add(int n1, int n2){
+		System.out.println("Addition of 2 numbers :"+(n1+n2));
+	}
+
+	public void sub(int n1, int n2){
+		System.out.println("Subtraction of 2 numbers :"+(n1-n2));
+	}
+
+	public void mul(int n1, int n2){
+		System.out.println("Multiplication of 2 numbers :"+(n1*n2));
+	}
+
+	public void div(int n1, int n2){
+		System.out.println("Division of 2 numbers :"+(n1/n2));
+	}
+
+	public void mod(int n1, int n2){
+		System.out.println("Modulation of 2 numbers :"+(n1%n2));
+	}
+
+
+}
+
+-> condition to create method create method:
+-------------------------------------------
+-> We must write the logic only inside the method, but not at class level, If place the method logic directly      at class level, We will get CE: <identifier> expected
+
+   class MethodCondTest 
+   {
+	 int num1 = 10;
+	 int num2 = 5;
+      System.out.println("Addition of 2 numbers :"+(num1+num2)); //CE: <identifier> expected
+    }
+
+2)Parts of Method:
+------------------
+->evry method will have 4 parts
+	1)Method prototype
+	2)Method signature
+	3)Method parametrs
+	4)Method retun type
+	5)Method Arguments
+
+->class ArithematicOperations{
+
+	public static void addition(int number1, int number2){
+
+		System.out.println("Addition of 2 numbers :"+(number1+number1));
+       }
+
+       
+		
+ }
+
+1)Method prototype:
+-------------------
+-> The head portion of the complete method is called Method prototye including all like accessa modifier,
+non-acccess modifier, return type, method name, parameters
+
+Ex: method prototype for above method
+public static void addition(int number1, int number2)
+
+2)Method signature:
+------------------
+-> The combination method name and parameterized variables is called method signature
+
+Ex: method signature for above method
+    addition(int number1, int number2)
+
+3)Method Parameters:
+--------------------
+->The variables declared in the method paranthesis are called method parameters
+
+Ex: method Parameters for above method
+int number1, int number2
+
+
+4)Method return type:
+---------------------
+->The any primitive datatye or referenced datatye or void is placed before the method name is called Method 
+return type.
+
+Ex: method return type for above method
+    void
+
+-> When we want to take void as a return type:
+----------------------------------------------
+->If we don't want return any value from a method then we should take the return type as a void, It tells that
+method will not return any value
+
+Ex: public static void addition(int number1, int number2){ <--- method wll not return any Thing
+		
+		a = number1; // a=1
+		b = number2; // b =2
+		System.out.println(a);
+		System.out.println(b);
+    }
+
+-> When we want to take primitive datatye types/referenced data type as a return type:
+--------------------------------------------------------------------------------------
+->If we want return some value, It can be any primitive type value or any referenced type object then we should
+place that particular data type before the method name.
+
+->We can take byte, short, int, long , double, float ,char, boolean for primitive types as a retutn type
+
+->we can take String, Employee, Student.. etc for referenced types as a return type.
+
+Ex: here taking primitive type as a return type
+----------------------------------------------
+
+public static int addition(int number1, int number2){ <--- method should return int type value
+
+		int addition = number1+number2);
+		return addition;
+}
+
+
+Ex: here taking Employee as a return type
+-----------------------------------------
+
+class Employee{
+ int empNo;
+ int empName;
+}
+
+public static Employee getEmployee(int number1, int number2){ <--- method should return Employee object
+		Employee employeeObject = new Employee();
+		employeeObject.empNo = 101;
+		employeeObject.empName ="Dev";
+		return employeeObject;
+}
+
+5)Method Argumets:
+------------------
+->The input values passed to the method parameters are method argumets.
+
+addition(10,20); // here calling addition method by passing 10,20 as arguments, so 10,20 are the arguments
+
+3)Find out main method parts:
+-----------------------------
+  public static void main(String[] args){
+      System.out.println("Hello");
+  }
+
+Method Proto type : public static void main(String[] args)
+
+Method Signature : main(String[] args)
+
+Method parametrs : String[] args
+
+Method return type: void
+
+=> public static int subtraction(int num1, int num2){
+         System.out.println(num1-num2);
+  }
+
+Method Proto type : public static int subtraction(int num1, int num2)
+
+Method Signature : subtraction(int num1, int num2)
+
+Method parametrs : int num1, int num2
+
+Method return type: int
+
+=> public static int muliplication(int num1, int num2){
+         System.out.println(num1*num2);
+  }
+
+Method Proto type : public static int muliplication(int num1, int num2)
+
+Method Signature : muliplication(int num1, int num2)
+
+Method parametrs : int num1, int num2
+
+Method return type: int
+
+
+
+
+4)Defination, declaration and calling method:
+---------------------------------------------
+->We can create a method in 2 ways
+  1)Method Defination(Method creatiion with body)
+  2)Method Declaration(Method creatiion with out body)
+  
+1)Method Defination(Method creatiion with body):
+------------------------------------------------
+-> Creating a method with body is called Method Defination, techically Method Defination we can also call    Concrete method
+
+->Syntax:
+
+<Access Modifier> 	<Modifier>	<return type> <method name>(<parameters>)
+{
+
+
+      <Method Body>
+
+}
+
+
+->in the above syntax 
+  <Access Modifier> ---> optional
+
+  <Modifier> ---> optional
+
+  <return type> ---> Mandatory
+
+  <method name> ---> Mandatory
+
+  <parameters> ---> <optional>
+
+  <Method Body> ---> Mandatory
+
+
+Ex: public static void additionOfTwoNumbers(int number1, int number2){
+
+    int result = number1+number2;
+    System.out.println(result);
+
+    }
+
+
+->after removing all the oprtional parts
+
+ void additionOfTwoNumbers(){
+    int number1 = 10;
+    int number2 = 20;
+    int result = number1+number2;
+    System.out.println(result);
+
+    }
+
+
+2)Method Declaration(Method creatiion with out body):
+-----------------------------------------------------
+->creating a method with out body is called Method declaration, Techinically we can also Method Declaration as abstract Method.
+
+->to create Method Declaration/abstract method ,we must use abstract modifier and method should end with semicolon(;)
+
+->Syntax:
+  <Access Modifier> abstract <return type> <method name>(<parameters>);
+
+->in the above syntax 
+  <Access Modifier> ---> optional
+
+  <Modifier>(only abstract allowed, because its abstract method) ---> Mandatory
+
+  <return type> ---> Mandatory
+
+  <method name> ---> Mandatory
+
+  <parameters> ---> Optional
+
+  Semicolon(;) ---> Mandatory
+
+Ex:
+
+public abstract void add(int number1, int number2);
+
+->after all optional parts from the method
+
+  abstract void add();
+
+
+->calling the method:
+--------------------
+->The prcess of sending control to a method body to execute its logic is called calling the method
+
+->syntax:
+      <method name>(<arguments>); -> to call paramerized methods
+      <method name>();-> to call paramerized methods
+  
+-><method name> ---> mandatory because with out method name, we can't call the method
+
+-><arguments> -> mandatory for parameterized methods, optional for non-parameterized methods
+
+
+Ex:
+
+class Test{
+  static void t1(){
+     System.out.println("from t1 method")
+  }
+
+  static void t2(int a){	
+    System.out.println("from t2 method")
+  }
+ 
+  public static void main(String[] args){
+            t1();
+
+            t2(10);
+  }
+
+}
+
+5)Types of Methods:
+-------------------
+
+6)Types Of Methods &  calling those methods:
+---------------------------------------------
+There are 6 types of the methods
+  1) static method
+
+  2) non-static method
+
+  3) parametrized method
+
+  4) non-parametrized method
+
+  5) void method
+
+  6) non-void method
+
+
+1)static method:
+-----------------
+-> If we create a method with static key word is called static method
+   syntax: <access modifier> static <return type> methodname(paremeters){
+              //method body
+           }
+
+   Ex: public static void multiplication(int num1, int num2){
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+-> For the above syntax,what are mandatory things to create static method
+   <access modifier> - optional
+   static - mandatory
+   <return type> - mandatory
+   methodname - manadatory
+   paremeters - optional
+
+Ex: static void multiplication(){
+	   int num1 = 10;
+	   int num2 = 20;
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+=>Numbers ways to static method:
+--------------------------------
+1)By using class name
+2)By using object name
+
+Note: If we are the static method from the same class, we no need use class name, directly we can call
+----
+
+->static methods If we are calling in the same class, we can call direclty with the method name
+
+case-1 - static method is there in the same class and calling that static method from the same class
+	class Test{
+		static void t1(){
+		  System.out.println("from t1 method")
+		}
+
+           public static void main(String[] args){
+               t1();
+           }
+
+       }
+
+case-2 - static method is there in the Test class and calling that static method from the Sample class main method
+	class Test{
+		static void t1(){
+		  System.out.println("from t1 method")
+		}
+
+        }
+
+       class Sample{
+
+		public static void main(String[] args){
+               		Test.t1();
+          	 }
+       }
+
+case-3 - calling static method by object name
+
+	class Test{
+		static void t1(){
+		  System.out.println("from t1 method")
+		}
+
+        }
+
+       class Sample{
+
+		public static void main(String[] args){
+               		Test tObject = new Test();
+			tObject.t1();
+			
+          	 }
+       }
+
+
+2)non-static method:
+--------------------
+-> If we create a method with out static key word is called  non-static method
+   syntax: <access modifier> <return type> methodname(paremeters){
+              //method body
+           }
+
+   Ex: public void multiplication(int num1, int num2){
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+-> For the above syntax,what are mandatory things to create static method
+   <access modifier> - optional
+   <return type> - mandatory
+   methodname - manadatory
+   paremeters - optional
+
+Ex: void multiplication(){
+	   int num1 = 10;
+	   int num2 = 20;
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+
+
+=>Numbers ways to call non-static method:
+-----------------------------------------
+->by using object name
+
+Ex:
+	
+
+class Sample{
+
+	  public void multiplication(int num1, int num2){
+             System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+          }
+	 
+
+          public static void main(String[] args){
+               	Sample sObject = new Sample();
+		sObject.multiplication(10,30);
+			
+          }
+
+}
+
+
+Q)In the same class with same method signature(combination of method name & parameters), can we create static &   non-static methods
+  ->No, We can't careate
+
+3) parametrized method:
+-----------------------
+->If we create a method with parametrized variables is called parametrized method
+
+->We no need to think about our method is static/nonstatic
+  syntax: <access modifier> static/nonstatic <return type> methodname(paremeters){
+              //method body
+           }
+
+->static parameterized method
+
+   public staic void multiplication(int num1, int num2){
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+->non-static parameterized method
+
+   public void multiplication(int num1, int num2){
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+  
+->How to call paraterized method:
+---------------------------------
+->to call parameterized method we need pass arguments/values based on the data type
+  multplication(10,20);
+
+4)non-parametrized method:
+--------------------------
+->If we create a method with out parametrized variables is called non-parametrized method
+
+->We no need to think about our method is static/nonstatic
+  syntax: <access modifier> static/nonstatic <return type> methodname(){
+              //method body
+           }
+
+->static non-parameterized method
+
+   public staic void multiplication(){
+	   int num1 = 10;
+	   int num2 = 20;
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+->non-static non-parameterized method
+
+   public void multiplication(){
+	   int num1 = 10;
+	   int num2 = 20;
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+  
+->How to call non-paraterized method:
+-------------------------------------
+->to call non-parameterized method we should not pass the arguments/values
+  multplication();
+
+5) void method:
+---------------
+->If we create method by return type as a void then that method is called void method.
+
+syntax: <access modifier> static/nonstatic <return type> methodname(){
+              //method body
+        }
+
+
+->static void method
+
+   public staic void multiplication(){
+	   int num1 = 10;
+	   int num2 = 20;
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+->non-static void  method
+
+   public void multiplication(){
+	   int num1 = 10;
+	   int num2 = 20;
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+       }
+
+
+-> For the above syntax,what are mandatory things to create static method
+   <access modifier> - optional
+   <return type> - void as a return type and mandatory
+   methodname - manadatory
+   paremeters - optional
+
+   void multiplication(){
+	   int num1 = 10;
+	   int num2 = 20;
+           System.out.println("Multiplication of 2 numbers :"+(num1*num2));
+    }
+
+
+->Number of ways to call void method
+------------------------------------
+->direct call
+->void method, when ever we call, It wont return anyrhing
+EX:  multiplication();
+
+6)non-void method:
+------------------
+->If We create method by taking return type as primitive type/referenced type then that method is called non-  void method.
+
+syntax: <access modifier> static/nonstatic <return type -primitive/referenced type> methodname(){
+              //method body
+        }
+
+-> addition method returning addition result
+        public static/non-static int addition(int num1, int num2){        
+           return num1+num2;
+        }
+
+->Number of ways to call non-void method:
+-----------------------------------------
+1)call directly-> in direct call, we will loss the returning value, because that method returning value is no one is receving.
+
+2)By variable assignment call
+  in the process of variable assignment call, we need take the method return data type variable and we need call the method with equal operator
+
+3)call in System.out.print() method:
+  we can call non-void methods directly in s.o.p method, then when ever that method return the value s.o.p will   print that returned value.
+
+Ex:
+class NonVoidTest 
+{
+	static int add(int num1, int num2){
+		return num1+num2;
+	}
+
+	public static void main(String[] args) 
+	{
+		//1.direct call 
+		add(10,20);
+
+               //2. variable assignment call
+	   	int result = add(10,20);
+	   	System.out.println(result);
+
+	      //3.call in System.out.print
+	        System.out.println(add(10,20));
+
+
+	}
+}
+
+Assignment-60:
+-------------
+Write a java program to calculate 5 Arithematic operations.
+ -create 2 static and void methods (addition,subtraction)
+ -create 3 non-static and non-void methods(multiplication,division and modulation)
+ - read 2 input values from the keyboard display the 5 operations results
+
+
+Assignment-61:
+-------------
+Write a java program to set and display employee values.
+ -Create Employ(empId,empName,employSal,empDept) class
+ -create method as - 
+   public Employ setEployValues(Employ emp){--- body retun emp}
+ -create method to display employee values - 
+   public void displayEmpValues(Employ emp){// display emp values logic}
+
+
+
+
+
+
+
+
+

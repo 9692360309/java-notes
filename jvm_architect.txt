@@ -1,0 +1,94 @@
+                                                13.JVM Architecture
+						-------------------
+
+->JVM stands for Java Virtual Machine
+
+->JVM is platform, its responsible to run the code by trnslating from byte code into current OS Machine language
+
+->Java beacme Platform Independent Language because of JVM
+
+->Every Java Program executes in 4 phases
+	1)Loading
+	2)Verifying
+	3)Memory Allocation
+	4)Interpreting
+	
+1)Loading:
+----------
+-> JVM loads the class file by using the class loader
+
+->There are 3 types class loaders
+	1)BootStrap class loader ---> loads --> C:\JDK/JRE/lib/rt.jar
+	2)Extension class loader ---> loads --> C:\jdk/JRE/lib/ext/*.jar
+	3)Application class Loader --> loads --> our classes from CWD and classpath related classes
+
+->In this loading process, if the given class file is not found ,then we will get below errors
+NoClassDefFound Error
+ClassNotFoundException
+
+
+
+2)Verifying:
+-------------
+->JVM verifies the given class file byte code is valid or not by using Byte Code Verifier
+
+->If given class file byte code is invalid then, we will get below any type of the errors
+Linkage Error
+Verify Error
+Class Format Error
+
+3)Memory Allocation
+-------------------
+->Stores the given class code & allocates memory to the class members
+
+=> JVM allocate the Memomory for every Java Program in 5 Areas
+--------------------------------------------------------------
+1)Method Area
+2)Heap Area
+3)Java Stack Area
+4)Program Counter Register Area
+5)Native Stack Area
+
+1)Method Area:
+--------------
+->In this area all class files byte code will be stored
+
+->For all the static variables allocate the memory.
+
+2)Heap Area:
+------------
+->Allocate the memory for all objects and non-static variables
+
+3)Java Stack Area:
+------------------
+->Executes static blocks, constructor block, Static Methods, Non-static Methods logics
+
+->For local variables and parameterized variables allocates the memory.
+
+4)Program Counter Register Area:
+--------------------------------
+->stores the instructions address to track the execution flow of the program
+
+
+5)Native Stack Area:
+--------------------
+->Loading & Executing native methods logic, here native methods methods means, the logic implemented in 
+native language like C, C++ ..etc
+	
+
+
+
+6)ExecutionEngine:
+-------------------
+->Execution is responsible for execute the given program and give the ouput
+->It works by taking bewlow 3 parts
+  Interprester --> translates the given class file byte code into current OS Machine
+  JIT -> Its gives the speed while executing the program
+  Security Manager --> It checks the given byte code valid or not
+
+7)Java Native Interface:
+------------------------
+-> The native methods implemented in native language(C,C++ lanaguage) will be loaded into the JVM
+
+
+  

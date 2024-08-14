@@ -1,0 +1,1915 @@
+﻿22.Collection Framework with Generics
+                                -------------------------------------
+Array:
+------
+Array is collection of homogenius group of elements with fixed size.
+Ex: int[] numbers;
+        Student[] students;
+        
+->We can solve homogenius elements issue of array by taking Object[]
+Student[] students = new Student[5];
+
+
+class Student{
+        private int studentSno;
+        private String studentSName;
+}
+
+
+class Employee{
+        private int empNo;
+        private String empName;
+}
+
+
+Student[] students = new Student[5];
+                students[0] = new Student();
+                students[1] = 20;// CE : cannot convert from int to Student
+                students[2] = new Employee();//CE: CE : cannot convert from Employee to Student
+                
+                
+solution: need to take Object[]
+---------
+Object[] objects = new Object[5];
+                objects[0] = new Student();
+                objects[1] = 20;
+                objects[2] = new Employee();        
+
+
+
+
+=>Array DisAdvanages:
+---------------------
+->fixed in size
+
+
+->It can store only Homogenius elements, but by taking Object 
+Array we can fix this isse.
+
+
+->There is readymade code support like size(), delete(), update..etc 
+operations are not available.
+
+
+->Array is not implemented any underlying data structure
+
+
+
+
+=> because of array dis advanatges Collection Framework introduced in
+Java 1.0 version
+
+
+=>Collection:
+-------------
+-> Collection is a homo/ hetero/ duplicate/unique group of elements with 
+out size limitation.
+
+
+->Every Collection class internally growable its size, when ever size is
+exceeded.
+
+
+->Every Collection class implemented by particular underlying data
+structure.
+
+
+
+
+=>Number ways we can add the data in the collection classes:
+------------------------------------------------------------
+1)by value
+2)by key and value
+
+
+
+
+1)by value:
+-----------
+-> by folloing this we can store the values only
+->for this we can use all list and set  and Queue classes
+
+
+->Ex: ArrayList al = new ArrayList();
+          al.add("Ramu");
+          al.add(10000);
+          s.o.pln(al); ==>[Ramu,10000]
+          
+->The dis advanatges of list and set classes, we can't add/retieve the elements in meaning fromat.
+
+
+->Soution: Map related objects and we can use with generics
+
+
+2)by key and value:
+------------------
+-> by using key and value fromat, we can store elements in meaningfull format.
+
+
+->If we want store the data in the form of key,value then we should go with Map classes
+
+
+Ex: HashaTable ht = new HashaTable();
+    ht.put("name","Ramu");
+        ht.put("salary",10000)
+        s.o.pln(ht); ==> [name=Ramu, salary=10000]
+        
+        
+=> In the Collection F/W, we have 9 key intefaces:
+--------------------------------------------------
+1)Collection
+2)List
+3)Set
+4)SortedSet
+5)NavigableSet
+6)Queue
+7)Map
+8)SortedMap
+9)NavigableMap
+
+
+1)Collection:
+-------------
+->Collection inteface is root inteface 
+
+
+->Collection inteface having the common methods which can be used in List and set classes.
+
+
+->Methods:
+---------
+1)public abstract boolean add(Object obj) ==> to add the elements
+2)public abstract boolean addAll(Collection collection); => copy one collection elements to the another collection
+
+
+3)public abstract boolean isEmpty(); ==> to check any elements present, if present retursns true otherwise returns false
+
+
+4)public abstract int size()==> to check the number of elements present
+
+
+5) public abstract boolean remove(Object obj); ==> to delete the elements based on we passed elements, It will remove only first occurance
+6) public abstract boolean removeAll(Collection collection); ==>remove the all ocurances of the curent collection
+which are present in given collection elements.
+7)public abstract boolean retainAll(Collection collection); ==>It will not remove the common elements of the current
+  and remaining all elements it will be deleted
+8)public abstract void clear(); ==> to remove all the elements
+
+
+9)public abstract boolean contains(Object obj);==> To check given element present or not in the given collection,
+        If present returns true otherwise returs false
+10)public abstract boolean containsAll(Collection collection);==>If we want check one collection having elements in 
+another collection then we should use containsAll
+
+
+11)public abstract java.util.Iterator<E> iterator(); ==> For retrieving elements
+
+
+12) public abstract int hashCode();==> It gives the unique code 
+
+
+13)public abstract boolean equals(Object obj); ==> It compares the data with the object content, If we want check one 
+collection exact elements with the same order in another collection then we should use equals
+        
+14)public abstract Object[] toArray(); ==> to covert the Array
+
+
+15)public abstract <T> T[] toArray(T[]); ==> We can to convert required array type
+
+
+java 8 methods
+
+
+
+
+16)pubilc default void forEach(Consumer) -->user to retrieving the elements
+17)public default java.util.stream.Stream<E> stream();-->used to retrieving the elements
+18)public default java.util.stream.Stream<E> parallelStream(); -->used to retrieving the elements
+19)public default java.util.Spliterator<E> spliterator();
+
+
+20)public default boolean removeIf(java.util.function.Predicate<? super E>);
+
+
+java 11
+
+
+21)public default <T> T[] toArray(java.util.function.IntFunction<T[]>); ==> based on the lambda expression we can convert the array
+
+
+
+
+2)List(I):
+-------
+->List is a child inteface of Collection Inteface
+
+
+->If we want represent group of elements as a single Object, where duplicates allowed and insertion order
+is followed.
+
+
+->It stores the elements in with index, becases list is index based
+
+
+Methods(From Collection 21 + 24 = 45):
+--------------------------------------
+1)public abstract void add(int, E); --> to add the element to the collection at particular index
+2)public abstract boolean addAll(int, java.util.Collection<? extends E>); --> to add the collection to the collection at particular index
+
+
+3)public abstract E get(int); --> to get the element based on the index
+
+
+4)public abstract E set(int, E);---> replce new element based on the index
+
+
+
+
+5)public default void sort(java.util.Comparator<? super E>);
+  
+6)public abstract E remove(int); --> remove element based on the index
+
+
+7)public abstract int lastIndexOf(java.lang.Object);-->It returns last index of given object
+  
+8)public abstract int indexOf(java.lang.Object);-->It returns first occurance index of the given object
+  
+9)public abstract java.util.ListIterator<E> listIterator();-->to retrive the elements
+
+
+java8 methods
+10)public default void replaceAll(java.util.function.UnaryOperator<E>); -->to replace the element with all ocurances
+11)public default void sort(java.util.Comparator<? super E>); --> to sort the elements
+
+
+12)public static <E> java.util.List<E> of();
+13)public static <E> java.util.List<E> of(E);
+14)public static <E> java.util.List<E> of(E, E);
+15)public static <E> java.util.List<E> of(E, E, E);
+16)public static <E> java.util.List<E> of(E, E, E, E);
+17)public static <E> java.util.List<E> of(E, E, E, E, E);
+18)public static <E> java.util.List<E> of(E, E, E, E, E, E);
+19)public static <E> java.util.List<E> of(E, E, E, E, E, E, E);
+20)public static <E> java.util.List<E> of(E, E, E, E, E, E, E, E);
+21)public static <E> java.util.List<E> of(E, E, E, E, E, E, E, E, E);
+22)public static <E> java.util.List<E> of(E, E, E, E, E, E, E, E, E, E);
+23)public static <E> java.util.List<E> of(E...);
+24)public static <E> java.util.List<E> copyOf(java.util.Collection<? extends E>);
+
+
+
+
+
+
+
+
+3)Set(I):
+--------
+->Set inteface is the Child inteface of Collection Inteface
+
+
+->If we want represent group of elements as a single Object, where duplicates not allowed and insertion order
+is not followed.
+
+
+
+
+4)Sorted Set(I)
+---------------
+->SortedSet inteface is child inteface of Set inteface
+
+
+->If we want represent group of elements as a single Object, where duplicates not allowed and if we want some 
+sorting order.
+
+
+5)NavigableSet(I)
+-----------------
+->NavigableSet Set also child interface of SortedSet.
+
+
+->some methods are implemted for navigation pupose.
+
+
+6)Queue(I):
+---------
+->if we want to maintain the elements in FIFO(FIRST IN FIRST ORDER) then we should use Queue inteface 
+implemented classes.
+
+
+
+
+7)Map(I)
+--------
+-> To represent the group of objects as key,value pair then we should use Map
+
+
+->Map is not a child inteface Collection inteface
+
+
+
+
+8)SortedMap(I)
+-------------
+->SortedMap is child interface of Map
+
+
+->If we want to maintain the keys as some sorting order then we should go with Sorted Map.
+
+
+
+
+
+
+9)NavigableMap(I)
+---------------
+->It is the child inteface of Sorted Map
+
+
+->It has serveral methods for the navigation purpose
+
+
+
+
+
+
+=>What is the diiference between Collection Framework and Collection
+---------------------------------------------------------------------
+-> Collection Framework is related List, Set, Queue, Map intefaces and classes
+->Collection Framework just Teminology
+->Collection is a inteface and it has sub intefaces as List, Set , Queue
+
+
+=>What are the legacy classes Of Collection Framework
+-----------------------------------------------------
+->legacy classes means, they are released java 1.0 version
+->Vector(C)
+->Stck(C)
+->HashaTable(C)
+->Properties(C)
+
+
+->Enumeration(I)
+->Dictionary(AC)
+
+
+=>For Every collcection class we need to the below points:
+--------------------------------------------------------
+->which type of class
+->version
+->why have to use
+->default capacity and incremental capacity
+->will it allows hetero/homo/unique
+->underlying Data structure
+->synchronized
+->allows nulls? how many
+
+
+
+
+
+
+=>Vector:
+---------
+-> Vector class implements List, RandomAccess, Serializable, Cloneable
+->Its released in 1.0 version
+->Its best suitable at multi threaded environment becases its all methods are Synchonized so, Vector class is
+threaded safe, and if our regular operation is retrieving the elements randomly then we can use Vector
+->its default capacity 10 and if size is exceeded then its size incremented by double
+->It maintains the insertion order
+->underlying data structure is resizable/growable array
+->it allows duplicate/homo/hetero elements
+->it allows null values 1 or more than one
+
+
+Constructors:
+-------------
+1) public Vector()
+2) pubilc Vector(Collection collection)
+3)pubilc Vector(int initialCapacity)
+4)pubilc Vector(int initialCapacity, int incremental capacity)
+
+
+Methods:
+--------
+1)public synchronized void addElement(E);
+2)pubilc synchronized Object elementAt(int index)
+3)pubilc synchronized Enumeration elements()
+4)pubilc synchronized Object removeElement(Object)
+5)pubilc synchronized Object removeElementAt(int index)
+6)protected synchronized void removeRange(int start index, int endIndex)
+7)pubilc synchronized void removeAllElements()
+8)pubilc synchronized void setElementAt(int index, Obj)
+9)pubilc synchronized int capacity()
+10)pubilc synchronized void setSize(int size)
+
+
+
+
+ArrayList:
+----------
+-> ArrayList class implements List, RandomAccess, Serializable, Cloneable
+->Its released in 1.2 version
+->Its best suitable at single threaded environment because its all methods are non-Synchonized so, ArrayList class is
+non-threaded safe, and if our regular operation is retrieving the elements randomly then we can use ArrayList
+->its default capacity 10 and if size is exceeded then its size will be implemented by half 
+->It maintains the insertion order
+->underlying data structure is resizable/growable array
+->it allows duplicates/homo/hetero elements
+->it allows null values 1 or more than one
+
+
+Constructors: 10
+-----------
+1)pubilc ArrayList()
+2)pubilc ArrayList(Collection)
+3)pubilc ArrayList(int initialCapacity)
+
+
+methods:(From Collection 21 + From List 24 = 45)
+------
+1)pubilc void ensureCapacity(int size);--> we can set capacity of the list before incrementing
+2)pubilc void trimtoSize();--> to remove the empty elements of the List
+ 
+ 
+Q) Difference between Vector and ArrayList
+
+
+Vector                                                                                                          ArrayList
+----------------------------------------------------------------------------------------------
+
+
+1)all methods are syncronized                                1)all methods are non-syncronized
+
+
+2)Thread-safe                                                                 2)non-threaded safe
+
+
+3)it best suitable Multi threaded                        3)it best suitable single threaded
+environment                                                                 environment 
+
+
+4)Performance is low                                                4)Performance is high
+
+
+5)1.0 version                                                                5)1.2 version
+
+
+
+
+=>ArrayList Example
+
+
+=>Linked List:
+-------------
+->Linked List implements Serializable, Cloneable but RandomAccess Interface
+
+
+->Linked List released 1.2 version
+
+
+->It follows the insertion order
+
+
+->The Underlying data Structure is Doubly Linked List
+
+
+->It allows duplicate/homo/hetero elements
+
+
+->allows more than one null values
+
+
+->We have to use the Linked List, when ever our regular operation is inserting or removing at middle of the List or
+starting of the list.
+
+
+->It is worst choice If regular operation is retrieval
+
+
+->in the Linked List  we can use (From Collection 21 + From List 24 = 45) methods.
+
+
+->Additionally It behaves as Stack(LIFO) and Queue(FIFO) based on the methods we use, to support Stack and Queue It has
+own methods.
+
+
+Constructors:
+-----------
+LinkedList linkedList = new LinkedList(); -> creates emplty Linked List
+
+
+LinkedList linkedList = new LinkedList(Collection collcection); -> creates LinkedList with given Collection elements
+
+
+
+
+Methods:
+-------
+1)pubilc void addFirst(Object obj)
+2)pubilc void addLast(Object obj)
+
+
+3)pubilc Object getFirst()
+4)pubilc Object getLast()
+
+
+5)publi Object removeFirst()
+6)pubilc Object removeLast()
+
+
+LinkedList Example:
+-------------------
+LinkedList linkedList = new LinkedList<>();
+                linkedList.add(23);
+                linkedList.add(45);
+                linkedList.add(20);
+                linkedList.add(new Student(101, "Venkat"));
+                linkedList.add(1, 30);
+                System.out.println(linkedList);
+                //System.out.println(linkedList.contains(new Student(101, "Venkat")));
+                
+                //to get the first index value
+                System.out.println(linkedList.get(0));
+                System.out.println(linkedList.getFirst());
+                System.out.println(linkedList.getLast());
+                
+                //add the element at 0th index
+                linkedList.addFirst(22);
+                linkedList.add(0, 22);
+                System.out.println(linkedList);
+                
+                //remove last element
+                linkedList.remove(6);
+                System.out.println(linkedList);
+                linkedList.removeLast();
+                System.out.println(linkedList);
+
+
+
+
+=>Cursors:
+----------
+->we have 3 types of the cursors, to retieve the elements, they are
+1)Enumeration(I)
+2)Iterator(I)
+3)ListIterator(I)
+
+
+1)Enumeration(I):
+-----------------
+->If we want retriev the elements one by one, we can use Enumeration
+
+
+->We can get the Enumeration Object by calling elements() method
+        pubilc Enumeration elements()
+        
+-> We can use Enumeration for the only legacy classes 
+        
+->Methods:
+---------
+1)pubilc boolean hasMoreElemets(); --> It returns true, if any element is available after current cursor element otherwise it retuns flase
+
+
+2)oublic Object nextElement();-->It returns current cursor element
+
+
+
+
+Example for Enumeration:
+-----------------------
+public static void main(String[] args) {
+                // TODO Auto-generated method stub
+                Vector<Student> students = new Vector<>();
+                students.add(new Student(101, "Arun"));
+                students.add(new Student(102, "Sri Lakshmi"));
+                students.add(new Student(103, "Chinna"));
+                students.add(new Student(104, "Chandu"));
+                students.add(new Student(105, "Subbu"));
+                students.add(new Student(106, "Siri"));
+                students.add(new Student(107, "Murthy"));
+                students.add(new Student(108, "Ankul"));
+                students.add(new Student(109, "Komal"));
+                
+                //get Enumeration object
+                Enumeration<Student> enumeration= students.elements();
+                
+                while(enumeration.hasMoreElements()) {
+                        System.out.println(enumeration.nextElement());
+                }
+                System.out.println();
+                
+                
+                //by using for loop
+                for (int i = 0; i <= students.size(); i++) {
+                        System.out.println(students.get(i));
+                }
+                
+        }
+        
+->DisAdvanages of Enumeration:
+------------------------------
+1)We can use Enumeration for the only legacy classes
+2)By Using Enumeration we can do only read operation but we can not do add, remove, update operation
+
+
+To overcome these DisAdvanages we got Iterator cursor
+
+
+2)Iterator(I):
+-------------
+-> By using Iterator we can retrieve the elements.
+
+
+-> we can use Iterator on any collcection object.
+
+
+->By using iterator(), we can get Iterator Object
+
+
+        pubilc Iterator iterator();
+
+
+->Iterator supports the remove operation while iterating
+
+
+->Methods:
+        pubilc boolean hasNext()--> It returns true, if any element is available after current cursor element otherwise it retuns flase
+        pubilc Object next()-->It returns current cursor element
+        pubilc void remove()-->It removes current cursor element
+
+
+Example:
+-------
+
+
+public class IteratorDemo {
+        
+        public static void main(String[] args) {
+                // adding the elements 1 to 50 to the list
+                ArrayList<Integer> integers = new ArrayList<>();
+                
+                for (int i = 1; i <= 50; i++) {
+                        integers.add(i);
+                }
+                System.out.println(integers);
+                
+                //get the iterator object
+                Iterator<Integer> iterator = integers.iterator();
+                while (iterator.hasNext()) {
+                        if(iterator.next()%2!=0) {
+                                iterator.remove();
+                        }                        
+                }
+                
+                System.out.println(integers);
+        }
+}
+
+
+DisAdvanages of Iterator:
+-------------------------
+-> Enumeration & Iterator are the forward direction cursors
+
+
+->By using Iterator we can only do read and remove operations, but we can't do add and updateoperations
+
+
+solution ListIterator
+
+
+3)ListIterator(I):
+--------------
+-> By using ListIterator we can retriev, add, update and remove the elements in 2 directions (forward-backwrd directions),so
+  it is Bi-directional cursor
+
+
+->List Iterator applicable for only list type objects
+
+
+->ListIterator is the child interface of Iterator
+
+
+-> we can get the listIterator object by using listIterator() method
+
+
+                pubilc ListIterator listIterator()
+                
+->Methods:
+----------
+        forward direction methods
+        1)pubilc boolean hasNext()
+        2)pubilc Object next()
+        3)pubilc int nextIndex()
+        
+        backwrd direction methods
+        4)pubilc boolean hasPrevious()
+        5)pubilc Object previous()
+        6)pubilc int previousIndex()
+        
+        7)pubilc void remove()
+        8)pubilc void set(Obj)
+        9)pubilc void add(obj)
+        
+        
+Assignment:
+----------
+create Employee class with variables
+        private int empNo;
+        private String empName;
+        private double empSalary;
+        private int exprerience;
+        private int performanceRating;
+        
+create Employee type ArrayList and permform the operations as given below requirement by listIterator
+
+
+experience >3 yrs && performnceRating>3
+increment salary of 10%
+
+
+experience >2 && performnceRating>2
+increment salary of 5%
+        
+performnceRating<=2        
+remove the employee
+
+
+
+
+
+
+Stack:
+------
+->Stack is the child class of the Vector class, so in Vector class what ever methods are available those all methods
+we can use on stack object
+
+
+->released in 1.0 version
+
+
+->Its given for Last In First Out(LIFO) purpose.
+
+
+->Methods:
+---------
+1.pubilc Object push(Object obj) --> To add the object into the stack
+
+
+2)pubilc Object pop() -->It remove and returns top element of the stack
+
+
+3)pubilc Object peek()-->It returns the top of the element of the Stack without removal
+
+
+4)public int search() --> If element presents, it returns the offset(+ve number) otherwise it retuns the -1
+                           
+                                        
+Note: to work search method, we need to override equals method
+
+
+
+
+HashSet:
+=======
+-> it Released in 1.2 version
+
+
+->Its underlying Data Structure is HashaTable
+
+
+->It wont allow the duplicate elements, even though we are trying add the duplicate elements ,won't get any CE or RE, simply
+add method returns false.
+
+
+->null Insertion is possible
+
+
+->Unique/Hetero elements allowed
+
+
+->It implents Coneable, Serializable but not RandomAccess inteface
+
+
+Constructors:
+------------
+HashSet hashSet = new HashSet();
+
+
+HashSet hashSet = new HashSet(int initialCapacity); --> it creates the hashSet with the given capacity
+
+
+
+
+-> Generally, When ever we adding duplicate data with our custom classes objects to set type ,Map type objects by default, they
+allow duplicates because to avoid duplicates, internally they call hashCode(), equals() method of our class.
+
+
+->If we not override hashCode(), equals() methods in our class, allows duplicates/homo/hetero
+
+
+->If we override hashCode(), equals() methods in our class, won't allow the duplicates.
+
+
+package collections;
+
+
+import java.util.HashSet;
+
+
+public class Employee {
+        private int empNo;
+        private String empName;
+        private int exprerience;
+        private double empSalary;
+        private int performanceRating;
+        
+        public Employee(int empNo, String empName, int exprerience, double empSalary, int performanceRating) {
+                super();
+                this.empNo = empNo;
+                this.empName = empName;
+                this.exprerience = exprerience;
+                this.empSalary = empSalary;
+                this.performanceRating = performanceRating;
+        }
+
+
+        public int getEmpNo() {
+                return empNo;
+        }
+
+
+        public void setEmpNo(int empNo) {
+                this.empNo = empNo;
+        }
+
+
+        public String getEmpName() {
+                return empName;
+        }
+
+
+        public void setEmpName(String empName) {
+                this.empName = empName;
+        }
+
+
+        public int getExprerience() {
+                return exprerience;
+        }
+
+
+        public void setExprerience(int exprerience) {
+                this.exprerience = exprerience;
+        }
+
+
+        public double getEmpSalary() {
+                return empSalary;
+        }
+
+
+        public void setEmpSalary(double empSalary) {
+                this.empSalary = empSalary;
+        }
+
+
+        public int getPerformanceRating() {
+                return performanceRating;
+        }
+
+
+        public void setPerformanceRating(int performanceRating) {
+                this.performanceRating = performanceRating;
+        }
+
+
+        @Override
+        public String toString() {
+                return "Employee [empNo=" + empNo + ", empName=" + empName + ", exprerience=" + exprerience + ", empSalary="
+                                + empSalary + ", performanceRating=" + performanceRating + "]";
+        }
+        
+        
+        @Override
+        public int hashCode() {
+                // TODO Auto-generated method stub
+                return empNo;
+        }
+
+
+        @Override
+        public boolean equals(Object obj) {
+                Employee employee = (Employee)obj;
+                return this.empNo == employee.getEmpNo() && 
+                           this.empName.equals(employee.getEmpName())&&
+                           this.empSalary == employee.getEmpSalary()&&
+                           this.exprerience == employee.getExprerience()&&
+                           this.performanceRating == employee.getPerformanceRating();
+        }
+
+
+}
+
+
+
+
+public class HashSetDemo {
+
+
+        public static void main(String[] args) {//[1,100,Java]
+                // TODO Auto-generated method stub
+                HashSet hashSet = new HashSet();
+                hashSet.add(1);
+                hashSet.add(100);
+                hashSet.add(1);
+                hashSet.add(100);
+                hashSet.add("Java");
+                hashSet.add("Java");
+                System.out.println(hashSet);
+                System.out.println(hashSet.size());
+                
+                System.out.println();
+                
+                
+                HashSet<Employee> empHashSet = new HashSet<>();
+                Employee employee1 = new Employee(101, "Venkat", 5, 90000, 4);
+                empHashSet.add(employee1);
+                
+                Employee employee2 = new Employee(102, "Deva", 4, 70000, 3);
+                empHashSet.add(employee2);
+                
+                Employee employee3 = new Employee(101, "Venkat", 5, 90000, 4);
+                empHashSet.add(employee3);
+                
+                System.out.println(empHashSet.size());
+                
+        }
+
+
+}
+
+
+Assignment:
+----------
+create Employee(empNo,empName,exprerience,empSalary,performanceRating), Student(studentId,studentName,studentBranch,studentClass)
+and add employee and student objects to hashSet, You write the code as should not allow duplicate student and employee objects
+
+
+
+
+
+
+
+
+LinkedHaSet:
+-----------
+->Its released in 1.4 version
+
+
+->Its the sub class of HashSet
+
+
+->allows the insertion order
+
+
+->The underlying data structure is LinkedList and HashaTable
+
+
+->It allows null value
+
+
+->It allows unique/Heterogenious elements
+
+
+Ex: Assignment
+
+
+
+
+TreeSet:
+--------
+->Its released in 1.2 version
+
+
+->The underlying data structure of TreeSet is Balanced TreeSet
+
+
+->It follows the natural ascending order
+
+
+->All elements which are adding to the TreeSet should be comparable otherwise we will get ClassCastException, by default
+all wrapper classes and String class are the Comparable.
+
+
+->It won't allow the null, even one time also
+
+
+->Implements Serializable, Cloneable but not RandomAccess Interface
+
+
+Comparable:
+----------
+->Comparable is a inteface
+-> Its released in 1.2 version
+->Its for default natural sorting order
+->If we want maintain some natutural soring by default then we need to implements Comparable with our class
+->All wrapper classes and String classes are the Comparable
+
+
+Method:
+------
+pubilc int CompareTo(Object obj)
+
+
+Example:
+--------
+package collections;
+
+
+import java.util.HashSet;
+
+
+public class Employee implements Comparable<Employee>{
+        private int empNo;
+        private String empName;
+        private int exprerience;
+        private double empSalary;
+        private int performanceRating;
+        
+        public Employee(int empNo, String empName, int exprerience, double empSalary, int performanceRating) {
+                super();
+                this.empNo = empNo;
+                this.empName = empName;
+                this.exprerience = exprerience;
+                this.empSalary = empSalary;
+                this.performanceRating = performanceRating;
+        }
+
+
+        public int getEmpNo() {
+                return empNo;
+        }
+
+
+        public void setEmpNo(int empNo) {
+                this.empNo = empNo;
+        }
+
+
+        public String getEmpName() {
+                return empName;
+        }
+
+
+        public void setEmpName(String empName) {
+                this.empName = empName;
+        }
+
+
+        public int getExprerience() {
+                return exprerience;
+        }
+
+
+        public void setExprerience(int exprerience) {
+                this.exprerience = exprerience;
+        }
+
+
+        public double getEmpSalary() {
+                return empSalary;
+        }
+
+
+        public void setEmpSalary(double empSalary) {
+                this.empSalary = empSalary;
+        }
+
+
+        public int getPerformanceRating() {
+                return performanceRating;
+        }
+
+
+        public void setPerformanceRating(int performanceRating) {
+                this.performanceRating = performanceRating;
+        }
+
+
+        @Override
+        public String toString() {
+                return "Employee [empNo=" + empNo + ", empName=" + empName + ", exprerience=" + exprerience + ", empSalary="
+                                + empSalary + ", performanceRating=" + performanceRating + "]";
+        }
+        
+        
+        @Override
+        public int hashCode() {
+                // TODO Auto-generated method stub
+                return empNo;
+        }
+
+
+        @Override
+        public boolean equals(Object obj) {
+                Employee employee = (Employee)obj;
+                return this.empNo == employee.getEmpNo() && 
+                           this.empName.equals(employee.getEmpName())&&
+                           this.empSalary == employee.getEmpSalary()&&
+                           this.exprerience == employee.getExprerience()&&
+                           this.performanceRating == employee.getPerformanceRating();
+        }
+
+
+        // obj1 wants to before obje2 return -1
+        //object1 wants after obj2 return 1
+        //object1==object2 return 0
+
+
+        @Override
+        public int compareTo(Employee employee) {
+                // TODO Auto-generated method stub
+                if(this.empSalary<employee.getEmpSalary())
+                        return -1;
+                else if(this.empSalary>employee.getEmpSalary())
+                        return 1;
+                else return 0;
+        }
+
+
+        
+}
+
+
+
+
+package collections;
+
+
+import java.util.TreeSet;
+
+
+public class TreeSetDemo {
+
+
+        public static void main(String[] args) {
+                // TODO Auto-generated method stub
+                TreeSet treeSet = new TreeSet<>();
+//                treeSet.add(98);
+//                treeSet.add(78);
+//                treeSet.add(97);
+//                treeSet.add(68);
+//                treeSet.add(1);
+//                treeSet.add("Java");
+                
+                treeSet.add(new Employee(101, "Keeresh", 4, 20000, 4));
+                treeSet.add(new Employee(101, "Balu..ABCD", 4, 5000, 4));
+                treeSet.add(new Employee(101, "Aparna", 4, 10000, 4));
+                treeSet.add(new Employee(101, "Ganesh", 4, 100000, 4));
+                
+                System.out.println(treeSet);
+                
+        }
+
+
+}
+
+
+
+
+Employee Salary Descending Order:
+--------------------------------
+@Override
+        public int compareTo(Employee employee) {
+                // TODO Auto-generated method stub
+                if(this.empSalary<employee.getEmpSalary())
+                        return -(-1);
+                else if(this.empSalary>employee.getEmpSalary())
+                        return -(1);
+                else return 0;
+        }
+        
+Employee name Alphabatica Order:
+--------------------------------        
+@Override
+        public int compareTo(Employee employee) {
+                // TODO Auto-generated method stub
+                return this.empName.compareTo(employee.getEmpName());
+        }
+        
+Employee name reverse Alphabatica Order:
+---------------------------------------
+@Override
+        public int compareTo(Employee employee) {
+                // TODO Auto-generated method stub
+                return -(this.empName.compareTo(employee.getEmpName()));
+        }
+        
+Assignment: Create Student[studentId,studentName,studentBranch,studentClass,studentGrade{A to D}] class, create 10 student objects
+add them to TreeSet, and do below cases
+1)Arrange the Student objeccts in Ascending order by studentId
+2)Arrange the Student objeccts in Descending order by studentId
+3)Arrange the Student objects in Alphabetical order by studentName
+4)Arrange the Student objects in reverse Alphabetical order by studentName
+5)Arrange the Student objects in Ascending order by studentGrade
+
+
+Comparator(I):
+-------------
+->It is from java.util package
+
+
+->It is for customized sorting order
+
+
+->Methods:
+---------
+public int compare(Object obj1, Object obj2)
+                        if obj1 has to come before obj2 then returns -1
+                        if obj1 has to come after obj2 then reurns 1
+                        if obj1==obj2 then retuns 0
+                        
+                        
+Comparator Example:
+------------------
+public class IntegersDescender implements Comparator{
+
+
+        @Override
+        public int compare(Object o1, Object o2) {
+                Integer i1 = (Integer)o1;
+                Integer i2 = (Integer)o2;
+                if(i1<i2)
+                        return -(-1);
+                else if(i1>i2)
+                        return -(1);
+                else
+                    return 0;
+        }
+        
+
+
+}
+
+
+IntegersDescender integersDescender = new IntegersDescender();
+TreeSet treeSet = new TreeSet<>(integersDescender);
+for (int i = 1; i <=100; i++) {
+                        treeSet.add(i);
+                }
+System.out.println(treeSet);
+
+
+
+
+Assignment:
+-----------
+Create a treeSet with 1 to 100 numbers and remove non-odd numbers from the treeSet and make the odd numbers in 
+Descending order.
+
+
+=> Difference between Comparable and Comparator:
+----------------------------------------------
+                Comparable                                                                        Comparator
+
+
+----------------------------------------------------------------------------------
+1)Its from java.lang package                                        Its from java.util package
+
+
+2)Its meant for default natural                                        Its meant customized soring order
+sorting order
+
+
+3)Method                                                                                Method
+ p int compareTo(Object obj)                                                p int compare(Object obj1, Object obj2)
+ 
+4)All Wrapper classes, String class by                         4)Collector, RuleBalanced Collector classes implemented by Comparator
+default implemted Comparable
+
+
+
+
+Map(I):
+----
+->If we want to reperesent our data in the form of key,value then we should go with Map
+
+
+->Map Interface is not a sub interface of Collection inteface
+
+
+->Key won't be allowed duplicates but values allowed duplicates
+
+
+->Each key,value is called Entry
+
+
+
+
+
+
+->Methods:
+--------------
+1)public void put(K, V);
+2)public void putAll(java.util.Map<? extends K, ? extends V>);
+
+
+3)public abstract int size();
+  
+4)public abstract boolean isEmpty();
+
+
+
+
+5)public abstract boolean containsKey(java.lang.Object);
+6)public abstract boolean containsValue(java.lang.Object);
+
+
+7)public abstract V get(java.lang.Object);
+  
+8)public abstract V remove(java.lang.Object);
+9)public default boolean remove(java.lang.Object, java.lang.Object);
+10)public abstract void clear();
+
+
+10)public abstract java.util.Set<K> keySet();
+11)public abstract java.util.Collection<V> values();
+
+
+12)public abstract java.util.Set<java.util.Map$Entry<K, V>> entrySet();
+
+
+13)public default boolean replace(K, V, V);
+14)public default V replace(K, V);
+
+
+jdk 1.8
+15)public default void forEach(java.util.function.BiConsumer<? super K, ? super V>);
+16)public default void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+  public default V putIfAbsent(K, V);
+  
+
+
+17)public default V computeIfAbsent(K, java.util.function.Function<? super K, ? extends V>);
+18)public default V computeIfPresent(K, java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+19)public default V compute(K, java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+
+
+20)public default V merge(K, V, java.util.function.BiFunction<? super V, ? super V, ? extends V>);
+  
+21)public static <K, V> java.util.Map<K, V> of();
+22)public static <K, V> java.util.Map<K, V> of(K, V);
+23)public static <K, V> java.util.Map<K, V> of(K, V, K, V);
+24)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V);
+25)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V, K, V);
+26)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V, K, V, K, V);
+27)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V, K, V, K, V, K, V);
+28)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V, K, V, K, V, K, V, K, V);
+29)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V, K, V, K, V, K, V, K, V, K, V);
+30)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V, K, V, K, V, K, V, K, V, K, V, K, V);
+31)public static <K, V> java.util.Map<K, V> of(K, V, K, V, K, V, K, V, K, V, K, V, K, V, K, V, K, V, K, V);
+
+
+32)public static <K, V> java.util.Map<K, V> ofEntries(java.util.Map$Entry<? extends K, ? extends V>...);
+33)public static <K, V> java.util.Map$Entry<K, V> entry(K, V);
+34)public static <K, V> java.util.Map<K, V> copyOf(java.util.Map<? extends K, ? extends V>);
+
+
+
+
+Entry(I):
+---------
+-> It is inner inteface of Map inteface
+
+
+->Here with out map object there is no chance of existing Entry object
+
+
+inteface Map{
+        interface Entry{
+                public Object getKey()
+                pubilc Object getValue()
+                pubilc Object setValue(Object obj)
+        }
+}
+
+
+
+
+HashMap:
+-------
+->Its underlying data Structure is HashaTable
+
+
+->Duplicate keys won't be allowed but duplicate values will be allowed
+
+
+->Heterogenious elements allowed for both key,values
+
+
+->It won't follow the insertion order, based on the hash code of key insertion order will be followed
+
+
+->For the keys null allowed only once, but for the values null allows more than one time
+
+
+Constructors:
+-------------
+HashMap hashMap = new HashMap();--> wll be created with default capacity 16, after 16 entries filledup its increment ratio is 75%
+
+
+HashMap hashMap = new HashMap(int initialCapacity);
+
+
+HashMap hashMap = new HashMap(int initialCapacity, float fillRation);
+
+
+HashMap hashMap = new HashMap(Map map);
+
+
+
+
+Example:
+HashMap< String, Integer> map1 = new HashMap<>();
+                map1.put("A", 1);
+                map1.put("B", 2);
+                map1.put("C", 4);
+                map1.put("D", 4);
+                map1.put("C", 3);
+                map1.put(null, null);
+                map1.put(null, 1);
+                System.out.println(map1);
+                
+                //map1.clear();
+                //System.out.println(map1);
+                
+                System.out.println(map1.containsKey("D"));
+                System.out.println(map1.containsKey("Z"));
+                
+                System.out.println();
+                
+                System.out.println(map1.containsValue(2));
+                System.out.println(map1.containsValue(100));
+                
+                System.out.println();
+                
+                System.out.println(map1.isEmpty());
+                
+                //to get the particular value of the key
+                System.out.println(map1.get("B"));
+                System.out.println(map1.get("Z"));
+                
+                System.out.println();
+                //print the values of map
+                Collection<Integer> listValues = map1.values();
+                for(Integer value:listValues) {
+                        System.out.println(value);
+                }
+                
+                System.out.println();
+                //print the all the keys of the map
+                Set<String> keys= map1.keySet();
+                for(String key:keys) {
+                        System.out.println(key);
+                }
+                
+                // How many ways we can retrieve the key,values from the map
+                //1)by using keySet() method
+                //2)by using entrySet() method
+                
+                //1)by using keySet() method
+                System.out.println();
+                Set<String> keys1 =        map1.keySet();
+                for(String key:keys1) {
+                        System.out.println(key +"-->"+map1.get(key));
+                }
+                
+                //2)by using entrySet() method
+                System.out.println();
+                Set<Entry<String,Integer>> entrySet        = map1.entrySet();
+                for(Entry entry:entrySet) {
+                        System.out.println(entry.getKey()+"-->"+entry.getValue());
+                }
+
+
+
+
+//customized class object adding to the map
+public class Student {
+        private int studentId;
+        private String studentName;
+        
+        
+        
+        public Student(int studentId, String studentName) {
+                super();
+                this.studentId = studentId;
+                this.studentName = studentName;
+        }
+        
+        public int getStudentId() {
+                return studentId;
+        }
+        public void setStudentId(int studentId) {
+                this.studentId = studentId;
+        }
+        public String getStudentName() {
+                return studentName;
+        }
+        public void setStudentName(String studentName) {
+                this.studentName = studentName;
+        }
+
+
+        @Override
+        public String toString() {
+                return "Student [studentId=" + studentId + ", studentName=" + studentName + "]";
+        }
+        
+        @Override
+        public int hashCode() {
+                // TODO Auto-generated method stub
+                return studentId;
+        }
+        
+        @Override
+        public boolean equals(Object obj) {
+                Student student = (Student)obj;
+                return this.studentId == student.getStudentId() && this.studentName.equals(student.getStudentName());
+        }
+
+
+}
+
+
+HashMap<Student, Integer> studentMap= new HashMap<>();
+                Student student1 = new Student(101, "Venka1");
+                studentMap.put(student1, 101);
+                
+                Student student2 = new Student(102, "Deva");
+                studentMap.put(student2, 102);
+                
+                Student student3 = new Student(101, "Venka1");
+                studentMap.put(student3, 101);
+                
+                System.out.println(studentMap.size());
+                
+                
+                
+HashTable Example Assignment
+
+
+=>Difference between HashTable and HashMap
+------------------------------------------
+                        HashTable                                                                         HashMap
+----------------------------------------------------------------------------------
+1)Its released in 1.0 version                                        1)Its released in 1.2 version
+
+
+2)all methods are synchronized                                        2)non-Synchonized
+
+
+3)Thread-safe                                                                        3)Non-Thread-safe
+
+
+4)won't allow the null VALUE for key & value        4)allows null value once for the key and more than one time for the value
+both otherwise we will ger NPE                                                                        
+
+
+
+
+LinkedHashMap
+-------------
+->Its released 1.4 version
+
+
+->It follows the insertion Order
+
+
+->its underlying Data Structure is HashTable LinkedList
+
+
+=>Difference between HashMap and LinkedHashMap
+------------------------------------------
+                        HashMap                                                                 LinkedHashMap
+----------------------------------------------------------------------------------
+1)Its released in 1.2 version                                        1)Its released in 1.4 version
+
+
+2)It won't follow the insertion order                        2)It follows the insertion order
+
+
+3)Its underlying Data Structure HashTable                3)its underlying Data Structure is HashTable and LinkedList
+
+
+
+
+IdentityHashMap:
+----------------
+-> IdentityHashMap almost its behaves like HashMap but only one difference is that JVM will uses the the equals method 
+to find out duplicate keys in the HashMap, but in the case of IdentityHashMap JVM will uses the object refences
+
+
+Example:
+--------
+In the case of HashMap, while the entries it will check based equals, hashcode methods for the the given keys
+                HashMap<Student, Integer> studentMap = new HashMap<>();
+                Student student1 = new Student(101, "Venkat");
+                studentMap.put(student1, 1);
+                
+                Student student2 = new Student(101, "Venkat");
+                studentMap.put(student2, 1);
+                
+                System.out.println(studentMap.size());
+in the above example, in Student class equals and HashCode methods overridden, so, student map size is 1
+
+
+but If we use IdentityHashMap, instead of HashMap then IdentityHashMap size will be 2, even though we overridden hashcode
+and equals methods. because it checks the bases object refernces, 
+                IdentityHashMap<Student, Integer> studentMap = new IdentityHashMap<>();
+                Student student1 = new Student(101, "Venkat");
+                studentMap.put(student1, 1);
+                
+                Student student2 = new Student(101, "Venkat");
+                studentMap.put(student2, 1);
+                
+                System.out.println(studentMap.size());
+                
+
+
+WeakHashMap:
+-----------
+->Its almost is equal HashMap but except one diffence In the case of HashMap, If any entry is associated with HashMap
+then it is not eligible for Garbage Collection.
+
+
+->But in the case of WeakHashMap, If an enrty associated with WeakHashMap then its eligible for Garbage Collection
+
+
+Example:
+-------
+class Sample {
+
+
+        @Override
+        protected void finalize() throws Throwable { ==> this method will be exucuted before object is removing from the JVM
+                System.out.println("Sample Removing");
+        }
+        
+        @Override
+        public String toString() {
+                // TODO Auto-generated method stub
+                return "sample";
+        }
+}
+
+
+                HashMap<Sample, Integer> sampleMap = new HashMap<>();
+                Sample sample = new Sample();
+                sampleMap.put(sample, 1);
+                System.out.println(sampleMap);==>{"sample" = 1}
+                //unreferencing the object
+                sample = null;
+                //we are removing sample obj from JVM, here won't be removed JVM because associated with HashMap
+                System.gc();
+                System.out.println(sampleMap);==>{"sample" = 1}
+                
+but if we use WeakHashMap, instead of HashMap
+
+
+                WeakHashMap<Sample, Integer> sampleMap = new WeakHashMap<>();
+                Sample sample = new Sample();
+                sampleMap.put(sample, 1);
+                System.out.println(sampleMap);==>{"sample" = 1}
+                //unreferencing the object
+                sample = null;
+                //we are removing sample obj from JVM,here will be removed from JVM becases it is WeakHashMap
+                System.gc();
+                System.out.println(sampleMap);==>{}
+                
+                
+TreeMap:
+--------
+->Its underlying data structure is Balanced TreeMap
+
+
+->It follows the default natural sorting order for the keys only but not for values
+
+
+->All the keys which are adding to TreeMap, those keys should be Comparable(should be implemented by Comparable interface).
+otherwise we wil get the ClassCastException
+
+
+Example:
+-------
+package collections;
+
+
+public class Student implements Comparable{
+        private int studentId;
+        private String studentName;
+        
+        
+        
+        public Student(int studentId, String studentName) {
+                super();
+                this.studentId = studentId;
+                this.studentName = studentName;
+        }
+        
+        public int getStudentId() {
+                return studentId;
+        }
+        public void setStudentId(int studentId) {
+                this.studentId = studentId;
+        }
+        public String getStudentName() {
+                return studentName;
+        }
+        public void setStudentName(String studentName) {
+                this.studentName = studentName;
+        }
+
+
+        @Override
+        public String toString() {
+                return "Student [studentId=" + studentId + ", studentName=" + studentName + "]";
+        }
+        
+        @Override
+        public int hashCode() {
+                // TODO Auto-generated method stub
+                return studentId;
+        }
+        
+        @Override
+        public boolean equals(Object obj) {
+                Student student = (Student)obj;
+                return this.studentId == student.getStudentId() && this.studentName.equals(student.getStudentName());
+        }
+        
+        @Override
+        public int compareTo(Object obj) {
+                // TODO Auto-generated method stub]
+                Student student = (Student)obj;
+                
+                if(this.studentId<student.getStudentId())
+                 return -(-1);
+                else if(this.studentId>student.getStudentId())
+                 return -1;
+                else
+                 return 0;
+        }
+
+
+}
+
+
+TreeMap<Student, Integer> treeMap = new TreeMap<>();
+Student student1 = new Student(101, "Venkat");
+treeMap.put(student1, 1);
+                
+Student student2 = new Student(103, "Balayya Babu");
+treeMap.put(student2, 3);
+                
+Student student3 = new Student(102, "Disky Babu");
+treeMap.put(student3, 2);
+                
+Student student4 = new Student(105, "Chaithanya");
+treeMap.put(student4, 6);
+                
+System.out.println(treeMap);
+
+
+Assignment: create Student(studentId, studentName) class and add the 10 student objects to the TreeMap and arange student
+objects by student name alphabatical order.
+
+
+
+
+Properties:
+-----------
+=>In our aplication, if anything is changing frequntly then we should  move those values to the file.
+
+
+=>From that file, need to read and use those properties where ever we needed in the application, for that pupose we need use poperties
+class.
+
+
+=>Properties class is the child class of HashTable.
+
+
+=>In Properties type both key and value will be string type only
+
+
+Constructor:
+------------
+Properties properties = new Properties()
+
+
+Methods:
+--------
+1)public String getProperty(Strig keyName) -> This method is used to get the value of associated with specified property name
+
+
+2)pubilc String setProperty(String keyName, String value)->used to set the new property
+
+
+3)pubilc Enumeration propertyNames()--> It returns all the key names in the form Enumeration
+
+
+4)pubilc void load(InputStream inputStream)->to load the properties file into Properties object
+
+
+5)pubilc void store(OutPutStream os, String comment)->to store the properties from Properties object to the file
+
+
+Example:
+--------
+
+
+public class PropertiesDemo {
+
+
+        public static void main(String[] args) throws IOException {
+                // TODO Auto-generated method stub
+                //1.Reading the values from file
+                //created Properties object
+                Properties properties = new Properties();
+                
+                //creating the FileInputStream with the file
+                FileInputStream fileInputStream = new FileInputStream("D:\\test.properties");
+                
+                //load the file to the properties object
+                properties.load(fileInputStream);
+                
+                System.out.println(properties);
+                
+                
+                //2.writing the new property to the file
+                //setting value to the properties object
+                properties.setProperty("mobileNumber", "989898998");
+                //creating FileoutputStream Object with the file
+                FileOutputStream fileOutputStream = new FileOutputStream("D:\\test.properties");
+                //writing the values to the file
+                properties.store(fileOutputStream, "updated the file succesfully");
+                
+                
+
+
+        }
+
+
+}
+
+
+Assignment:
+----------
+ctreate fruits.properties file and put some frutnames and rate in the properties file and calcualate total cost of the
+fruits by reading the fruits cost from the file
+
+
+fruits.properties
+-----------------
+mangoes=250
+banana=150
+apples=400
+pappaya=150
+
+
+Utitlity classes:
+-----------------
+->utility classes methods are used to work with collection classes
+
+
+1)Collections:
+-----------
+->It is utillity class from java.util package, It has serveral utility methods for the collection objects
+
+
+a)public static void sort(List list)->to sort the default natural sorting order,here list elements should be Comparable otherwise, we will get ClassCastException
+
+
+b)public static void sort(List list,Comparator comparator)->for custom sorting order
+
+
+c)public static int binarySearch(List list, Object target)
+
+
+
+
+2)Arrays:
+-------
+->Arrays also an utility class, It has several utility methods for the Array Objects
+
+
+Methods:
+-------
+1)pubilc static void sort(primary[] primaryArray)
+
+
+2)pubilc static void sort(Object[] objArray)
+
+
+3)

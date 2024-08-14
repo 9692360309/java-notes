@@ -1,0 +1,1425 @@
+					15.ExceptionHandling
+					--------------------
+
+1)What is Exception & Example ?
+
+2)Exception Handling ?
+
+3)Differnce betwwen Compiletime & Runtime Exceptions?
+
+4)Difference between Error & Exception?
+
+5)Difference between Checked & UnChecked Exceptions?
+
+6)Exception classes Hierachy Diagram ?
+
+7)Difference between FullyChecked vs Partially Checked Exceptions?
+
+8)Execution Flow in try/catch blocks ?
+
+9)Methods to print Exception message Information?
+
+10)Try with Multple Catch Blocks 
+
+11)Aboot finally block ? rules/conditions to write the code in that block?
+
+12)About System.exit(0)
+
+13)the possiblity ways of writing try/cathch/fianally
+
+14)Control flow in try/catch/finally
+
+15)Control flow in inner try catch finally thow key word
+
+16)Difference beteen throw & throws
+
+
+
+=>Exception:
+------------
+->Exception is a unwated, un expected thing that distrubs the normal execution flow of the  program.
+
+
+Ex For Real Time Exceptions:
+----------------------------
+->HallTicketFogottenException, PenNotWoringException, BombBlastException
+  BikeTierPuctureException
+  
+Ex for Java Programming Exceptions:
+---------------------------------
+->crate an array with Nagitive number size then we will get 
+  java.lang.NagitiveArraySizeException
+  
+  int[] values = new int[-10];
+  
+  Exception in thread "main" java.lang.NegativeArraySizeException: -10
+	at exceptionHandling.NasExceTest01.main(NasExceTest01.java:5)
+  
+->Reading the array elements by passing index value out of range then we will get java.lang.ArrayIndexOutOfBoundsException
+
+  int[] values = new int[-10];
+  System.out.println(values[10]);
+  Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 10 out of bounds for length 10
+	at exceptionHandling.NasExceTest01.main(NasExceTest01.java:7)
+	
+->When ever we are trying to convert String to number then the string value should be particular number datatype value only otherwise we will get NumberFormatException
+
+       String value = "java";
+       Integer intValue = Integer.parseInt(value);
+		
+       Exception in thread "main" java.lang.NumberFormatException: For input string: "java"
+
+
+->When ever exception raised in our java program, program terminates abnormally means from exception raised onwards the remaining code will not be exceuted.
+
+->By default Java supports Exception Handling, JVM handle the Exception when ever If we not handle exception
+
+->In the below program executes with normal termination
+
+public class NormalFlowTest02 {
+	public static void main(String[] args) {
+		System.out.println("Main Start");
+		int a = 40;
+		int b = 20;
+		int division = a/b;
+		System.out.println("Divsion ::"+division);
+		System.out.println("Main End");
+	}
+
+}
+
+outout:
+Main Start
+Divsion :: 2
+Main End
+
+->Below program Terminates abnormally
+public class AbNormalFlowTest3 {
+	public static void main(String[] args) {
+		System.out.println("Main Start");
+		int a = 40;
+		int b = 0;
+		int division = a/b;
+		System.out.println("Divsion "+division);
+		System.out.println("Main End");
+	}
+
+}
+
+output:
+-------
+Main Start
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+
+
+=>Exception Handling:
+---------------------
+-> The process of converting programatic exception messages into User understandable
+Exception messages by catching the exception then this process is called
+ExceptionHandling.
+
+->By using Exception Handling, we are not preparing the exception, just we are providing the 
+alternative way to execute the program normally.
+
+->by using try catch blocks we can hanle the exceptions
+
+->by handling the Exception, program will not execute normally, just we are giving some 
+instructions to user to give the correct input, to exceute the program normally.
+
+Ex::
+package exceptionHandling;
+
+import java.util.Scanner;
+
+public class ExceptionHandlingTest4 {
+	public static void main(String[] args) {
+		
+		try {
+			System.out.println("Main Start");
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Enter First Number");
+			int a = scanner.nextInt();
+		
+			System.out.println("Enter Second Number");
+			int b = scanner.nextInt();
+		
+			int division = a/b;
+		
+			System.out.println("Divsion ::"+division);
+			System.out.println("Main End");
+		}
+		catch(Exception ex) {
+			System.out.println("Secod number should not be zero, please try again");
+		}
+	}
+
+}
+
+case-1:(Program terminated abnormally)
+-------
+First Number : 10
+Second Number : 0
+
+out put:
+Main Start
+Enter First Number
+10
+Enter Second Number
+0
+Secod number should not be zero, please try again
+
+case-2:(Program terminated normally)
+-------
+First Number : 10
+Second Number : 5
+
+out put:
+Main Start
+Enter First Number
+10
+Enter Second Number
+5
+Divsion:: 2
+Main End
+
+-> We have 2 types Exceptions, They are 
+          1)Compile Time Exception
+	  2)RunTimeException
+			 
+1)Compile Time Exception:
+-------------------------
+->Compile Time Exceptiptions we will get at Compilation time.
+
+->These Exceptions will come because of Syntax mistakes
+Ex:
+   System.out.println()--> here we are missing semicolon; we will get CE: insert the semicolon(;) 
+                           to complete the statement.
+						   
+
+2)RunTimeException:
+-------------------
+->Run Time Exceptiptions we will get while executing the program.
+
+->These exceptions will because of wrong inputs
+
+Ex: int a = 10;
+    int b = 0; 
+	int c = a/b; here we will get ArithmeticException while exeuting the program, to execute the
+	             program normally, we need to give second number except zero
+				 
+Throwable:
+----------				 
+->The class Throwable is the super class of all the Exception classes.
+
+->Throwable contains 2 sub classes, They are 
+			1)Error
+			2)Exception
+			
+1)Error:
+--------
+-> In Java, always Error will come because of leak System resources.
+
+->Errors we can't handle progrmatically.
+
+Ex: OutofMemory Error
+
+2)Exception:
+------------
+->Exception will come because program sytax mistakes or wrong inputs
+
+->We can handle the exceptions programatically
+
+->Compile Exceptions will come because of Syntax Mistakes
+   
+->Compile Time Exception is also called Checked Exception
+
+->Run Time Exceptions will come becuase Wrong Inputs.
+
+->Run Time Exceptions also calles UnChecked Exceptions.
+
+Ex for Compile Time/Checked Exceptions
+   FileNotFoundException, IOException
+   
+Ex for RunTime/UnChecked Exceptions
+   ArithmeticException
+   ArrayIndexOutOfBoundsException
+   NagitiveArraySizeException
+   
+   
+-> Checked vs UnChecked Exceptions:
+-----------------------------------
+->The exceptions which are checked by the compiler at compilation time then those exceptions are called Checked
+  Exceptions.
+
+->Either checked or Unchecked Exceptions, we will get at run time only, but some exceptions Compiler will check
+at compilation time only.
+
+->An Exception is said to be Checked Exception it and its Child classes also Checked Exception classses
+
+->We can also call Checked Exceptions as a Fully Checked Excpetions
+
+->IO Exception and its all child classes, ClassNotFoundException and InterruptedException are Checked/Fully checked Exceptions
+
+
+Ex: HallTicketFogottenException, InSuffitientFoodException,
+    FileNotFoundException, IOException
+	
+Ex: code Checked Exception FileNotFoundException
+
+public class CheckedExceptionTest6 {
+ public static void main(String[] args) { 
+	try {
+		
+		PrintWriter printWriter = new PrintWriter("abc.txt");
+		printWriter.println("Hello");
+		printWriter.flush();
+	
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+  }
+}
+
+->UnChecked Exception:
+----------------------
+-> The exceptions which are not checked by compiler at compilation time those exceptions are called Unchecked Exceptions.
+
+
+Ex: BombBlastException,InSuffitientFundsException
+    ArithmeticException, ArrayIndexOutOfBoundsException
+
+->An Exception is said to be UnChecked Exception it and its Child classes also Unchecked Exception classses
+
+->Error and its sub classes and RunTimeException and its sub classes are called Unchecked Exceptions
+
+->Throwable is the super class of all exception classes, It contains 2 sub classes, They are
+    1)Error 
+    2)Exception
+	
+
+=>FullyChecked vs Partially Checked Exceptions:
+-------------------------------------------------
+->FullyChecked Exceptions:
+--------------------------
+->An Exception is said to be FullyChecked Exception, it and its Child classes also Checked Exception classses
+
+Ex: IOException, InterruptedException,ClassNotFoundException
+
+->Partially Checked Exception:
+------------------------------
+->An Exception is said to be PatiallyChecked Exception, If its some of child classes are Checked Exceptions and some of the child classes are UnChecked Exception then we can tell those clases arePartially Checked Exceptions.
+
+Ex:Throwable, Exception
+
+->Find out the below are which type of exception classes
+---------------------------------------------------------
+
+- RunTimeException - UnCheckedException 
+
+- FileNotFoundException - CheckedException(FullyChecked)
+
+- IOException - CheckedException(FullyChecked)
+
+- ArithmeticException - UnChecked Exception
+
+- Error - UnChecked Exception
+
+- Throwable - Partially Checked Exception
+
+- Exception - Partially Checked Exception
+
+- NullPointerException - UnChecked Exception
+
+- IndextOutofBoundsException - UncheckedException
+
+- ArrayIndexOutOfBoundsException - UncheckedException
+
+- StringIndexOutOfBoundsException - UncheckedException
+
+- ClassCastException - UncheckedException
+
+- IllegalArgumentException - UncheckedException
+
+- IllegalStateException - UncheckedException
+
+- UnSupportedOperationException - UncheckedException
+
+- SecurityException - UncheckedException
+
+- NumberFormatException - UncheckedException
+
+- InterruptedException - UncheckedException
+
+- InvocationTargetException - UncheckedException
+
+- VerifyError - UncheckedException
+
+- NoSuchMethodException - UncheckedException
+
+- IllegalAccessException - UncheckedException
+
+- NoSuchFieldException - UncheckedException
+
+- StackOverFlowError - UncheckedException
+
+- OutOfMemoryError - UncheckedException
+
+- ConcurrentModificationException - UncheckedException
+
+
+=>About try and catch blocks & rules/conditions to write the code in those blocks
+----------------------------------------------------------------------------------
+->We can handle exception by using try/catch blocks 
+
+  try{
+      //rexception may come related code
+
+  }catch(exception classname classrefname){
+     //exception handling code
+
+ }
+->While handling the Exception by using try/catch blocks, in the catch block we should take the exact
+Exception class to handle the Exception.
+
+
+->We ca't take blindly all of Exception classes in the catche block, We can take parent Exception
+classes no issue.
+
+->If try block raised one type of Exception but if you taken different Exception then catch blck will not handle that exception.
+
+
+
+
+
+->The catch block will handle the exception, If the raised exception is the same exception class/ parent class exception classes.
+
+
+case- 1 
+                    code raised ArithematicException but taken
+		    ArrayIndexOutOfBoundsException in the catch Block
+		    here catch block will not handle the Exception
+Ex: 
+		
+		try {
+			int a = 10;
+			int b = 0;
+			int c = a / b;
+
+		} catch (ArrayIndexOutOfBoundsException ae) {
+			System.out.println("SecondNumber Should not be Zero");
+		}
+		
+case- 2         code raised ArithematicException but taken
+		NullPointerException in the catch Block
+		here catch block will not handle the Exception		
+		
+
+		try {
+			int a = 10;
+			int b = 0;
+			int c = a / b;
+
+		} catch (NullPointerException npe) {
+			System.out.println("SecondNumber Should not be Zero");
+		}
+		
+
+
+case- 3         code raised ArithematicException but taken
+		RuntimeException in the catch Block
+		here catch block will handle the Exception because Arithematic Exception is the sub class of                  RuntimeException		
+		
+
+		try {
+			int a = 10;
+			int b = 0;
+			int c = a / b;
+
+		} catch (RuntimeException re) {
+			System.out.println("SecondNumber Should not be Zero");
+		} 
+
+		
+ case- 4 	code raised ArithematicException but taken
+		Exception in the catch Block
+		here catch block will handle the exception because  ArithematicExceptionis the
+		sub class of  Exception class
+		 
+		
+
+		try {
+			int a = 10;
+			int b = 0;
+			int c = a / b;
+
+		} catch (Exception re) {
+			System.out.println("SecondNumber Should not be Zero");
+		}
+		
+
+case- 5        code raised ArithematicException but taken
+               Throwable in the catch Block
+               here catch block will handle the exception because  ArithematicExceptionis is the sub class of                  Throwable
+		
+
+		try {
+			int a = 10;
+			int b = 0;
+			int c = a / b;
+
+		} catch (Throwable th) {
+			System.out.println("SecondNumber Should not be Zero");
+		}
+
+
+		
+=>Execution Flow in try/catch blocks:
+-------------------------------------
+try{
+   stamt1;
+   stamt2;
+   stmt3;
+   stamt4
+}catch(E e){
+   stmt5;
+   stmt6;
+}  
+stmt7;
+
+case-1: - if there is exception not raised
+-------
+public class TryCatchExeFlowTest8 {
+	public static void main(String[] args) {
+		try {
+			
+			System.out.println("1");
+			System.out.println("2");
+			System.out.println("3");
+			System.out.println("4");
+			
+		} catch (Exception e) {
+			System.out.println("5");
+			System.out.println("6");
+		}
+		System.out.println("7");
+		
+		
+	}
+}
+output: 1,2,3,4,7
+
+
+case-2: exception raised stmt2 and corresponsing catch block exception not matched 
+-----------------------------------------------------------------------------------
+try {
+			
+			System.out.println("1");
+			System.out.println(10/0);
+			System.out.println("3");
+			System.out.println("4");
+			
+		} catch (ArrayIndexOutOfBoundsException ae) {
+			System.out.println("5");
+			System.out.println("6");
+		}
+		System.out.println("7"); 
+		
+output: 1
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at exceptionHandling.TryCatchExeFlowTest8.main(TryCatchExeFlowTest8.java:8)
+
+
+case-3: exception raised stmt4 and corresponsing catch block exception matched 
+-------------------------------------------------------------------------------
+		try {
+			
+			System.out.println("1");
+			System.out.println("2");
+			System.out.println("3");
+			System.out.println(10/0);
+			
+		} catch (ArithmeticException ae) {
+			System.out.println("5");
+			System.out.println("6");
+		}
+		System.out.println("7");
+		
+output: 1,2,3,5,6,7
+
+
+case-4: exception raised stmt2 and corresponsing catch block exception matched 
+-------------------------------------------------------------------------------
+try {
+			
+			System.out.println("1");
+			System.out.println(10/0);
+			System.out.println("3");
+			System.out.println("4");
+			
+		} catch (ArithmeticException ae) {
+			System.out.println("5");
+			System.out.println("6");
+		}
+		System.out.println("7");
+		
+output: 1,5,6,7
+
+
+case-4: exception raised stmt1 and corresponsing catch block exception not matched 
+----------------------------------------------------------------------------------
+try {
+			int[] values = new int[8];
+			System.out.println(values[9]);
+			System.out.println("2");
+			System.out.println("3");
+			System.out.println("4");
+			
+		} catch (ArithmeticException ae) {
+			System.out.println("5");
+			System.out.println("6");
+		}
+		System.out.println("7");
+		
+output: Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 9 out of bounds for length 8
+	at exceptionHandling.TryCatchExeFlowTest8.main(TryCatchExeFlowTest8.java:8)
+
+
+	
+=>Methods to print Exception message Information:
+-------------------------------------------------
+->In Throwable class have 3 methods to print exception messages, these 3 methods prints the exception message format in different ways, based on our requirement we need to use, they are
+
+1)printStackTrace() ---> Name of the Exception : Reson for the Exception  : Exception Stack Trace
+
+2)to String() ---> Name of the Exception : Reson for the Exception
+
+3)getMessage() ---> Exception Descrption
+
+ex: printStackTrace()
+---------------------
+               try {
+			
+		int c = 10/0;
+			
+		} catch (ArithmeticException ae) {
+			ae.printStackTrace();
+		}
+output:
+------
+java.lang.ArithmeticException: / by zero
+	at exceptionHandling.TryCatchExeFlowTest8.main(TryCatchExeFlowTest8.java:7)
+
+here 
+java.lang.ArithmeticException --> Name of the exception 
+/ by zero ---> reson for the exception
+at exceptionHandling.TryCatchExeFlowTest8.main(TryCatchExeFlowTest8.java:7)--> Exception Stack Trace
+
+ex: toString()
+---------------------
+try {
+			
+			int c = 10/0;
+			
+		} catch (ArithmeticException ae) {
+			System.out.println(ae.toString());
+		}
+output:
+------
+java.lang.ArithmeticException: / by zero
+
+here 
+java.lang.ArithmeticException --> Name of the exception 
+/ by zero ---> reson for the exception
+
+ex: getMessage()
+---------------------
+try {
+			
+			int c = 10/0;
+			
+		} catch (ArithmeticException ae) {
+			System.out.println(ae.getMessage());
+		}
+output:
+------
+/ by zero
+
+here 
+/ by zero ---> reson for the exception
+
+->By default all the exception Handler uses printStackTrace method when exception raised to print the exception Messages
+
+
+=>Try with Multple Catch Blocks:
+-------------------------------
+->We can take multiple catch blocks with the try block
+
+->In the code we may get different kinds of exceptions, So, in this situation by taking Parent Exception class in the catch block also, we can handle all kinds exceptions, it kills the Code readablility and its not Good programming pracice.
+
+->Ex without multiple catch blocks
+try{
+   int number1 = Integer.parseInt(args[0]);
+   
+   int number2 = Integer.parseInt(args[1]);
+   
+   int addition = number1/number2;
+   
+}catch(Exception e){
+  System.out.println("You shoud pass the numbers");
+}
+
+->In the above, there is a chance of getting 3 Exceptions
+   1)ArrayIndexOutOfBoundsException -- If we not pass the values from the commandPrompt
+   2)ArithematicException -- if you pass second number as Zero
+   3)NumberFormatException -- If pass input as String
+   
+-> By taking one catch block, when ever there is chance of getting multiple exceptins then we can't show multiple user understandable exception messages with one catch block.
+
+->If you observe the above program, of every exception it, shows "You shoud pass the numbers" only
+
+->By using printStackTrace, toSting and getMessage methods, we can show the exact messages, but those exception messages user will not unserstand.
+
+Ex: without multiple catch blocks using printStackTrace method
+try{
+   int number1 = Integer.parseInt(args[0]);
+   
+   int number2 = Integer.parseInt(args[1]);
+   
+   int addition = number1/number2;
+   
+}catch(Exception e){
+  System.out.println("You shoud pass the numbers");
+}
+
+->By taking multiple catch blocks with try block, we can achieve code readablility and
+we can print multiple user understandable messages and its also good programming parctice/
+   
+try{
+   int number1 = Integer.parseInt(args[0]);
+   
+   int number2 = Integer.parseInt(args[1]);
+   
+   int addition = number1/number2;
+   
+}catch(ArrayIndexOutOfBoundsException aie){
+
+  System.out.println("You shoud pass the numbers");
+}catch(ArithematicException aie){
+
+  System.out.println("should not pass Second number as Zero");
+
+}catch(NumberFormatException nfe){
+  System.out.println("You should pass Numbers only");
+}
+
+
+->Condtions while writing multiple catch Blocks with try block
+--------------------------------------------------------------
+condition -1:
+------------
+If already catch block existed with one type exception class then we should not create same  type of exception class with catch, othewise We will get Compile Time Error CE:Unreachable catch block for ArrayIndexOutOfBoundsException. 
+   It is already handled by the catch block for Exception
+
+try{
+   int number1 = Integer.parseInt(args[0]);
+   
+   int number2 = Integer.parseInt(args[1]);
+   
+   int addition = number1/number2;
+   
+}catch(ArrayIndexOutOfBoundsException aie){
+
+  System.out.println("You shoud pass the numbers");
+
+}catch(ArrayIndexOutOfBoundsException aie){
+
+  System.out.println("should not pass Second number as Zero");
+
+}catch(NumberFormatException nfe){
+
+  System.out.println("You should pass Numbers only");
+
+}
+
+condition -2:
+------------
+always catch bloks exception classes sequnce should child classes to parent classes but not parent classes to Child classess.  
+   
+try{ ---> valid
+   int number1 = Integer.parseInt(args[0]);
+   
+   int number2 = Integer.parseInt(args[1]);
+   
+   int addition = number1/number2;
+   
+}catch(ArrayIndexOutOfBoundsException aie){
+  System.out.println("You shoud pass the numbers");
+}catch(NumberFormatException nfe){
+  System.out.println("You should pass Numbers only");
+}catch(Exception e){
+  e.printStackTrace();
+}
+
+
+			 
+try{ ---> Invalid 
+   int number1 = Integer.parseInt(args[0]);
+   
+   int number2 = Integer.parseInt(args[1]);
+   
+   int addition = number1/number2;
+   
+}
+catch(Exception e){
+  e.printStackTrace();
+}catch(ArrayIndexOutOfBoundsException aie){
+  System.out.println("You shoud pass the numbers");
+}
+ catch(ArrayIndexOutOfBoundsException aie){
+  System.out.println("should not pass Second number as Zero");
+}
+catch(NumberFormatException nfe){
+  System.out.println("You should pass Numbers only");
+}
+
+
+Comile Error:Unreachable catch block for ArrayIndexOutOfBoundsException. 
+             It is already handled by the catch block for Exception
+
+
+=>finally block:
+----------------
+->whether exception raised or not raised finally block will be executed.So, whether exception raised or not raised, If we want execute out code then that code we need to put in finally block.  
+
+->Generarlly we write the cleanup code(i.e closing the file Objects,closing data base connection objects) in side the finally block.
+
+->If we write the cleanup code in try/catch block there is no guarantee that try/catch cleanup code will be executed or not.
+
+->Ex: 
+     try{
+	  //Risky code
+     }catch{
+	 
+	  //exceptionHandling code
+     }finally{
+	 
+	  //cleanup code
+    }
+	 
+	 
+->finally block always its excecutes
+
+Ex-1: Normal Termanation
+
+		try {
+			System.out.println("in try block");		
+		} catch (ArithmeticException ae) {
+			System.out.println("in catch block");
+		}finally {
+			System.out.println("in finally block");
+		}
+		
+		
+output:
+------
+in try block
+in finally block
+
+
+Ex-2: exception raised at try block and catch block exception matched 
+
+		try {
+			System.out.println("in try block");	
+		         int c = 10/0;
+		} catch (ArithmeticException ae) {
+			System.out.println("in catch block");
+		}finally {
+			System.out.println("in finally block");
+		}
+		
+		
+output:
+------
+in try block
+in catch block
+in finally block
+
+Ex-3: exception raised at try block and catch block exception not matched 
+
+		try {
+			System.out.println("in try block");	
+		         int c = 10/0;
+		} catch (NullPointerException npe) {
+			System.out.println("in catch block");
+		}finally {
+			System.out.println("in finally block");
+		}
+		
+		
+output:
+------
+in try block
+in finally block
+RE: ArithematicException / By zero
+
+->Even though ,If we write return statement in try/catch block finally block will be executed, So finally dominated  the return statement.
+Ex:
+	public static void main(String[] args) {
+		
+		System.out.println(m1());
+	}
+	
+	public static int m1() {
+		
+		try {
+			System.out.println("in try block");
+			return 1000;
+			
+		} catch (ArithmeticException npe) {
+			System.out.println("in catch block");
+			return 2000;
+		}finally {
+			System.out.println("in finally block");
+			return 3000;
+		}
+		
+	}
+	
+output:
+System.out.println("in try block");
+System.out.println("in finally block");
+3000
+
+=>System.exit(0)
+----------------
+->By using System.ext(0), we can stop the finally block excecution, If we wrtie System.exit(0), JVM it self
+it shut down.
+
+->in the System.exit(0), the argument 0 represents status code, instead of zero, we can give any valid integer
+value.
+
+Ex-1: 
+	public static void main(String[] args) {
+		
+		try {
+			System.out.println("in try block");
+			System.exit(0);
+			
+		} catch (ArithmeticException npe) {
+			System.out.println("in catch block");
+			
+		}finally {
+			System.out.println("in finally block");
+		}
+	}
+
+output: in try block
+
+Ex-2: 
+		try {
+			System.out.println("in try block");
+			int c = 10/0;
+			System.exit(0);
+			
+		} catch (ArithmeticException npe) {
+			System.out.println("in catch block");
+			
+		}finally {
+			System.out.println("in finally block");
+		}
+	}
+output:
+------
+in try block	
+in catch block
+in finally block
+here before executing System.exit(0), exception raised, so System.exit(0) not executed and finally block excecuted.
+
+=> the possiblity ways of writing try/cathch/fianally:
+-----------------------------------------------------
+case-1 - only try block 
+-------
+try{} - invalid
+
+
+case-2: try with catch --> valid
+-------
+		try {
+			System.out.println("in try block");
+		} catch (Exception e) {
+			System.out.println("in catch block");
+		}
+		
+
+case-3: try with multiple catch --> valid
+-------
+		try {
+			System.out.println("in try block");
+		} catch (Arithematic e) {
+			System.out.println("in catch block");
+		}
+		catch (Exception e) {
+			System.out.println("in catch block");
+		}
+
+		
+case-4: try with finally --> valid
+-------
+		try {
+			System.out.println("in try block");
+		} finally{
+			System.out.println("in finally block");
+		}
+
+
+case-5: try with mutiple catch and finally --> valid
+-------
+		try {
+			System.out.println("in try block");
+		}catch (ArithematicException ae) {
+			System.out.println("in catch block");
+		}catch (Exception e) {
+			System.out.println("in catch block");
+		} finally{
+			System.out.println("in finally block");
+		}
+
+		
+case-6: catch with finally --> invalid
+-------
+		catch (ArithematicException ae) {
+			System.out.println("in catch block");
+		}finally{
+			System.out.println("in finally block");
+		}
+
+
+=>Control flow in try/catch/finally:
+------------------------------------
+Ex: try{
+
+	stamt1;
+	stamt2
+	stmt3;
+
+    }catch(E e){
+
+		stmt4;
+
+	}finally{
+
+		stamt5
+
+	}
+
+	stamt6
+
+	
+
+	public static void main(String[] args) {
+		
+		try {
+			System.out.println("stmt1");
+			System.out.println("stmt2");
+			System.out.println("stmt3");
+		
+		} catch (Exception e) {
+
+			System.out.println("stmt4");
+
+		}finally {
+
+			System.out.println("stmt5");
+
+		}
+
+		System.out.println("stmt6");
+	}
+	
+case-1: no exception raised 
+---------------------------
+stmt 1,2,3, 5, 6
+
+case-2: Exception raised at stmt2 and eception catch block matched
+------------------------------------------------------------------
+	public static void main(String[] args) {
+		
+		try {
+			System.out.println("stmt1");
+			System.out.println(10/0);
+			System.out.println("stmt3");
+		
+		} catch (ArithmeticException e) {
+
+			System.out.println("stmt4");
+
+		}finally {
+
+			System.out.println("stmt5");
+
+		}
+
+		System.out.println("stmt6");
+	}
+	
+output:stmt 1,4,5,6
+
+case-3: Exception raised at stmt3 and eception catch block not matched
+-----------------------------------------------------------------------
+	public static void main(String[] args) {
+		
+		try {
+			System.out.println("stmt1");
+			System.out.println("stmt2");
+			System.out.println(10/0);
+		
+		} catch (NullPointerException e) {
+
+			System.out.println("stmt4");
+
+		}finally {
+
+			System.out.println("stmt5");
+
+		}
+		System.out.println("stmt6");
+
+	}
+output: stmt 1,2,5 Exception in thread "main" java.lang.ArithmeticException: / by zero
+
+
+case-4: Exception raised at stmt3 and exception catch block matched and also exception raised at stamt4
+--------------------------------------------------------------------------------------------------------
+public static void main(String[] args) {
+		
+		try {
+			System.out.println("stmt1");
+			System.out.println("stmt2");
+			System.out.println(10/0);
+		
+		} catch (ArithmeticException e) {
+			System.out.println(10/0);
+		}finally {
+			System.out.println("stmt5");
+		}
+		System.out.println("stmt6");
+	}
+
+1,2,5
+	
+output: stmt 1,2,5 Exception in thread "main" java.lang.ArithmeticException: / by zero
+
+case-5: Exception raised at stmt3 and exception catch block not matched and also exception raised at stamt4
+--------------------------------------------------------------------------------------------------------
+public static void main(String[] args) {
+		
+		try {
+			System.out.println("stmt1");
+			System.out.println("stmt2");
+			System.out.println(10/0);
+		
+		} catch (ArithmeticException e) {
+			System.out.println(10/0);
+		}finally {
+			System.out.println("stmt5");
+		}
+		System.out.println("stmt6");
+	}
+	
+output: stmt 1,2,5 Exception in thread "main" java.lang.ArithmeticException: / by zero
+
+case-6: Exception raised at stmt5 
+---------------------------------
+public static void main(String[] args) {
+		
+		try {
+			System.out.println("stmt1");
+			System.out.println("stmt2");
+			System.out.println("stmt3");
+		
+		} catch (ArithmeticException e) {
+			System.out.println("stmt4");
+		}finally {
+			System.out.println(10/0);
+		}
+		System.out.println("stmt6");
+	}
+	
+output: stmt 1,2,3 Exception in thread "main" java.lang.ArithmeticException: / by zero
+
+
+=>Control flow in inner try catch finally:
+-----------------------------------------
+	try{
+		stamt1;
+		stamt2
+		stmt3;
+		
+		try{
+
+		  stmt7;
+		  stmt 8
+
+		}catch(E e){
+
+		  stmt 9;
+
+		}finally{
+
+		  stmt 10;
+
+		}
+		
+		stmt 11;
+	
+      }catch(E e){
+		stmt4;
+		
+		try{
+
+		  stmt12;
+		  stmt13;
+
+		}catch(E e){
+
+		  stmt 14;
+
+		}
+
+		stmt 19;
+	
+	}finally{
+
+		stamt5
+		
+		try{
+
+		  stmt15;
+		  stmt16;
+
+		}catch(E e){
+
+		  stmt 17;
+
+		}
+
+		stmt 18;
+	}
+	stamt6
+	
+
+		public static void main(String[] args) {
+
+		try {
+			System.out.println("stamt1");
+			System.out.println("stamt2");
+			System.out.println("stmt3");
+
+			try {
+				System.out.println("stmt7");
+				System.out.println("stmt8");
+
+			} catch (NegativeArraySizeException e) {
+
+				System.out.println("stmt9");
+
+			} finally {
+
+				System.out.println("stmt10");
+
+			}
+
+			System.out.println("stmt11");
+
+		} catch (ArithmeticException e) {
+
+			System.out.println("stmt4");
+
+			try {
+				System.out.println("stmt12");
+				System.out.println("stmt13");
+
+			} catch (ArrayIndexOutOfBoundsException aibe) {
+
+				System.out.println("stmt14");
+
+			}
+
+			System.out.println("stmt19");
+
+		} finally {
+
+			System.out.println("stamt5");
+
+			try {
+				System.out.println("stmt15");
+				System.out.println("stmt16");
+
+			} catch (NumberFormatException e) {
+
+				System.out.println("stmt17");
+
+			}
+
+			System.out.println("stmt18");
+		}
+		System.out.println("stamt6");
+
+	}
+	
+	
+case-1: no exception raised
+---------------------------
+stamt1
+stamt2
+stmt3
+stmt7
+stmt8
+stmt10
+stmt11
+stamt5
+stmt15
+stmt16
+stmt18
+stamt6
+
+case -2 : exception raised at stmt2 and catch block is matched:
+--------------------------------------------------------------
+stmt 1,4,12,13,19,5,15,16,18,6
+
+
+
+
+
+
+
+case -3 : exception raised at stmt8 and catch block matched
+-----------------------------------------------------------
+1,2,3,7,9,10,11,5,15,16,18,6
+
+
+=>thow key word:
+================
+->If we want to do custom exception handling then by using throw key word
+
+->By using throw key word, we can raise our own eceptions where ever we want in the code
+
+->We can create our exception classes by extending our clsses with Exception or its sub classess
+
+public class InsuffitientFunsException extends Exception {
+	
+	InsuffitientFunsException(String message){
+		super(message);
+	}
+}
+
+
+public class CustomExceptionTest19 {
+	static int balance = 10000;
+	
+	public static void withdraw(int amount) throws InsuffitientFunsException 
+	{
+		if(balance<amount) {
+			throw new InsuffitientFunsException("No Balance in your Account");
+		}
+		
+		balance = balance-amount;
+		System.out.println("Succefully withdwan ::"+amount+"\nCurrent Balance ::"+balance);
+		
+	}
+	
+	public static void main(String[] args) {
+		try {
+			withdraw(10000);
+		} catch (InsuffitientFunsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
+
+->By using throw key word, we can also change the messages of pre-defined exception classes
+
+	public static void main(String[] args) {
+		try {
+			int c =10/0;
+		} catch (ArithmeticException e) {
+			throw new ArithmeticException("Second Number should not be Zero");
+		}
+	} 
+
+=>throws key 
+============
+-> We can handle the checked exception in 2 ways 
+   1)by using try/catch
+   2)by using throws key word
+   
+1)by using try/catch:
+---------------------
+->If we want to handle the exception with cathch blocks then we should hanle the exception with try catch
+
+public class CustomExceptionTest19 {
+	static int balance = 10000;
+	
+	public static void withdraw(int amount) throws InsuffitientFunsException 
+	{
+		if(balance<amount) {
+			throw new InsuffitientFunsException("No Balance in your Account");
+		}
+		
+		balance = balance-amount;
+		System.out.println("Succefully withdwan ::"+amount+"\nCurrent Balance ::"+balance);
+		
+	}
+	
+	public static void main(String[] args) { ---> handling the exception with try/catch
+		try {
+			withdraw(10000);
+		} catch (InsuffitientFunsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
+
+2)by using throws key word:
+---------------------------
+->If there is any chance of raising checked Exception, then by using throws key word we can propagate exception
+message to the caller
+
+->If we do't want handle the exception, by throws key word we can propagate that exception to the calling method 
+then that calling method responsibilty to handle the exception or else it can propagate.
+
+
+
+public class CustomExceptionTest19 {
+	static int balance = 10000;
+	
+	public static void withdraw(int amount) throws InsuffitientFunsException 
+	{
+		if(balance<amount) {
+			throw new InsuffitientFunsException("No Balance in your Account");
+		}
+		
+		balance = balance-amount;
+		System.out.println("Succefully withdwan ::"+amount+"\nCurrent Balance ::"+balance);
+		
+	}
+	
+	public static void main(String[] args) throws InsuffitientFunsException { --> proogating exception
+			withdraw(20000);
+	}
+
+}
+
+=> throw key word is used to create out custom exceptions and we change the existed exception messages also
+
+=> By using throws keyword ,we can propagate the exception.
+
+
+Assignment-66:
+-------------
+Develop a Axis Bank Application with operations withdrawl, deposite, balanceEnquiry and hanlde the exceptions InSuffitientFundsException for withdrawl method, InvalidAmountException for deposite method.
