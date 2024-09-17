@@ -311,7 +311,8 @@ Ex: IOException, InterruptedException,ClassNotFoundException
 
 ->Partially Checked Exception:
 ------------------------------
-->An Exception is said to be PatiallyChecked Exception, If its some of child classes are Checked Exceptions and some of the child classes are UnChecked Exception then we can tell those clases arePartially Checked Exceptions.
+->An Exception is said to be PatiallyChecked Exception, If its some of child classes are Checked Exceptions and some of 
+child classes are UnChecked Exception then we can tell those clases arePartially Checked Exceptions.
 
 Ex:Throwable, Exception
 
