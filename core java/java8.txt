@@ -639,7 +639,7 @@ class ImplementedCalss implements I1,I2{
    public static final variables       non-static variables
    
  ->in inteface we ca't create       ->In abstact class class we can create constructors
-   constructors,stastic blocks        ,non-static blocks ans static blocks
+   constructors,stastic blocks        ,non-static blocks and static blocks
    and non-static blocks
    
  ->If Its functional inteface       -> For abstact class we can't write lamda expression
