@@ -120,7 +120,9 @@ int values[] = new int[5];
    syntax-2: primitve/ref data type[] variablename = {val1,val2,val3.....};
     ex: int[] values = {10,20,30,40,50};
 
-Note: at the time creating array with the values, no need to mention the array size other wise, we will           CE:error: array creation with both dimension expression and initialization is illegal, so here how           may values we are at the time of creating array, that will be the size of the array.
+Note: at the time creating array with the values, no need to mention the array size other wise, we will     
+      CE:error: array creation with both dimension expression and initialization is illegal, so here how     
+      may values we are at the time of creating array, that will be the size of the array.
 
 6)diff b/2 length & length():
 -----------------------------
