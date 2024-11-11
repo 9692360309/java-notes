@@ -1,0 +1,376 @@
+				          8.Variables & Types of Variables
+                                          --------------------------------
+1)what is variable & syntax to variable ?
+
+1)Variables & Types of variabbles
+
+2)Variables declaration, Iniatialization, assignment
+
+3)Life time and scope of the static & non-static variables
+
+4)Default values static & Non-Static variables
+
+5)No of ways to access static & non-static variables
+
+6)Modifiers allowed to SVs & NSVs
+
+7)Method level variables(parameterized/local variables)
+
+8)life time scope of paraterized and local variables
+
+9)default values of the paraterized and local variables
+
+10)numbers of ways to access paraterized and local variables
+
+11)Modifiers allowed to paraterized and local variables and class level variables
+
+
+1)Variables & Types of variabbles:
+---------------------------------
+-> variable is used to store the value, that value can primitive value or object address based on the data type
+   which we will take.
+
+    Ex: int a = 10; -> here value 10 will be strored to a variable
+        Employ emp = new Employ(); -> employ object addredd will be stored to emp variable
+
+-> We have 2 categories and 4 types of variables
+               1)class level variables
+                    1)static variables
+                    2)non-static variables
+
+               2)method level variables
+                    1)parameterized variables
+                    2)local variables
+
+
+2)Variables declaration, Iniatialization, assignment:
+-------------------------------------------------------
+-> just creating the variable is called variable declaration
+    ex: int a;
+        Employ emp;
+
+->Creating varible with value is called variable initialization
+     ex: int a = 10;
+         Employ emp = new Emp();
+
+->assigning/storing new values to already created variables
+      ex:   int a = 10;
+            Employ emp = new Employ();
+
+     -here for already created variable reassignement
+            int b =20;
+
+            a = b;
+            a = 100;
+
+            emp = new Employ();
+
+->static & non-static variables:
+--------------------------------
+-> static & non-static variables can be created at class level only
+
+->A variable If we create with static key word at class level is called static variable
+    static int a = 30;
+
+->a variable If we create with out static key word at class level is called non-static variables
+        int a = 30;
+
+
+-> all objects will be share the the same static variable values, but object to object to object non-static variable values will be different.
+   Ex: for ex we have a student class, properties will be studentid, studentname, collegeName, class,section;
+       class Student{
+             int studnetId;
+             String studentName;
+             static String collegeName;
+             String section;
+       }
+
+->Always object to object, If property/variable value is same then we need to that variable as static variable
+  Ex: for all students collegename is same so we can take collegename as static
+
+->Always object to object, If property/variable value is not same then we need to that variable as non-static   variable
+  Ex: for all students studentid,studentname,collegename,section values are differnt, that'd why need to take
+       these all variables as non-static
+
+
+3)Life time and scope of the static & non-static variables:
+----------------------------------------------------------
+->SVs will born/get the memory allocation at the time of class loading into the JVM
+
+->SVs will be destroyed when class is removed from the JVM
+
+->NSVs will born/get will the memory at the time of object creation.
+        Student student = new Student();
+
+->NSVs will be destroyed when object removed from JVM
+
+4)Default values static & Non-Static variables:
+----------------------------------------------
+->when class loading into the JVM, all the static variables will be initialized with default values based on the their datatype.
+
+->When object is careting, all non-static varaibles will be initialized with default values based on the their
+  data types
+
+   data types			default values
+   --------------------------------------------
+   byte					0
+   short				0
+   int					0
+   long					0
+   float				0.0
+   double				0.0
+   char                                 space
+   boolean                              false
+   String                               null
+   any referenced type variable         null
+
+
+->to prove SVs will get the memory at the time class loading only, observer below ex
+   class Student
+   {
+	int studentId;
+	String studentName;
+	static String collgeName = test();
+	String section;
+
+   	public static String test(){
+		System.out.println("test method called");
+		return "test";
+	}
+
+}
+
+-here If we execute "test method called" will be printed, 
+
+->default values will be initialized for SVs & NSVs in below way
+   class Student
+   {
+	int studentId;
+	String studentName;
+	static String collgeName ;
+	String section;
+
+	public static void main(String[] args) 
+	{
+		//here collegename String type initailzed with null
+		System.out.println(collgeName);
+
+               //obect creation
+		Student studentObj = new Student();
+		System.out.println(studentObj.studentId);// 0
+		System.out.println(studentObj.studentName);// null
+		System.out.println(studentObj.section);//null
+
+	}
+
+   }
+
+5)No of ways to access static & non-static variables:
+-----------------------------------------------------
+-> We can access the static variables by using
+            1)by using class name
+            2)object name
+
+->We can access NSVs by using only
+            1)object name
+
+
+->NSVs in static methods we can't access directly, by using objectname only, we can access
+
+->NSVs in non-static methods we can access directly.
+
+class Student
+{
+	int studentId;
+	String studentName;
+	static String collgeName ;
+	String section;
+
+	public static void main(String[] args) 
+	{
+		//here collegename String type initailzed with null
+		System.out.println(Student.collgeName);
+
+                //obect creation
+		Student studentObj = new Student();
+
+		//calling non-static method
+		studentObj.displayNSVs();
+
+		System.out.println(studentObj.studentId);// 0
+		System.out.println(studentObj.studentName);// null
+		System.out.println(studentObj.section);//null
+
+	}
+
+        //non-static method start
+	public void displayNSVs(){
+		System.out.println(studentId);// 0
+		System.out.println(studentName);// null
+		System.out.println(section);//null
+	}//end
+
+}
+
+->SVs we can access static methods and non-static methods
+
+->NSVs we can aceess directly in Non-static Methods, If we wan access in static methods also then by object name we can acceess.
+
+
+6)Modifiers allowed to SVs & NSVs:
+----------------------------------
+->We have 12 modifriers, they are divided into 2 types
+	1)Access Modifiers
+		1)public(Y)
+		2)private(Y)
+		3)protected(Y)
+		4)default(Y)
+
+	2)Non-Access Modifies 
+		5)static(Y)
+		6)abstact
+		7)final(Y)
+		8)transient(Y)
+		9)synchronzed
+		10)volatile(Y)
+		11)native
+		12)strictfp
+
+->For SVs/NSVs, we can use all access modifiers(public, private, protected, default)
+
+	->we create public variables to access from any where, from other classes also.
+
+	->private variables can used with in the class only.
+
+	->protected/default can be accessed at package
+
+->For SVs/NSVs, we can use only static, final, trasient, and volatile Non-access modifiers
+        ->we can use final key word for SVs and NSVs and local variable, once we initialized the values to final variables, we can't change their values
+	  
+		Ex: final int a =10;
+                    static final int b=30;
+                    b=40; we can't cahnge
+
+	->transient key word we can use for class level variables(SVs & NSVs) only, If we don't want            particiapte any variable in Serialization process then we can create that variable as a transient
+
+        
+	->volatile key word we can use for class level variables(SVs & NSVs) only. If JVM don't want to modify
+          any variable value concurently by multiple threads then we need create variable as a volatile.
+
+
+7)Method level variables(parameterized/local variables):
+-------------------------------------------------------
+->The vaiables created in the method, those variables are called Method level variables
+
+->We have 2 types of Method level variables
+	1)Parameterized variable
+	2)Local variable
+
+->Paramerized Variable:
+----------------------
+->A variable If we creae at method at method paranthesis is called paramerized variable.
+      Syntax: <modifier> <return type> methodname(prmitive/referenced data type variables....)
+              {
+			//method body
+               }
+
+      Ex1:      public       void              add(int num1,int num2) -> num1,num2 are parameterized variables
+                {          
+                     //method body
+
+                }
+
+      Ex2:      public       void              addEmploy(Employ emp){ -> emp is parameterized variable
+                {
+			//method body
+                }
+
+
+->Parameterized variables are used to recieve the inputs from other method or from othe class method
+  add(10,20); -> here we are calling add method, 10 value received by num1 variable, 20 value received by num2                  variable
+
+8)life time scope of paraterized and local variables:
+-----------------------------------------------------
+->life time: until method execution
+
+10)numbers of ways to access paraterized and local variables
+-------------------------------------------------------------
+->How can we access parameterized variables:
+  we can't access direclty,by callig method and passing specific values to that method we can access.
+	public void  add(int num1,int num2){
+              //body
+        }
+        add(10,20);
+
+->local variables:
+  ----------------
+  -> The variables created in the method body is called local variables
+  -> loacal variables are storing the result.
+		public void  add(int num1,int num2){
+              	   int result = num1+num2;
+        	}
+        add(10,20);
+
+->allowed modifiers for local and parameterized variables is only final
+
+9)default values of the paraterized and local variables
+->Parameterized/local variables will not have any default values.
+
+
+11)Modifiers allowed to paraterized and local variables and class level variables:
+-----------------------------------------------------------------------------------
+parametezed varibles: final
+local variable : final
+class level variables(SVs & NSVs) : public,private,protected,default,static,final,volatile and transient
+
+Assignment-59:
+-------------
+Write a java program to calculate 5 Arithematic operations.
+ -create 4 non-static variables(addition,subtraction,multiplication,division and modulation)
+ -create one static variable(operationType)
+ -create 5 non-static methods with 2 int type param variables
+
+input:
+-----
+Enter num1:
+10
+
+Enter num2:
+20
+
+Enter Type of operation:
+add
+
+output:
+------
+Addition of 2 numbers : 30
+
+
+
+
+
+
+
+
+
+                     
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+      
+
+
+
+
+
